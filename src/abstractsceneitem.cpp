@@ -1,5 +1,5 @@
 #include "abstractsceneitem.h"
 
-AbstractSceneItem::AbstractSceneItem()
+AbstractSceneItem::AbstractSceneItem(const int x, const int y)
 {
 }

@@ -13,10 +13,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     gamescene.cpp \
-    globalfunctions.cpp
+    globalfunctions.cpp \
+    abstractsceneitem.cpp
 
 HEADERS  += mainwindow.h \
     gamescene.h \
-    globalfunctions.h
+    globalfunctions.h \
+    abstractsceneitem.h
 
 FORMS    += mainwindow.ui
