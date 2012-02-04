@@ -23,6 +23,14 @@ protected:
      */
     AbstractSceneItem(const int x, const int y);
 
+    /*!
+      \brief Конструктор копирования.
+      Абстрактный конструктор.
+      Необходима его реализация во всех дочерних классах.
+      \param other Ссылка на копируемый объект.
+     */
+    AbstractSceneItem(AbstractSceneItem & other) = 0;
+
 public:
 
     /*!
