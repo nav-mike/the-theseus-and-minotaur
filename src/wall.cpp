@@ -16,4 +16,13 @@ Wall::Wall(const int x, const int y)
 #ifdef QT_DEBUG
     logMessage("Wall::Wall()\n");
 #endif
-}
+} // End Wall.
+
+/* Конструктор копирования. */
+Wall::Wall(const Wall &other)
+    : AbstractSceneItem(other.x(),other.y())
+{
+#ifdef QT_DEBUG
+    logMessage("Wal::Wall()");
+#endif
+} // End Wall.
