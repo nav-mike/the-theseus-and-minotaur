@@ -31,6 +31,15 @@ protected:
      */
     AbstractSceneItem(AbstractSceneItem & other) = 0;
 
+    /*!
+      \brief Оператор присваивания.
+      Перегруженный оператор присваивания.
+      Копирует объект.
+      \param other Копируемый объект класса.
+      \return Ссылка на текущий объект класса.
+     */
+    AbstractSceneItem & operator =(AbstractSceneItem & other) = 0;
+
 public:
 
     /*!
