@@ -19,6 +19,10 @@ public:
      */
     Wall();
 
+    /*!
+     */)
+    Wall(const int x, const int y);
+
 private:
 
 }; // End class.
