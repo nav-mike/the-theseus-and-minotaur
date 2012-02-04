@@ -1,6 +1,10 @@
 #ifndef WALL_H
 #define WALL_H
 
+#include <typeinfo>
+
+using namespace std;
+
 #include "globalfunctions.h"
 #include "abstractsceneitem.h"
 
@@ -32,6 +36,13 @@ public:
       \param other Копируемый объект.
      */
     Wall(const Wall & other);
+
+    /*!
+      \brief Конструктор с параметром.
+      Приводит тип AbstractSceneItem к текущему типу.
+      \param Полиморфная копируемая переменная.
+     */
+    Wall(const AbstractSceneItem &other);
 
 private:
 
