@@ -3,6 +3,8 @@
 
 #include <QGraphicsItem>
 
+#include "globalfunctions.h"
+
 /*!
   \brief Класс объекта сцены.
   Является родительским классом для всех объектов сцены:
@@ -11,7 +13,7 @@
  */
 class AbstractSceneItem : public QGraphicsItem
 {
-public:
+protected:
 
     /*!
       \brief Конструктор с параметрами.
@@ -20,6 +22,8 @@ public:
       \param y Координата y на сцене.
      */
     AbstractSceneItem(const int x, const int y);
+
+public:
 
     /*!
       \brief Метод расчета и получения области, занимаемой элементом сцены.
