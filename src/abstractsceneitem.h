@@ -31,6 +31,8 @@ protected:
      */
     AbstractSceneItem(const int x, const int y);
 
+public:
+
     /*!
       \brief Конструктор копирования.
       Создает текущий объект как копию объекта, указанного в качестве
@@ -79,7 +81,7 @@ public:
       Абстрактный метод.
       \return Объект класса прямоугольник - пространство, которое занимает элемент сцены.
      */
-    virtual QRectF boundingRect() const = 0;
+    virtual QRectF boundingRect() const;
 
     /*!
       \brief Метод рисования элемента сцены на сцене.
@@ -88,7 +90,7 @@ public:
       \param option  Опции рисования объекта.
       \param widget  Виджет.
      */
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) = 0;
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 protected:
 

@@ -45,3 +45,21 @@ AbstractSceneItem & AbstractSceneItem::operator =(const AbstractSceneItem & othe
 
     return *this;
 } // End operator=.
+
+/* Метод получения прямоугольника - пространства, которое занимет элемент сцены. */
+QRectF AbstractSceneItem::boundingRect() const
+{
+#ifdef QT_DEBUG
+    logMessage("AbstractSceneItem::boundingRect()\n");
+#endif
+
+    return QRectF(QPointF(),QSizeF());
+}
+
+/* Метод рисования элемента сцены на сцене. */
+void AbstractSceneItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+#ifdef QT_DEBUG
+    logMessage("AbstractSceneItem::paint()\n");
+#endif
+}

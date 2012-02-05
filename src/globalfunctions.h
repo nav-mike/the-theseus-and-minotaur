@@ -3,6 +3,9 @@
 
 #include <QDebug>
 #include <stdio.h>
+#include <string>
+
+using namespace std;
 
 #ifdef QT_DEBUG
 /*!
@@ -11,7 +14,7 @@
   Вызывается во всех функицях.
   \param[in] message Сообщение для лога.
  */
-void logMessage (char* message);
+void logMessage (string message);
 #endif
 
 #endif // GLOBALFUNCTIONS_H
