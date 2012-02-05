@@ -16,14 +16,16 @@ SOURCES += main.cpp\
     globalfunctions.cpp \
     abstractsceneitem.cpp \
     wall.cpp \
-    exit.cpp
+    exit.cpp \
+    door.cpp
 
 HEADERS  += mainwindow.h \
     gamescene.h \
     globalfunctions.h \
     abstractsceneitem.h \
     wall.h \
-    exit.h
+    exit.h \
+    door.h
 
 FORMS    += mainwindow.ui
 

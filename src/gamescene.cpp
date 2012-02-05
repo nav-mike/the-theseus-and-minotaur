@@ -24,6 +24,8 @@ GameScene::GameScene(QWidget *parent)
     m_scene->addItem(w);
     Exit* e = new Exit();
     m_scene->addItem(e);
+    Door* d = new Door(3,3);
+    m_scene->addItem(d);
 #endif
 
 } // End GameScene.

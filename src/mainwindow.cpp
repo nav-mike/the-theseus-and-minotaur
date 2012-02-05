@@ -108,6 +108,9 @@ void MainWindow::fillAllFields()
     m_main->addWidget(m_lpanelBox);
     m_center->setLayout(m_main);
     setCentralWidget(m_center);
+
+    m_hasSword->setCheckable(false);
+    m_hasKey->setCheckable(false);
 } // End fillAllFields.
 
 void MainWindow::initSwiProlog()

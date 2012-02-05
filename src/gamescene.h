@@ -11,6 +11,7 @@
 #include "abstractsceneitem.h"
 #include "wall.h"
 #include "exit.h"
+#include "door.h"
 
 /*!
   \brief Класс игровой сцены.
