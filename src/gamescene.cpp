@@ -22,6 +22,8 @@ GameScene::GameScene(QWidget *parent)
 #ifdef QT_DEBUG
     Wall* w = new Wall(2,2);
     m_scene->addItem(w);
+    Exit* e = new Exit();
+    m_scene->addItem(e);
 #endif
 
 } // End GameScene.

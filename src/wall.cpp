@@ -77,7 +77,9 @@ QRectF Wall::boundingRect()  const
     logMessage("Wall::boundingRect()\n");
 #endif
 
-    return QRectF(QPoint(m_xCoord,m_yCoord),QSizeF(30,30));
+    return QRectF(QPoint((m_xCoord - 1) * 30 - 300,
+                         (m_yCoord - 1) * 30 - 300),
+                  QSizeF(30,30));
 } // End boundingRect.
 
 /* Метод рисования стены на сцене. */

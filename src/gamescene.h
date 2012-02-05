@@ -10,6 +10,7 @@
 #include "globalfunctions.h"
 #include "abstractsceneitem.h"
 #include "wall.h"
+#include "exit.h"
 
 /*!
   \brief Класс игровой сцены.
