@@ -80,10 +80,14 @@ QRectF Wall::boundingRect()  const
     return QRectF(QPoint(m_xCoord,m_yCoord),QSizeF(30,30));
 } // End boundingRect.
 
+/* Метод рисования стены на сцене. */
 void Wall::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 #ifdef QT_DEBUG
     logMessage("Wall::paint()\n");
 #endif
+
+    painter->setPen(Qt::black);
+    painter->fillRect(m_xCoord,m_yCoord,30,30,Qt::SolidPattern);
 
 } // End paint.

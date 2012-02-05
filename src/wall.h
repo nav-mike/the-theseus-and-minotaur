@@ -1,6 +1,8 @@
 #ifndef WALL_H
 #define WALL_H
 
+#include <QPainter>
+
 #include "abstractsceneitem.h"
 
 /*!
