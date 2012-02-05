@@ -88,6 +88,8 @@ void Wall::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 #endif
 
     painter->setPen(Qt::black);
-    painter->fillRect(m_xCoord,m_yCoord,30,30,Qt::SolidPattern);
+    painter->fillRect((m_xCoord - 1) * 30 + 10 - 310,
+                      (m_yCoord - 1) * 30 + 10 - 310,
+                      30,30,Qt::SolidPattern);
 
 } // End paint.

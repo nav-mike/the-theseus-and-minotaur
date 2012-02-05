@@ -19,6 +19,11 @@ GameScene::GameScene(QWidget *parent)
     setMaximumSize(620,620);
     setMinimumSize(620,620);
 
+#ifdef QT_DEBUG
+    Wall* w = new Wall(2,2);
+    m_scene->addItem(w);
+#endif
+
 } // End GameScene.
 
 /* Конструктор по умолчанию. */
