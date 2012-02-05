@@ -36,8 +36,12 @@ AbstractSceneItem::AbstractSceneItem(const AbstractSceneItem &other)
 /* Оператор присваивания. */
 AbstractSceneItem & AbstractSceneItem::operator =(const AbstractSceneItem & other)
 {
+#ifdef QT_DEBUG
+    logMessage("AbstractSceneItem::operator =()\n");
+#endif
+
     m_xCoord = other.m_xCoord;
     m_yCoord = other.m_yCoord;
 
     return *this;
-}
+} // End operator=.

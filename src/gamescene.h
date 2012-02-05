@@ -4,6 +4,8 @@
 #include <QGraphicsView>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
+#include <QMap>
+#include <QPair>
 
 #include "globalfunctions.h"
 #include "abstractsceneitem.h"
@@ -30,8 +32,9 @@ public:
 private:
 
     /* Поля класса. */
-    GameGrid*       m_grid;   //!< Указатель на игровую сетку.
-    QGraphicsScene* m_scene;  //!< Указатель на модель сцены.
+    GameGrid*                              m_grid;       //!< Указатель на игровую сетку.
+    QGraphicsScene*                        m_scene;      //!< Указатель на модель сцены.
+    QMap<QPair<int,int>,AbstractSceneItem> m_sceneItems; //!< Карта всех объектов сцены.
 
     /*!
       \brief Класс, являющийся игровой сеткой.

@@ -10,6 +10,7 @@ GameScene::GameScene(QWidget *parent)
 
     m_grid  = new GameGrid();
     m_scene = new QGraphicsScene(this);
+    m_sceneItems.clear();
     setScene(m_scene);
 
     m_scene->addItem(m_grid);
