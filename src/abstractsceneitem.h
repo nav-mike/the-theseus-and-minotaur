@@ -7,7 +7,10 @@
 using namespace std;
 
 #include "globalfunctions.h"
-
+/*!
+  \brief јбстрактный класс элемента сцены.
+  явл€етс€ родительским к классам: стена, дверь, игрок и т.д.
+ */
 class AbstractSceneItem : public QGraphicsItem
 {
 protected:
