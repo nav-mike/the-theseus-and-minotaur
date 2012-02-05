@@ -10,6 +10,8 @@
 #include <QTextCodec>
 
 #include "gamescene.h"
+#include "SWI-cpp.h"
+#include "SWI-Prolog.h"
 
 namespace Ui {
 class MainWindow;
@@ -79,6 +81,8 @@ private:
       Используется в конструкторе.
      */
     void fillAllFields ();
+
+    void initSwiProlog ();
 
 }; // End class.
 

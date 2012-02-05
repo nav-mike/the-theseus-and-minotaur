@@ -26,3 +26,6 @@ HEADERS  += mainwindow.h \
     exit.h
 
 FORMS    += mainwindow.ui
+
+LIBS  += ./swi-prolog/bin/swipl.dll
+INCLUDEPATH += ./swi-prolog/include

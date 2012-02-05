@@ -28,6 +28,8 @@ MainWindow::MainWindow(QWidget *parent) :
     // Заполнение панелей и менеджеров компоновки.
     fillAllFields();
 
+    initSwiProlog();
+
 
 } // End MainWindow.
 
@@ -107,3 +109,30 @@ void MainWindow::fillAllFields()
     m_center->setLayout(m_main);
     setCentralWidget(m_center);
 } // End fillAllFields.
+
+void MainWindow::initSwiProlog()
+{
+#ifdef QT_DEBUG
+    logMessage("MainWindow::initSwiProlog()\n");
+#endif
+
+    // Переменные среды.
+    string path = "C:\\Program Files (x86)\\pl";
+    putenv(path.c_str());
+
+    // Подключение библиотеки.
+    static char* av[] = { (char*)"libpl.dll", NULL };
+
+//    if (PL_initialise(1, av) == 0)
+//    {
+//        PL_halt(1);
+
+//         qDebug() << "lib initialize error -(";
+
+//    }
+
+//    else
+
+//         qDebug() << "lib initialize ok!";
+
+}
