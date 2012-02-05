@@ -2,6 +2,9 @@
 #define ABSTRACTSCENEITEM_H
 
 #include <QGraphicsItem>
+#include <typeinfo>
+
+using namespace std;
 
 #include "globalfunctions.h"
 
