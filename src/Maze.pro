@@ -14,13 +14,11 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     gamescene.cpp \
     globalfunctions.cpp \
-    abstractsceneitem.cpp \
-    wall.cpp
+    abstractsceneitem.cpp
 
 HEADERS  += mainwindow.h \
     gamescene.h \
     globalfunctions.h \
-    abstractsceneitem.h \
-    wall.h
+    abstractsceneitem.h
 
 FORMS    += mainwindow.ui

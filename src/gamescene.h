@@ -6,6 +6,7 @@
 #include <QGraphicsScene>
 
 #include "globalfunctions.h"
+#include "abstractsceneitem.h"
 
 /*!
   \brief Класс игровой сцены.
