@@ -28,6 +28,8 @@ GameScene::GameScene(QWidget *parent)
     m_scene->addItem(d);
     Sword* sw = new Sword(4,4);
     m_scene->addItem(sw);
+    Yarn* th = new Yarn(18,18);
+    m_scene->addItem(th);
 #endif
 
 } // End GameScene.

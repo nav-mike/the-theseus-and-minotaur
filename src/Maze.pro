@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     exit.cpp \
     door.cpp \
     sword.cpp \
-    empty.cpp
+    empty.cpp \
+    thread.cpp
 
 HEADERS  += mainwindow.h \
     gamescene.h \
@@ -29,7 +30,8 @@ HEADERS  += mainwindow.h \
     exit.h \
     door.h \
     sword.h \
-    empty.h
+    empty.h \
+    thread.h
 
 FORMS    += mainwindow.ui
 
