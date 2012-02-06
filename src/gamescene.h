@@ -13,6 +13,7 @@
 #include "exit.h"
 #include "door.h"
 #include "sword.h"
+#include "empty.h"
 
 /*!
   \brief Класс игровой сцены.
