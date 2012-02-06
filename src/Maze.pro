@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     abstractsceneitem.cpp \
     wall.cpp \
     exit.cpp \
-    door.cpp
+    door.cpp \
+    sword.cpp
 
 HEADERS  += mainwindow.h \
     gamescene.h \
@@ -25,7 +26,8 @@ HEADERS  += mainwindow.h \
     abstractsceneitem.h \
     wall.h \
     exit.h \
-    door.h
+    door.h \
+    sword.h
 
 FORMS    += mainwindow.ui
 

@@ -26,6 +26,8 @@ GameScene::GameScene(QWidget *parent)
     m_scene->addItem(e);
     Door* d = new Door(3,3);
     m_scene->addItem(d);
+    Sword* sw = new Sword(4,4);
+    m_scene->addItem(sw);
 #endif
 
 } // End GameScene.
