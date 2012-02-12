@@ -13,6 +13,8 @@
 #include "SWI-cpp.h"
 #include "SWI-Prolog.h"
 
+#define PROLOG_PROGRAM "C:\\Users\\Mikhail Navrotskiy\\Documents\\Projects\\QPlGame\\Maze\\test_random.pl"
+
 namespace Ui {
 class MainWindow;
 } // End namescpace.

@@ -124,18 +124,12 @@ void MainWindow::initSwiProlog()
     putenv(path.c_str());
 
     // Подключение библиотеки.
-    static char* av[] = { (char*)"libpl.dll", NULL };
-
-//    if (PL_initialise(1, av) == 0)
-//    {
-//        PL_halt(1);
-
-//         qDebug() << "lib initialize error -(";
-
-//    }
-
-//    else
-
-//         qDebug() << "lib initialize ok!";
+    putenv("SWI_HOME_DIR=C:\\Program Files (x86)\\pl");
+    static char * av[] = {PROLOG_PROGRAM};
+    if(!PL_initialise(1,av))
+    {
+        PL_halt(1);
+        return;
+    }
 
 }
