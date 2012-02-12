@@ -15,6 +15,7 @@
 #include "sword.h"
 #include "empty.h"
 #include "thread.h"
+#include "key.h"
 
 /*!
   \brief Класс игровой сцены.

@@ -30,6 +30,8 @@ GameScene::GameScene(QWidget *parent)
     m_scene->addItem(sw);
     Yarn* th = new Yarn(18,18);
     m_scene->addItem(th);
+    Key* k = new Key(6,6);
+    m_scene->addItem(k);
 #endif
 
 } // End GameScene.

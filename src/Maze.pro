@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     door.cpp \
     sword.cpp \
     empty.cpp \
-    thread.cpp
+    thread.cpp \
+    key.cpp
 
 HEADERS  += mainwindow.h \
     gamescene.h \
@@ -31,7 +32,8 @@ HEADERS  += mainwindow.h \
     door.h \
     sword.h \
     empty.h \
-    thread.h
+    thread.h \
+    key.h
 
 FORMS    += mainwindow.ui
 
