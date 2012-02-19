@@ -13,7 +13,7 @@
 #include "SWI-cpp.h"
 #include "SWI-Prolog.h"
 
-#define PROLOG_PROGRAM "C:\\Users\\Mikhail Navrotskiy\\Documents\\Projects\\QPlGame\\Maze\\test_random.pl"
+#define PROLOG_PROGRAM "C:\\Users\\Mikhail Navrotskiy\\Documents\\Visual Studio 2010\\Projects\\Game\\Game\\test_random.pl"
 
 namespace Ui {
 class MainWindow;

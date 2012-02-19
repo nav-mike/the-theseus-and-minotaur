@@ -1,7 +1,7 @@
-#include "mainwindow.h"
+п»ї#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-/* Конструктор по умолчанию. */
+/* ГЉГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ. */
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -12,20 +12,20 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-    // Подключение русского языка
+    // ГЏГ®Г¤ГЄГ«ГѕГ·ГҐГ­ГЁГҐ Г°ГіГ±Г±ГЄГ®ГЈГ® ГїГ§Г»ГЄГ 
     QTextCodec *codec = QTextCodec::codecForName("CP1251");
     QTextCodec::setCodecForCStrings(codec);
     QTextCodec::setCodecForTr(codec);
     QTextCodec::setCodecForLocale(codec);
 
-    // Установка размера окна.
+    // Г“Г±ГІГ Г­Г®ГўГЄГ  Г°Г Г§Г¬ГҐГ°Г  Г®ГЄГ­Г .
     setMaximumSize(800,670);
     setMinimumSize(800,670);
 
-    // Инициализация полей класса.
+    // Г€Г­ГЁГ¶ГЁГ Г«ГЁГ§Г Г¶ГЁГї ГЇГ®Г«ГҐГ© ГЄГ«Г Г±Г±Г .
     initAllFields();
 
-    // Заполнение панелей и менеджеров компоновки.
+    // Г‡Г ГЇГ®Г«Г­ГҐГ­ГЁГҐ ГЇГ Г­ГҐГ«ГҐГ© ГЁ Г¬ГҐГ­ГҐГ¤Г¦ГҐГ°Г®Гў ГЄГ®Г¬ГЇГ®Г­Г®ГўГЄГЁ.
     fillAllFields();
 
     initSwiProlog();
@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 } // End MainWindow.
 
-/* Деструктор. */
+/* Г„ГҐГ±ГІГ°ГіГЄГІГ®Г°. */
 MainWindow::~MainWindow()
 {
 #ifdef QT_DEBUG
@@ -43,7 +43,7 @@ MainWindow::~MainWindow()
     deleteAllFields();
 } // End ~MainWindow.
 
-/* Метод инициализации полей. */
+/* ГЊГҐГІГ®Г¤ ГЁГ­ГЁГ¶ГЁГ Г«ГЁГ§Г Г¶ГЁГЁ ГЇГ®Г«ГҐГ©. */
 void MainWindow::initAllFields()
 {
 #ifdef QT_DEBUG
@@ -51,21 +51,22 @@ void MainWindow::initAllFields()
 #endif
 
     m_gscene    = new GameScene(this);
-    m_newGame   = new QPushButton("Новая игра",this);
-    m_closeGame = new QPushButton("Закрыть игру",this);
-    m_hasSword  = new QCheckBox("Меч",this);
-    m_hasKey    = new QCheckBox("Ключ",this);
+    m_newGame   = new QPushButton("ГЌГ®ГўГ Гї ГЁГЈГ°Г ",this);
+    m_closeGame = new QPushButton("Г‡Г ГЄГ°Г»ГІГј ГЁГЈГ°Гі",this);
+    m_hasSword  = new QCheckBox("ГЊГҐГ·",this);
+    m_hasKey    = new QCheckBox("ГЉГ«ГѕГ·",this);
     m_attr      = new QVBoxLayout();
     m_menu      = new QVBoxLayout();
     m_lpanel    = new QVBoxLayout();
-    m_attrBox   = new QGroupBox("Аттрибуты игрока",this);
-    m_menuBox   = new QGroupBox("Меню",this);
+    m_attrBox   = new QGroupBox("ГЂГІГІГ°ГЁГЎГіГІГ» ГЁГЈГ°Г®ГЄГ ",this);
+    m_menuBox   = new QGroupBox("ГЊГҐГ­Гѕ",this);
     m_lpanelBox = new QGroupBox("",this);
     m_main      = new QHBoxLayout();
     m_center    = new QWidget();
+	this->setWindowTitle("РўРµСЃРµР№ Рё РњРёРЅРѕС‚Р°РІСЂ");
 } // End initAllFields.
 
-/* Метод удаления полей класса. */
+/* ГЊГҐГІГ®Г¤ ГіГ¤Г Г«ГҐГ­ГЁГї ГЇГ®Г«ГҐГ© ГЄГ«Г Г±Г±Г . */
 void MainWindow::deleteAllFields()
 {
 #ifdef QT_DEBUG
@@ -88,7 +89,7 @@ void MainWindow::deleteAllFields()
     delete ui;
 } // End deleteAllFields
 
-/* Метод заполнения полей класса. */
+/* ГЊГҐГІГ®Г¤ Г§Г ГЇГ®Г«Г­ГҐГ­ГЁГї ГЇГ®Г«ГҐГ© ГЄГ«Г Г±Г±Г . */
 void MainWindow::fillAllFields()
 {
 #ifdef QT_DEBUG
@@ -119,11 +120,11 @@ void MainWindow::initSwiProlog()
     logMessage("MainWindow::initSwiProlog()\n");
 #endif
 
-    // Переменные среды.
+    // ГЏГҐГ°ГҐГ¬ГҐГ­Г­Г»ГҐ Г±Г°ГҐГ¤Г».
     string path = "C:\\Program Files (x86)\\pl";
     putenv(path.c_str());
 
-    // Подключение библиотеки.
+    // ГЏГ®Г¤ГЄГ«ГѕГ·ГҐГ­ГЁГҐ ГЎГЁГЎГ«ГЁГ®ГІГҐГЄГЁ.
     putenv("SWI_HOME_DIR=C:\\Program Files (x86)\\pl");
     static char * av[] = {PROLOG_PROGRAM};
     if(!PL_initialise(1,av))

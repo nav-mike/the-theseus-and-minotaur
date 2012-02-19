@@ -37,5 +37,5 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui
 
-LIBS  += "C:\Users\Mikhail Navrotskiy\Documents\Projects\QPlGame\Maze-build-desktop-Qt_4_8_0__4_8_0_________\debug\swipl.dll"
+LIBS  += "C:\Users\Mikhail Navrotskiy\Documents\Universities projects\Maze\Maze-build-desktop-Qt_4_8_0__4_8_0__Debug\debug\swipl.dll"
 #INCLUDEPATH += ./swi-prolog/include

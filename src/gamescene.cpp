@@ -1,6 +1,6 @@
-#include "gamescene.h"
+Ôªø#include "gamescene.h"
 
-/*  ÓÌÒÚÛÍÚÓ Ò Ô‡‡ÏÂÚÓÏ. */
+/* √ä√Æ√≠√±√≤√∞√≥√™√≤√Æ√∞ √± √Ø√†√∞√†√¨√•√≤√∞√Æ√¨. */
 GameScene::GameScene(QWidget *parent)
     : QGraphicsView(parent)
 {
@@ -15,9 +15,11 @@ GameScene::GameScene(QWidget *parent)
 
     m_scene->addItem(m_grid);
 
-    // «‡‰‡ÌËÂ ‡ÁÏÂÓ‚ ÒˆÂÌ˚.
+    // √á√†√§√†√≠√®√• √∞√†√ß√¨√•√∞√Æ√¢ √±√∂√•√≠√ª.
     setMaximumSize(620,620);
     setMinimumSize(620,620);
+
+	//drawMaze();
 
 #ifdef QT_DEBUG
     Wall* w = new Wall(2,2);
@@ -32,20 +34,21 @@ GameScene::GameScene(QWidget *parent)
     m_scene->addItem(th);
     Key* k = new Key(6,6);
     m_scene->addItem(k);
+	m_scene->addItem(new GameUnit(15,15));
 #endif
 
 } // End GameScene.
 
-/*  ÓÌÒÚÛÍÚÓ ÔÓ ÛÏÓÎ˜‡ÌË˛. */
+/* √ä√Æ√≠√±√≤√∞√≥√™√≤√Æ√∞ √Ø√Æ √≥√¨√Æ√´√∑√†√≠√®√æ. */
 GameScene::GameGrid::GameGrid()
 {
-    // ÕÂ ËÒÔÓÎ¸ÁÛÂÚÒˇ.
+    // √ç√• √®√±√Ø√Æ√´√º√ß√≥√•√≤√±√ø.
 #ifdef QT_DEBUG
     logMessage("GameScene::GameGrid::init()\n");
 #endif
 } // End GameGrid.
 
-/* ÃÂÚÓ‰ ‡Ò˜ÂÚ‡ Ë ÔÓÎÛ˜ÂÌËˇ Ó·Î‡ÒÚË, Á‡ÌËÏ‡ÂÏÓÈ ÒÂÚÍÓÈ. */
+/* √å√•√≤√Æ√§ √∞√†√±√∑√•√≤√† √® √Ø√Æ√´√≥√∑√•√≠√®√ø √Æ√°√´√†√±√≤√®, √ß√†√≠√®√¨√†√•√¨√Æ√© √±√•√≤√™√Æ√©. */
 QRectF GameScene::GameGrid::boundingRect() const
 {
 #ifdef QT_DEBUG
@@ -55,7 +58,7 @@ QRectF GameScene::GameGrid::boundingRect() const
     return QRectF(QPointF(-300,-300),QSizeF(600,600));
 } // End boundingRect.
 
-/* ÃÂÚÓ‰ ËÒÓ‚‡ÌËˇ ÒÂÚÍË Ì‡ ÒˆÂÌÂ. */
+/* √å√•√≤√Æ√§ √∞√®√±√Æ√¢√†√≠√®√ø √±√•√≤√™√® √≠√† √±√∂√•√≠√•. */
 void GameScene::GameGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 #ifdef QT_DEBUG
@@ -79,3 +82,7 @@ void GameScene::GameGrid::paint(QPainter *painter, const QStyleOptionGraphicsIte
 
     painter->restore();
 } // End paint.
+/* –ú–µ—Ç–æ–¥ —Ä–∏—Å–æ–≤–∞–Ω–∏—è –ª–∞–±–∏—Ä–∏–Ω—Ç–∞. */
+void GameScene::drawMaze()
+{
+} // End drawMaze.
