@@ -1,6 +1,9 @@
 package game.graphics;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -46,14 +49,33 @@ public class MainWindow extends JFrame {
         super("Тесей и Минотавр"); // Вызов родительского конструктора.
         
         initComponents(); // Инициализация графических компонентов окна.
+        createLayouts();
         
         this.setPreferredSize(new Dimension(700, 700));
         this.setMaximumSize(new Dimension(700, 700)); // Установка размера главного окна.
         this.setMinimumSize(new Dimension(700, 700));
+        this.setSize(700, 700);
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Установка режима закрытия окна.
         
         this.setVisible(true); // Установка видимость родительского окна.
+        this.setResizable(false);
+    }
+    
+    /**
+     * Метод упаковки графических компонентов в менеджеры компоновки.
+     */
+    private void createLayouts () {
+        
+        this.add(m_gameScene, BorderLayout.CENTER);
+        GridLayout gl = new GridLayout(5, 1, 5, 5);
+        JPanel panel = new JPanel(gl);
+        panel.add(m_newGame);
+        panel.add(m_closeGame);
+        panel.add(m_hasKey);
+        panel.add(m_hasSword);
+        panel.add(m_value);
+        this.add(panel, BorderLayout.EAST);
     }
     
     /**
@@ -67,5 +89,7 @@ public class MainWindow extends JFrame {
         this.m_hasSword = new JCheckBox("Меч",false);
         this.m_newGame = new JButton("Новая игра");
         this.m_value = new JLabel("Очков хода: 2");
+        
+        m_gameScene.setBackground(Color.red);
     }
 }
