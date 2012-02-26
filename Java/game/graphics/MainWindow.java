@@ -90,6 +90,8 @@ public class MainWindow extends JFrame {
         this.m_newGame = new JButton("Новая игра");
         this.m_value = new JLabel("Очков хода: 2");
         
+        m_hasKey.setEnabled(false);
+        m_hasSword.setEnabled(false);
         m_gameScene.setBackground(Color.red);
     }
 }
