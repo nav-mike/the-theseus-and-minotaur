@@ -1,0 +1,16 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\gamescene.o
+./release\globalfunctions.o
+./release\abstractsceneitem.o
+./release\wall.o
+./release\exit.o
+./release\door.o
+./release\sword.o
+./release\empty.o
+./release\thread.o
+./release\key.o
+./release\moc_mainwindow.o
+./release\moc_gamescene.o
+);

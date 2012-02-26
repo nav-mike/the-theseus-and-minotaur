@@ -1,0 +1,16 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\gamescene.o
+./debug\globalfunctions.o
+./debug\abstractsceneitem.o
+./debug\wall.o
+./debug\exit.o
+./debug\door.o
+./debug\sword.o
+./debug\empty.o
+./debug\thread.o
+./debug\key.o
+./debug\moc_mainwindow.o
+./debug\moc_gamescene.o
+);
