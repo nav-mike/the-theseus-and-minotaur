@@ -2,6 +2,7 @@ package game.model;
 
 import game.model.events.ChangeStepsCountEvent;
 import game.model.events.ChangeStepsCountListener;
+import game.model.events.KillMinotaurusEvent;
 import game.model.events.KillMinotaurusListener;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -114,11 +115,22 @@ public class MainModel {
     /**
      * Метод оповещения слушателей о событии.
      */
-    public void fireChangesStepsListener () {
+    protected void fireChangesStepsListener () {
         
         Iterator i = m_stepsListeners.iterator();
         while (i.hasNext())
             ((ChangeStepsCountListener)i.next()).changedStepsCount(m_event);
+    }
+    
+    /**
+     * Метод оповещения слушателей о событии.
+     */
+    protected void fireKillMinotaurusListener () {
+        
+        Iterator i = m_killMinotaurusListeners.iterator();
+        
+        while (i.hasNext())
+            ((KillMinotaurusListener)i.next()).minotaurusDead(new KillMinotaurusEvent(true, this));
     }
     
 }
