@@ -103,6 +103,15 @@ public class MainModel {
     }
     
     /**
+     * Метод удаления слушателя события убийства Минотавра Тесеем.
+     * @param l Слушатель события.
+     */
+    public void removeKillMinotaurusListener (KillMinotaurusListener l) {
+        
+        m_killMinotaurusListeners.remove(l);
+    }
+    
+    /**
      * Метод оповещения слушателей о событии.
      */
     public void fireChangesStepsListener () {
