@@ -1,7 +1,9 @@
 package game.model;
 
+import game.model.events.ChangeStepsCountEvent;
 import game.model.events.ChangeStepsCountListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Класс модели.
@@ -49,6 +51,8 @@ public class MainModel {
     private int m_stepsCount;
     /** Список слушателей для события изменения количества очков хода Тесея.*/
     private ArrayList<ChangeStepsCountListener> m_stepsListeners;
+    /** Событие. */
+    private ChangeStepsCountEvent m_event = new ChangeStepsCountEvent(m_stepsCount, this);
     
     /**
      * Метод добавления слушателя события изменения количества очков хода Тесея.
@@ -66,6 +70,16 @@ public class MainModel {
     public void removeChangedStepsListener (ChangeStepsCountListener l) {
         
         m_stepsListeners.remove(l);
+    }
+    
+    /**
+     * Метод оповещения слушателей о событии.
+     */
+    public void fireChangesStepsListener () {
+        
+        Iterator i = m_stepsListeners.iterator();
+        while (i.hasNext())
+            ((ChangeStepsCountListener)i.next()).changedStepsCount(m_event);
     }
     
 }
