@@ -1,15 +1,7 @@
 package game.graphics;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.HeadlessException;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.awt.*;
+import javax.swing.*;
 
 /**
  * Класс главного окна приложения.
@@ -60,6 +52,9 @@ public class MainWindow extends JFrame {
         
         this.setVisible(true); // Установка видимость родительского окна.
         this.setResizable(false);
+        
+        Image img = new ImageIcon(MainWindow.class.getResource("/game/graphics/textures/hero.png")).getImage();
+        this.setIconImage(img);
     }
     
     /**
