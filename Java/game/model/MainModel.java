@@ -1,5 +1,8 @@
 package game.model;
 
+import game.model.events.ChangeStepsCountListener;
+import java.util.ArrayList;
+
 /**
  * Класс модели.
  * Получает и обрабатывает перемещения игроков.
@@ -44,5 +47,16 @@ public class MainModel {
     private int m_doorCoordY;
     /** Число ходов игрока. */
     private int m_stepsCount;
+    /** Список слушателей для события изменения количества очков хода Тесея.*/
+    private ArrayList<ChangeStepsCountListener> m_stepsListeners;
+    
+    /**
+     * Метод добавления слушателя события изменения количества очков хода Тесея.
+     * @param l Слушатель события.
+     */
+    public void addChangedStepsListener (ChangeStepsCountListener l) {
+        
+        m_stepsListeners.add(l);
+    }
     
 }
