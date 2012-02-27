@@ -59,4 +59,13 @@ public class MainModel {
         m_stepsListeners.add(l);
     }
     
+    /**
+     * Метод удаления слушателя события изменения количества очков хода Тесея.
+     * @param l Слушатель события.
+     */
+    public void removeChangedStepsListener (ChangeStepsCountListener l) {
+        
+        m_stepsListeners.remove(l);
+    }
+    
 }
