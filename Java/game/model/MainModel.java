@@ -2,6 +2,7 @@ package game.model;
 
 import game.model.events.ChangeStepsCountEvent;
 import game.model.events.ChangeStepsCountListener;
+import game.model.events.KillMinotaurusListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -51,6 +52,8 @@ public class MainModel {
     private int m_stepsCount;
     /** Список слушателей для события изменения количества очков хода Тесея.*/
     private ArrayList<ChangeStepsCountListener> m_stepsListeners;
+    /** Список слушателей для события убийства Минотавра. */
+    private ArrayList<KillMinotaurusListener> m_killMinotaurusListeners;
     /** Событие. */
     private ChangeStepsCountEvent m_event;
 
@@ -79,6 +82,15 @@ public class MainModel {
     public void addChangedStepsListener (ChangeStepsCountListener l) {
         
         m_stepsListeners.add(l);
+    }
+    
+    /**
+     * Метод добавления слушателя события убийтсва Минотавра Тесеем.
+     * @param l Слушатель события.
+     */
+    public void addKillMinotaurusListener (KillMinotaurusListener l) {
+        
+        m_killMinotaurusListeners.add(l);
     }
     
     /**
