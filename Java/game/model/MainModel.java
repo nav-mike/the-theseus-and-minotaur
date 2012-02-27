@@ -52,7 +52,25 @@ public class MainModel {
     /** Список слушателей для события изменения количества очков хода Тесея.*/
     private ArrayList<ChangeStepsCountListener> m_stepsListeners;
     /** Событие. */
-    private ChangeStepsCountEvent m_event = new ChangeStepsCountEvent(m_stepsCount, this);
+    private ChangeStepsCountEvent m_event;
+
+    /**
+     * Метод получения количества очков хода Тесея.
+     * @return Количество очков хода Тесея.
+     */
+    public int getStepsCount() {
+        return m_stepsCount;
+    }
+
+    /**
+     * Метод задания количества очков хода Тесея.
+     * @param stepsCount Количество очков хода Тесея.
+     */
+    public void setStepsCount(int stepsCount) {
+        this.m_stepsCount = stepsCount;
+        m_event = new ChangeStepsCountEvent(m_stepsCount, this);
+        fireChangesStepsListener();
+    }
     
     /**
      * Метод добавления слушателя события изменения количества очков хода Тесея.
