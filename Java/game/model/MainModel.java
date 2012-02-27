@@ -51,12 +51,31 @@ public class MainModel {
     private int m_doorCoordY;
     /** Число ходов игрока. */
     private int m_stepsCount;
+    /** Флаг того жив Минотавр или убит Тесеем. */
+    private boolean m_isMinotaurusDead;
     /** Список слушателей для события изменения количества очков хода Тесея.*/
     private ArrayList<ChangeStepsCountListener> m_stepsListeners;
     /** Список слушателей для события убийства Минотавра. */
     private ArrayList<KillMinotaurusListener> m_killMinotaurusListeners;
     /** Событие. */
     private ChangeStepsCountEvent m_event;
+
+    /**
+     * Метод задания значения флага жив Минотавр или нет.
+     * @param isMinotaurusDead Значение флага жив Минотавр или убит Тесеем.
+     */
+    public void setIsMinotaurusDead(boolean isMinotaurusDead) {
+        this.m_isMinotaurusDead = isMinotaurusDead;
+        fireKillMinotaurusListener();
+    }
+
+    /**
+     * Метод получения флага жив Минотавр или нет.
+     * @return Значение флага убит Минотавр Тесеем или нет.
+     */
+    public boolean isMinotaurusDead() {
+        return m_isMinotaurusDead;
+    }
 
     /**
      * Метод получения количества очков хода Тесея.
@@ -130,7 +149,7 @@ public class MainModel {
         Iterator i = m_killMinotaurusListeners.iterator();
         
         while (i.hasNext())
-            ((KillMinotaurusListener)i.next()).minotaurusDead(new KillMinotaurusEvent(true, this));
+            ((KillMinotaurusListener)i.next()).minotaurusDead(new KillMinotaurusEvent(m_isMinotaurusDead, this));
     }
     
 }
