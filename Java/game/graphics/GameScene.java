@@ -26,6 +26,22 @@ public class GameScene {
     private boolean m_lifeMinotaurus;
 
     /**
+     * Метод задания значения флага требуется отображение меча или нет.
+     * @param needShowSword Значение флага требуется отображение меча или нет.
+     */
+    public void setNeedShowSword(boolean needShowSword) {
+        this.m_needShowSword = needShowSword;
+    }
+
+    /**
+     * Метод получения значения флага требуется отображение меча или нет.
+     * @return Значение флага требуется отображение меча или нет.
+     */
+    public boolean isNeedShowSword() {
+        return m_needShowSword;
+    }
+
+    /**
      * Метод задания значения флага жив Минотавр или нет.
      * @param lifeMinotaurus Значение флага жив Минотавр или нет.
      */
