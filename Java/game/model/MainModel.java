@@ -53,8 +53,10 @@ public class MainModel {
     private int m_doorCoordY;
     /** Число ходов игрока. */
     private int m_stepsCount;
-    /** Флаг того жив Минотавр или убит Тесеем. */
+    /** Флаг того, жив Минотавр или убит Тесеем. */
     private boolean m_isMinotaurusDead;
+    /** Флаг того, получил Тесей меч или нет. */
+    private boolean m_hasTeseusSword;
     /** Список слушателей для события изменения количества очков хода Тесея.*/
     private ArrayList<ChangeStepsCountListener> m_stepsListeners;
     /** Список слушателей для события убийства Минотавра. */
@@ -63,6 +65,22 @@ public class MainModel {
     private ArrayList<TeseusGetSwordListener> m_getSwordListeners;
     /** Событие. */
     private ChangeStepsCountEvent m_event;
+
+    /**
+     * Метод задания значения флагу, получил Тесей меч или нет.
+     * @param hasTeseusSword Значение флага, получил Тесей меч или нет.
+     */
+    public void setHasTeseusSword(boolean hasTeseusSword) {
+        this.m_hasTeseusSword = hasTeseusSword;
+    }
+
+    /**
+     * Метод получения значения флага, получил Тесей меч или нет.
+     * @return Значение флага, получил Тесей меч или нет.
+     */
+    public boolean hasTeseusSword() {
+        return m_hasTeseusSword;
+    }
 
     /**
      * Метод задания значения флага жив Минотавр или нет.
