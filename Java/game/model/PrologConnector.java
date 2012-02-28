@@ -3,6 +3,8 @@
  * and open the template in the editor.
  */
 package game.model;
+//import jpl.*;
+
 
 /**
  * Класс для связи модели с базой данных Пролога.
@@ -33,6 +35,12 @@ public class PrologConnector {
     
     /** Координата Минотавра по У. */
     private static int m_enemysCoordY;
+    
+    /** Координата меча по Х. */
+    private static int m_swordCoordX;
+    
+    /** Координата меча по У. */
+    private static int m_swordCoordY;
 
     /**
      * Получить координату Минотавра по Х.
@@ -64,6 +72,22 @@ public class PrologConnector {
      */
     public static int getPlayersCoordY() {
         return m_playersCoordY;
+    }
+
+    /**
+     * Получить координату меча по Х.
+     * @return Координата меча по Х.
+     */
+    public static int getM_swordCoordX() {
+        return m_swordCoordX;
+    }
+
+    /**
+     * Получить координату меча по У.
+     * @return Координата меча по У.
+     */
+    public static int getM_swordCoordY() {
+        return m_swordCoordY;
     }
 
     /**
@@ -99,6 +123,22 @@ public class PrologConnector {
     }
     
     /**
+     * Задать координату меча по Х.
+     * @param m_swordCoordX Новая координата меча по Х.
+     */
+    public static void setM_swordCoordX(int m_swordCoordX) {
+        PrologConnector.m_swordCoordX = m_swordCoordX;
+    }
+
+    /**
+     * Задать координату меча по У.
+     * @param m_swordCoordX Новая координата меча по У.
+     */
+    public static void setM_swordCoordY(int m_swordCoordY) {
+        PrologConnector.m_swordCoordY = m_swordCoordY;
+    }
+    
+    /**
      * Узнать, убит ли Минотавр.
      * @return Флаг, означающий убит ли Минотавр Тесеем.
      */
@@ -128,6 +168,33 @@ public class PrologConnector {
      */
     public static boolean isWin() {
         return m_isWin;
+    }
+    
+    /**
+     * Метод инициализации базы данных Пролога. 
+     * Должен вызываься первым! Задаем координаты игровым объектам.
+     * @param enemyX Координата Минотавра по Х.
+     * @param enemyY Координата Минотавра по У.
+     * @param playerX Координата Тесея по Х.
+     * @param playerY Координата Тесея по У.
+     * @param swordX Координата меча по Х.
+     * @param swordY Координата меча по У.
+     * @return Результат инициализации базы данных.
+     */
+    public static boolean initPrologDatabase(int enemyX, int enemyY, 
+                                             int playerX, int playerY,
+                                             int swordX, int swordY){
+        boolean result = false;
+        
+        String connect = "consult('maze.pro')"; 
+//    
+//        Query q1 = new Query(connect); 
+//        
+//        result = q1.hasSolution();
+        
+        System.out.println( connect + " " + (result ? "succeeded" : "failed") ); 
+    
+        return result;
     }
     
     /**
