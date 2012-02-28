@@ -90,6 +90,8 @@ public class GameCell {
      * Создает клетку с заданными параметрами.
      * @param cellsType Тип клетки.
      * @param isHide Является ли клетка скрытой.
+     * @param coordX Координата клетки x.
+     * @param coordY Координата клетки y.
      */
     public GameCell(int cellsType, boolean isHide, int coordX, int coordY) {
         this.m_cellsType = cellsType;
@@ -143,7 +145,7 @@ public class GameCell {
         int result = -1;
         int random = -1;
         
-        random = new Random(System.currentTimeMillis()).nextInt(args.length) % 3;
+        random = Math.abs(new Random().nextInt()) % 3;
         result = args[random];
         
         return result;

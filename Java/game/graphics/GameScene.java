@@ -1,5 +1,6 @@
 package game.graphics;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
@@ -80,8 +81,6 @@ public class GameScene extends JPanel{
     public void paint(Graphics g) {
         super.paint(g);
         
-        drawGrid(g);
-        
         for (int i = 0; i < 12; i++) {
             
             for (int j = 0; j < 12; j++) {
@@ -90,6 +89,8 @@ public class GameScene extends JPanel{
                     m_cells[i][j].paint(g);
             }
         }
+        
+        drawGrid(g);
     }
     
     /**
@@ -98,6 +99,7 @@ public class GameScene extends JPanel{
      */
     private void drawGrid (Graphics g) {
         
+        g.setColor(Color.white);
         for (int i = 10; i <= 340; i += 30) {
             
             for (int j = 10; j <=340; j += 30) {
@@ -107,11 +109,69 @@ public class GameScene extends JPanel{
         }
     }
     
+    /**
+     * Метод формирования игрового поля - карты.
+     * Используется при отладке.
+     */
     private void fromMap () {
         
         for (int i = 0; i < 12; i++) {
             
-            m_cells[i][0] = new GameCell(GameCell.WALL, false,i+1,1);
+            if (i == 1)
+                m_cells[1][0] = new GameCell(GameCell.DOOR, false, i+1, 1);
+            else
+                m_cells[i][0] = new GameCell(GameCell.WALL, false,i+1,1);
+            m_cells[i][11] = new GameCell(GameCell.WALL, false, i+1, 12);
+        }
+
+        for (int i = 1; i < 11; i++) {
+            
+            m_cells[0][i]  = new GameCell(GameCell.WALL, false, 1, i+1);
+            m_cells[11][i] = new GameCell(GameCell.WALL, false, 12, i+1);
+        }
+        
+        m_cells[1][2] = new GameCell(GameCell.WALL, false, 2, 3);
+        m_cells[8][8] = new GameCell(GameCell.TESEUS, false, 9, 9);
+        m_cells[1][8] = new GameCell(GameCell.MINOTAURUS, false, 2, 9);
+        m_cells[8][1] = new GameCell(GameCell.SWORD, false, 9, 2);
+        m_cells[3][1] = new GameCell(GameCell.WALL, false, 4, 2);
+        m_cells[3][2] = new GameCell(GameCell.WALL, false, 4, 3);
+        m_cells[4][2] = new GameCell(GameCell.WALL, false, 5, 3);
+        m_cells[6][2] = new GameCell(GameCell.WALL, false, 7, 3);
+        m_cells[8][2] = new GameCell(GameCell.WALL, false, 9, 3);
+        m_cells[9][2] = new GameCell(GameCell.WALL, false, 10, 3);
+        m_cells[2][4] = new GameCell(GameCell.WALL, false, 3, 5);
+        m_cells[4][4] = new GameCell(GameCell.WALL, false, 5, 5);
+        m_cells[5][4] = new GameCell(GameCell.WALL, false, 6, 5);
+        m_cells[7][4] = new GameCell(GameCell.WALL, false, 8, 5);
+        m_cells[8][4] = new GameCell(GameCell.WALL, false, 9, 5);
+        m_cells[10][4] = new GameCell(GameCell.WALL, false, 11, 5);
+        m_cells[2][5] = new GameCell(GameCell.WALL, false, 3, 6);
+        m_cells[4][6] = new GameCell(GameCell.WALL, false, 5, 7);
+        m_cells[7][6] = new GameCell(GameCell.WALL, false, 8, 7);
+        m_cells[9][6] = new GameCell(GameCell.WALL, false, 10, 7);
+        m_cells[2][7] = new GameCell(GameCell.WALL, false, 3, 8);
+        m_cells[5][7] = new GameCell(GameCell.WALL, false, 6, 8);
+        m_cells[7][7] = new GameCell(GameCell.WALL, false, 8, 8);
+        m_cells[9][7] = new GameCell(GameCell.WALL, false, 10, 8);
+        m_cells[10][7] = new GameCell(GameCell.WALL, false, 11, 8);
+        m_cells[5][8] = new GameCell(GameCell.WALL, false, 6, 9);
+        m_cells[1][9] = new GameCell(GameCell.WALL, false, 2, 10);
+        m_cells[2][9] = new GameCell(GameCell.WALL, false, 3, 10);
+        m_cells[4][9] = new GameCell(GameCell.WALL, false, 5, 10);
+        m_cells[5][9] = new GameCell(GameCell.WALL, false, 6, 10);
+        m_cells[6][9] = new GameCell(GameCell.WALL, false, 7, 10);
+        m_cells[7][9] = new GameCell(GameCell.WALL, false, 8, 10);
+        m_cells[5][10] = new GameCell(GameCell.WALL, false, 6, 11);
+        m_cells[9][10] = new GameCell(GameCell.WALL, false, 10, 11);
+        
+        for (int i = 0; i < 12; i++) {
+            
+            for (int j = 0; j < 12; j++) {
+                
+                if (m_cells[i][j] == null)
+                    m_cells[i][j] = new GameCell(GameCell.FREE, false, i+1, j+1);
+            }
         }
     }
     
