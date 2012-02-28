@@ -183,9 +183,15 @@ public class GameCell {
         return m_isHide;
     }
     
+    /**
+     * Метод рисования клетки.
+     * @param g Контекст рисования.
+     */
     public void paint(Graphics g) {
         
         Image img = new ImageIcon(MainWindow.class.getResource(m_paths[m_currentImagesIndex])).getImage();
+        
+        g.drawImage(img, (m_coordX - 1) * 30, (m_coordY - 1) * 30, 30, 30, null);
     }
     
 }
