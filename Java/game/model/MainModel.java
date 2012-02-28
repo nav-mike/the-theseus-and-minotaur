@@ -231,9 +231,13 @@ public class MainModel {
         m_getSwordListeners = new ArrayList<TeseusGetSwordListener>();
     }
 
+    /**
+     * Конструктор с параметром.
+     * @param scene Ссылка на поле игрового поля.
+     */
     public MainModel (GameScene scene) {
 
-
+        initComponents(scene);
     }
 
 }
