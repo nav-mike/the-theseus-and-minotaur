@@ -21,8 +21,8 @@ import javax.swing.JPanel;
  * минотавра, и в каком он состоянии.
  * 2]. Геттеры, сеттеры параметров меча, Минотавра и т. д.
  */
-public class GameScene extends JPanel{
-    
+public class GameScene extends JPanel implements KeyListener {
+
     /* Поля класса. */
     /** Список клеток поля. */
     private GameCell[][] m_cells;
@@ -36,11 +36,13 @@ public class GameScene extends JPanel{
      * Создает игровою сцену.
      */
     public GameScene() {
-        
+
         super();
-        
+
         m_cells = new GameCell[12][12];
         fromMap();
+
+        this.addKeyListener(this);
     }
 
     /**
@@ -82,43 +84,44 @@ public class GameScene extends JPanel{
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        
+
         for (int i = 0; i < 12; i++) {
-            
+
             for (int j = 0; j < 12; j++) {
-                
+
                 if (m_cells[i][j] != null)
                     m_cells[i][j].paint(g);
             }
         }
-        
+
         drawGrid(g);
+
     }
-    
+
     /**
      * Метод рисования сетки игрового поля.
      * @param g Контекст рисования.
      */
     private void drawGrid (Graphics g) {
-        
+
         g.setColor(Color.white);
         for (int i = 10; i <= 340; i += 30) {
-            
+
             for (int j = 10; j <=340; j += 30) {
-                
+
                 g.drawRect(i, j, 30, 30);
             }
         }
     }
-    
+
     /**
      * Метод формирования игрового поля - карты.
      * Используется при отладке.
      */
     private void fromMap () {
-        
+
         for (int i = 0; i < 12; i++) {
-            
+
             if (i == 1)
                 m_cells[1][0] = new GameCell(GameCell.DOOR, false, i+1, 1);
             else
@@ -127,11 +130,11 @@ public class GameScene extends JPanel{
         }
 
         for (int i = 1; i < 11; i++) {
-            
+
             m_cells[0][i]  = new GameCell(GameCell.WALL, false, 1, i+1);
             m_cells[11][i] = new GameCell(GameCell.WALL, false, 12, i+1);
         }
-        
+
         m_cells[1][2] = new GameCell(GameCell.WALL, false, 2, 3);
         m_cells[8][8] = new GameCell(GameCell.TESEUS, false, 9, 9);
         m_cells[1][8] = new GameCell(GameCell.MINOTAURUS, false, 2, 9);
@@ -166,38 +169,50 @@ public class GameScene extends JPanel{
         m_cells[7][9] = new GameCell(GameCell.WALL, false, 8, 10);
         m_cells[5][10] = new GameCell(GameCell.WALL, false, 6, 11);
         m_cells[9][10] = new GameCell(GameCell.WALL, false, 10, 11);
-        
+
         for (int i = 0; i < 12; i++) {
-            
+
             for (int j = 0; j < 12; j++) {
-                
+
                 if (m_cells[i][j] == null)
                     m_cells[i][j] = new GameCell(GameCell.FREE, false, i+1, j+1);
             }
         }
     }
-    
+
     /**
-     * Класс обработчика событий клавиатуры.
-     * Используется для управления игроком.
+     * Метод обработки события ввода символа.
+     * @param e Событие.
      */
-    public class MyKeyListener implements KeyListener {
+    @Override
+    public void keyTyped(KeyEvent e) {}
 
-        @Override
-        public void keyTyped(KeyEvent e) {
-            throw new UnsupportedOperationException("Not supported yet.");
-        }
+    /**
+     * Метод обработки события нажатой клавиши.
+     * @param e Событие.
+     */
+    @Override
+    public void keyPressed(KeyEvent e) {
 
-        @Override
-        public void keyPressed(KeyEvent e) {
-            throw new UnsupportedOperationException("Not supported yet.");
-        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT)
+            System.out.println("Go to left");
+        else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+            System.out.println("Go to right");
+        else if (e.getKeyCode() == KeyEvent.VK_DOWN)
+            System.out.println("Go to down");
+        else if (e.getKeyCode() == KeyEvent.VK_UP)
+            System.out.println("Go to up");
+        else if (e.getKeyCode() == KeyEvent.VK_SPACE)
+            System.out.println("Go to next step");
+        else
+            System.out.println("Unknown keys");
+    }
 
-        @Override
-        public void keyReleased(KeyEvent e) {
-            throw new UnsupportedOperationException("Not supported yet.");
-        }
-        
-    };
-    
+    /**
+     * Метод обработки события отпуска клавиши.
+     * @param e Событие.
+     */
+    @Override
+    public void keyReleased(KeyEvent e) {}
+
 }

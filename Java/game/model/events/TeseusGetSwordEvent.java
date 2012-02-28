@@ -7,7 +7,7 @@ import java.util.EventObject;
  * Возникает, когда Тесей берет меч.
  */
 public class TeseusGetSwordEvent extends EventObject {
-    
+
     /* Поля класса. */
     /** Флаг, что Тесей взял меч. */
     private boolean m_isTeseusHasSword;
@@ -38,5 +38,5 @@ public class TeseusGetSwordEvent extends EventObject {
         super(source);
         this.m_isTeseusHasSword = isTeseusHasSword;
     }
-    
+
 }

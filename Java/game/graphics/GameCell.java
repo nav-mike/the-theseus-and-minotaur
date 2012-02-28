@@ -11,32 +11,32 @@ import javax.swing.ImageIcon;
  * Отрисовывается по команде поля.
  */
 public class GameCell {
-    
+
     /* Поля класса. */
     /** Тип клетки. */
     private int m_cellsType;
-    
+
     /** Массив имен всех изображений. */
-    private static final String[] m_paths = 
-    {
-        "/game/graphics/textures/hero.png",     // 0
-        "/game/graphics/textures/Minotaur.png", // 1
-        "/game/graphics/textures/door.png",     // 2
-        "/game/graphics/textures/floor1.png",   // 3
-        "/game/graphics/textures/floor2.png",   // 4
-        "/game/graphics/textures/floor3.png",   // 5
-        "/game/graphics/textures/sword.png",    // 6
-        "/game/graphics/textures/wall1.png",    // 7
-        "/game/graphics/textures/wall2.png",    // 8
-        "/game/graphics/textures/wall3.png"     // 9
-    };
+    private static final String[] m_paths =
+            {
+                    "/game/graphics/textures/hero.png",     // 0
+                    "/game/graphics/textures/Minotaur.png", // 1
+                    "/game/graphics/textures/door.png",     // 2
+                    "/game/graphics/textures/floor1.png",   // 3
+                    "/game/graphics/textures/floor2.png",   // 4
+                    "/game/graphics/textures/floor3.png",   // 5
+                    "/game/graphics/textures/sword.png",    // 6
+                    "/game/graphics/textures/wall1.png",    // 7
+                    "/game/graphics/textures/wall2.png",    // 8
+                    "/game/graphics/textures/wall3.png"     // 9
+            };
     /** Индекс текущего изображения. */
     private int m_currentImagesIndex;
     /** Координата клетки x. */
     private int m_coordX;
     /** Координата клетки y. */
     private int m_coordY;
-    
+
     /* Тип клетки. */
     /** Пустая клетка, по ней можно проходить. */
     public static final int FREE = 0x033;
@@ -98,59 +98,59 @@ public class GameCell {
         this.m_isHide = isHide;
         this.m_coordX = coordX;
         this.m_coordY = coordY;
-        
+
         getImageIndex();
     }
-    
+
     /**
      * Метод вычисления требуемого индекса изображения.
      */
     private void getImageIndex () {
-        
+
         switch (m_cellsType)
         {
             case (FREE):
                 m_currentImagesIndex = getRandomImagesIndex(3,4,5);
                 break;
-                
+
             case (DOOR):
                 m_currentImagesIndex = 2;
                 break;
-                
+
             case (MINOTAURUS):
                 m_currentImagesIndex = 1;
                 break;
-                
+
             case (SWORD):
                 m_currentImagesIndex = 6;
                 break;
-                
+
             case (TESEUS):
                 m_currentImagesIndex = 0;
                 break;
-                
+
             case (WALL):
                 m_currentImagesIndex = getRandomImagesIndex(7, 8, 9);
                 break;
         }
     }
-    
+
     /**
      * Метод получения номера изображения.
      * @param args Список возможных изображений.
      * @return Индекс изображения.
      */
     private static int getRandomImagesIndex (int... args) {
-        
+
         int result = -1;
         int random = -1;
-        
+
         random = Math.abs(new Random().nextInt()) % 3;
         result = args[random];
-        
+
         return result;
     }
-    
+
     /* Видимость клетки. */
     /** Является ли клетка скрытой. */
     private boolean m_isHide;
@@ -186,19 +186,19 @@ public class GameCell {
     public boolean isHide() {
         return m_isHide;
     }
-    
+
     /**
      * Метод рисования клетки.
      * @param g Контекст рисования.
      */
     public void paint(Graphics g) {
-        
+
         if (!isHide()) {
-            
+
             Image img = new ImageIcon(MainWindow.class.getResource(m_paths[m_currentImagesIndex])).getImage();
-        
+
             g.drawImage(img, (m_coordX - 1) * 30 + 10, (m_coordY - 1) * 30 + 10, 30, 30, null);
         }
     }
-    
+
 }

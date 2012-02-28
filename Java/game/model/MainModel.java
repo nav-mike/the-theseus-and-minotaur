@@ -1,5 +1,7 @@
 package game.model;
 
+import game.graphics.GameCell;
+import game.graphics.GameScene;
 import game.model.events.ChangeStepsCountEvent;
 import game.model.events.ChangeStepsCountListener;
 import game.model.events.KillMinotaurusEvent;
@@ -21,18 +23,20 @@ import java.util.Iterator;
  * 6). Число очков хода игрока.
  * Содержит основные методы.
  * 1]. Получить карту поля.
- * 2]. Передвинуть игрока. Получает код нажатой клавиши: вверх, вниз, влево, 
+ * 2]. Передвинуть игрока. Получает код нажатой клавиши: вверх, вниз, влево,
  * вправо; определяет, возможно ли перемещение, взят ли меч, достигнута ли дверь,
  * и можно ли выйти, т. е. убит ли Минотавр. Возвращает новые координаты игрока
  * и уменьшает число возможных ходом, если перемещение возможно (не уткнулся в
  * стену).
  * 3]. Передвинуть Минотавра.
- * 4]. Методы определения состояния игрока, минотавра, взятия меча и окончания 
+ * 4]. Методы определения состояния игрока, минотавра, взятия меча и окончания
  * игры.
  */
 public class MainModel {
-    
+
     /* Поля класса. */
+    /** Ссылка на игровое поле. */
+    private GameScene m_scene;
     /** Клетки поля. */
     private Object[][] m_cells;
     /** Координата игрока x. */
@@ -116,91 +120,120 @@ public class MainModel {
         m_event = new ChangeStepsCountEvent(m_stepsCount, this);
         fireChangesStepsListener();
     }
-    
+
     /**
      * Метод добавления слушателя события изменения количества очков хода Тесея.
      * @param l Слушатель события.
      */
     public void addChangedStepsListener (ChangeStepsCountListener l) {
-        
+
         m_stepsListeners.add(l);
     }
-    
+
     /**
      * Метод добавления слушателя события убийтсва Минотавра Тесеем.
      * @param l Слушатель события.
      */
     public void addKillMinotaurusListener (KillMinotaurusListener l) {
-        
+
         m_killMinotaurusListeners.add(l);
     }
-    
+
     /**
      * Метод добавления слушателя события получения Тесеем меча.
      * @param l Слушатель события.
      */
     public void addGetSwordListener (TeseusGetSwordListener l) {
-        
+
         m_getSwordListeners.add(l);
     }
-    
+
     /**
      * Метод удаления слушателя события изменения количества очков хода Тесея.
      * @param l Слушатель события.
      */
     public void removeChangedStepsListener (ChangeStepsCountListener l) {
-        
+
         m_stepsListeners.remove(l);
     }
-    
+
     /**
      * Метод удаления слушателя события убийства Минотавра Тесеем.
      * @param l Слушатель события.
      */
     public void removeKillMinotaurusListener (KillMinotaurusListener l) {
-        
+
         m_killMinotaurusListeners.remove(l);
     }
-    
+
     /**
      * Метод удаления слушателя события получения меча Тесеем.
      * @param l Слушатель события.
      */
     public void removeGetSwordListener (TeseusGetSwordListener l) {
-        
+
         m_getSwordListeners.remove(l);
     }
-    
+
     /**
      * Метод оповещения слушателей о событии.
      */
     protected void fireChangesStepsListener () {
-        
+
         Iterator i = m_stepsListeners.iterator();
         while (i.hasNext())
             ((ChangeStepsCountListener)i.next()).changedStepsCount(m_event);
     }
-    
+
     /**
      * Метод оповещения слушателей о событии.
      */
     protected void fireKillMinotaurusListener () {
-        
+
         Iterator i = m_killMinotaurusListeners.iterator();
-        
+
         while (i.hasNext())
             ((KillMinotaurusListener)i.next()).minotaurusDead(new KillMinotaurusEvent(m_isMinotaurusDead, this));
     }
-    
+
     /**
      * Метод оповещения слушателей о событии.
      */
     protected void fireGetSwordListener () {
-        
+
         Iterator i = m_getSwordListeners.iterator();
-        
+
         while (i.hasNext())
             ((TeseusGetSwordListener)i.next()).gotSword(new TeseusGetSwordEvent(m_hasTeseusSword, this));
     }
-    
+
+    /**
+     * Метод инициализации компонентов класса.
+     * @param scene Ссылка на игровое поле.
+     */
+    private void initComponents (GameScene scene) {
+
+        m_scene = scene;
+        m_cells = new GameCell[12][12];
+        m_playersCoordX = -1;
+        m_playersCoordY = -1;
+        m_minotaurusCoordX = -1;
+        m_minotaurusCoordY = -1;
+        m_swordCoordX = -1;
+        m_swordCoordY = -1;
+        m_doorCoordX = -1;
+        m_doorCoordY = -1;
+        m_stepsCount = -1;
+        m_isMinotaurusDead = false;
+        m_hasTeseusSword = false;
+        m_stepsListeners = new ArrayList<ChangeStepsCountListener>();
+        m_killMinotaurusListeners = new ArrayList<KillMinotaurusListener>();
+        m_getSwordListeners = new ArrayList<TeseusGetSwordListener>();
+    }
+
+    public MainModel (GameScene scene) {
+
+
+    }
+
 }

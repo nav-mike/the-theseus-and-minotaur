@@ -7,7 +7,7 @@ import java.util.EventObject;
  * Вознкает когда Тесей убивает Минотавра.
  */
 public class KillMinotaurusEvent extends EventObject {
-    
+
     /* Поля класса. */
     /** Флаг жив Минотавр или нет. */
     private boolean m_isMinotaurusDead;
@@ -39,5 +39,5 @@ public class KillMinotaurusEvent extends EventObject {
         super(source);
         this.m_isMinotaurusDead = m_isMinotaurusDead;
     }
-    
+
 }

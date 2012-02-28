@@ -7,7 +7,7 @@ import java.util.EventObject;
  * Возникает когда изменяется количество очков хода.
  */
 public class ChangeStepsCountEvent extends EventObject {
-    
+
     /* Поля класса. */
     /** Количество оставшихся у Тесея ходов. */
     private int m_stepsCount;
@@ -30,5 +30,5 @@ public class ChangeStepsCountEvent extends EventObject {
     public int getStepsCount() {
         return m_stepsCount;
     }
-    
+
 }
