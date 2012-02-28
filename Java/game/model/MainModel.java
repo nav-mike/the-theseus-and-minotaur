@@ -4,6 +4,8 @@ import game.model.events.ChangeStepsCountEvent;
 import game.model.events.ChangeStepsCountListener;
 import game.model.events.KillMinotaurusEvent;
 import game.model.events.KillMinotaurusListener;
+import game.model.events.TeseusGetSwordEvent;
+import game.model.events.TeseusGetSwordListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -57,6 +59,8 @@ public class MainModel {
     private ArrayList<ChangeStepsCountListener> m_stepsListeners;
     /** Список слушателей для события убийства Минотавра. */
     private ArrayList<KillMinotaurusListener> m_killMinotaurusListeners;
+    /** Список слушателей для события получения меча Тесеем. */
+    private ArrayList<TeseusGetSwordListener> m_getSwordListeners;
     /** Событие. */
     private ChangeStepsCountEvent m_event;
 
@@ -111,6 +115,15 @@ public class MainModel {
     public void addKillMinotaurusListener (KillMinotaurusListener l) {
         
         m_killMinotaurusListeners.add(l);
+    }
+    
+    /**
+     * Метод добавления слушателя события получения Тесеем меча.
+     * @param l Слушатель события.
+     */
+    public void addGetSwordListener (TeseusGetSwordListener l) {
+        
+        m_getSwordListeners.add(l);
     }
     
     /**
