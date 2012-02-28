@@ -1,7 +1,6 @@
 package game.graphics;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JPanel;
@@ -38,6 +37,11 @@ public class GameScene extends JPanel implements KeyListener {
     public GameScene() {
 
         super();
+
+        this.setSize(500,450);
+        this.setPreferredSize(new Dimension(500,450));
+        this.setMaximumSize(new Dimension(500,450));
+        this.setMinimumSize(new Dimension(500,450));
 
         m_cells = new GameCell[12][12];
         fromMap();

@@ -1,6 +1,8 @@
 package game.graphics;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
@@ -20,7 +22,16 @@ public class MainWindow extends JFrame {
     /* Поля класса. */
     /** Игровое поле. */
     private GameScene m_gameScene;
-    // private MyButton  m_newButton;
+    /** Панель с меню. */
+    private MenuClass m_mainMenu;
+    /** Менюбар с основными пунктами. */
+    private JMenuBar m_menuBar;
+    /** Элемент меню. */
+    private JMenu m_gameMenu;
+    /** Меню новая игра. */
+    private JMenuItem m_newGame;
+    /** Меню закрытие игры. */
+    private JMenuItem m_closeGame;
 
     /**
      * Конструктор по умолчанию.
@@ -33,11 +44,12 @@ public class MainWindow extends JFrame {
 
         initComponents(); // Инициализация графических компонентов окна.
         createLayouts();
+        addListeners();
 
-        this.setPreferredSize(new Dimension(700, 700));
-        this.setMaximumSize(new Dimension(700, 700)); // Установка размера главного окна.
-        this.setMinimumSize(new Dimension(700, 700));
-        this.setSize(700, 700);
+        this.setPreferredSize(new Dimension(800, 450));
+        this.setMaximumSize(new Dimension(800, 450)); // Установка размера главного окна.
+        this.setMinimumSize(new Dimension(800, 450));
+        this.setSize(800, 450);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Установка режима закрытия окна.
 
@@ -54,8 +66,26 @@ public class MainWindow extends JFrame {
      */
     private void createLayouts () {
 
-        this.add(m_gameScene, BorderLayout.CENTER);
-        //     this.add(m_newButton, BorderLayout.EAST);
+        this.setLayout(new GridLayout(1,2));
+        this.add(m_gameScene); this.add(m_mainMenu);
+        this.m_gameMenu.add(m_newGame);
+        this.m_gameMenu.add(m_closeGame);
+        m_menuBar.add(this.m_gameMenu);
+        this.setJMenuBar(m_menuBar);
+    }
+
+    /**
+     * Метод добавления слушателей к событиям.
+     */
+    private void addListeners () {
+
+        this.m_closeGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                System.exit(0);
+            }
+        });
     }
 
     /**
@@ -65,6 +95,11 @@ public class MainWindow extends JFrame {
 
         this.m_gameScene = new GameScene();
         m_gameScene.setBackground(Color.red);
-        //  this.m_newButton = new MyButton(500, 500);
+        this.m_mainMenu = new MenuClass();
+        m_mainMenu.setBackground(Color.yellow);
+        m_menuBar = new JMenuBar();
+        m_gameMenu = new JMenu("Игра");
+        m_newGame = new JMenuItem("Новая игра");
+        m_closeGame = new JMenuItem("Закрыть игру");
     }
 }
