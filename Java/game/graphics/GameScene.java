@@ -24,5 +24,21 @@ public class GameScene {
     private boolean m_needShowSword;
     /** Жив ли Минотавр. */
     private boolean m_lifeMinotaurus;
+
+    /**
+     * Метод задания значения флага жив Минотавр или нет.
+     * @param lifeMinotaurus Значение флага жив Минотавр или нет.
+     */
+    public void setLifeMinotaurus(boolean lifeMinotaurus) {
+        this.m_lifeMinotaurus = lifeMinotaurus;
+    }
+
+    /**
+     * Метод получения значения флага жив Минотавр или нет.
+     * @return Значение флага жив Минотавр или нет.
+     */
+    public boolean islifeMinotaurus() {
+        return m_lifeMinotaurus;
+    }
     
 }
