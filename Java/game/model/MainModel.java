@@ -192,4 +192,15 @@ public class MainModel {
             ((KillMinotaurusListener)i.next()).minotaurusDead(new KillMinotaurusEvent(m_isMinotaurusDead, this));
     }
     
+    /**
+     * Метод оповещения слушателей о событии.
+     */
+    protected void fireGetSwordListener () {
+        
+        Iterator i = m_getSwordListeners.iterator();
+        
+        while (i.hasNext())
+            ((TeseusGetSwordListener)i.next()).gotSword(new TeseusGetSwordEvent(m_hasTeseusSword, this));
+    }
+    
 }
