@@ -1,5 +1,8 @@
 package game.graphics;
 
+import java.awt.Graphics;
+import javax.swing.JPanel;
+
 /**
  * Класс игрового поля.
  * Вначале игры получает статичную карту от модели (само поле, координаты меча и
@@ -15,7 +18,7 @@ package game.graphics;
  * минотавра, и в каком он состоянии.
  * 2]. Геттеры, сеттеры параметров меча, Минотавра и т. д.
  */
-public class GameScene {
+public class GameScene extends JPanel{
     
     /* Поля класса. */
     /** Список клеток поля. */
@@ -55,6 +58,32 @@ public class GameScene {
      */
     public boolean islifeMinotaurus() {
         return m_lifeMinotaurus;
+    }
+
+    /**
+     * Метод рисования объектов.
+     * @param g Контекст рисования.
+     */
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        
+        drawGrid(g);
+    }
+    
+    /**
+     * Метод рисования сетки игрового поля.
+     * @param g Контекст рисования.
+     */
+    private void drawGrid (Graphics g) {
+        
+        for (int i = 10; i <= 340; i += 30) {
+            
+            for (int j = 10; j <=340; j += 30) {
+                
+                g.drawRect(i, j, 30, 30);
+            }
+        }
     }
     
 }

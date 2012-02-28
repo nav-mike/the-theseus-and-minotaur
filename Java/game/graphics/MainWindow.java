@@ -79,7 +79,7 @@ public class MainWindow extends JFrame {
     private void initComponents () {
         
         this.m_closeGame = new JButton("Закрыть");
-        this.m_gameScene = new JPanel();
+        this.m_gameScene = new GameScene();
         this.m_hasKey = new JCheckBox("Ключ",false);
         this.m_hasSword = new JCheckBox("Меч",false);
         this.m_newGame = new JButton("Новая игра");
