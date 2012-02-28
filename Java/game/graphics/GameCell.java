@@ -91,9 +91,11 @@ public class GameCell {
      * @param cellsType Тип клетки.
      * @param isHide Является ли клетка скрытой.
      */
-    public GameCell(int cellsType, boolean isHide) {
+    public GameCell(int cellsType, boolean isHide, int coordX, int coordY) {
         this.m_cellsType = cellsType;
         this.m_isHide = isHide;
+        this.m_coordX = coordX;
+        this.m_coordY = coordY;
         
         getImageIndex();
     }
@@ -141,7 +143,7 @@ public class GameCell {
         int result = -1;
         int random = -1;
         
-        random = new Random(System.currentTimeMillis()).nextInt(args.length);
+        random = new Random(System.currentTimeMillis()).nextInt(args.length) % 3;
         result = args[random];
         
         return result;
@@ -189,9 +191,12 @@ public class GameCell {
      */
     public void paint(Graphics g) {
         
-        Image img = new ImageIcon(MainWindow.class.getResource(m_paths[m_currentImagesIndex])).getImage();
+        if (!isHide()) {
+            
+            Image img = new ImageIcon(MainWindow.class.getResource(m_paths[m_currentImagesIndex])).getImage();
         
-        g.drawImage(img, (m_coordX - 1) * 30, (m_coordY - 1) * 30, 30, 30, null);
+            g.drawImage(img, (m_coordX - 1) * 30 + 10, (m_coordY - 1) * 30 + 10, 30, 30, null);
+        }
     }
     
 }

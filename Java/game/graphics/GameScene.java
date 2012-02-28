@@ -29,6 +29,18 @@ public class GameScene extends JPanel{
     private boolean m_lifeMinotaurus;
 
     /**
+     * Конструктор по умолчанию.
+     * Создает игровою сцену.
+     */
+    public GameScene() {
+        
+        super();
+        
+        m_cells = new GameCell[12][12];
+        fromMap();
+    }
+
+    /**
      * Метод задания значения флага требуется отображение меча или нет.
      * @param needShowSword Значение флага требуется отображение меча или нет.
      */
@@ -69,6 +81,15 @@ public class GameScene extends JPanel{
         super.paint(g);
         
         drawGrid(g);
+        
+        for (int i = 0; i < 12; i++) {
+            
+            for (int j = 0; j < 12; j++) {
+                
+                if (m_cells[i][j] != null)
+                    m_cells[i][j].paint(g);
+            }
+        }
     }
     
     /**
@@ -83,6 +104,14 @@ public class GameScene extends JPanel{
                 
                 g.drawRect(i, j, 30, 30);
             }
+        }
+    }
+    
+    private void fromMap () {
+        
+        for (int i = 0; i < 12; i++) {
+            
+            m_cells[i][0] = new GameCell(GameCell.WALL, false,i+1,1);
         }
     }
     
