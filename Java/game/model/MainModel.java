@@ -145,6 +145,15 @@ public class MainModel {
     }
     
     /**
+     * Метод удаления слушателя события получения меча Тесеем.
+     * @param l Слушатель события.
+     */
+    public void removeGetSwordListener (TeseusGetSwordListener l) {
+        
+        m_getSwordListeners.remove(l);
+    }
+    
+    /**
      * Метод оповещения слушателей о событии.
      */
     protected void fireChangesStepsListener () {
