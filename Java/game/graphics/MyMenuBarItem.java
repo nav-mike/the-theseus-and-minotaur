@@ -28,6 +28,7 @@ public class MyMenuBarItem {
      * Метод задания неизменной части элемента игровой информации.
      * @param text Неизменяемая часть текста информации.
      */
+    @Deprecated
     public void setText1 (String text) {
 
         m_text1 = text;
@@ -49,6 +50,18 @@ public class MyMenuBarItem {
     public void setText2 (String text) {
 
         m_text2 = text;
+    }
+
+    /**
+     * Конструктор с параметрами.
+     * Создает игровую информацию с заданными частями.
+     * @param text1 Неизменяемая часть.
+     * @param text2 Изменяемая часть.
+     */
+    public MyMenuBarItem (String text1, String text2) {
+
+        m_text1 = text1;
+        m_text2 = text2;
     }
 
 }
