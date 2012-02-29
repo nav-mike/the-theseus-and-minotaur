@@ -327,7 +327,7 @@ public class MainModel {
         
         boolean result = false;
         
-        String connect = "consult('maze.pro')"; 
+        String connect = "consult('maze.pl')"; 
 //    
 //        Query q1 = new Query(connect); 
 //        
