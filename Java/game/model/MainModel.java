@@ -71,6 +71,69 @@ public class MainModel {
     private ChangeStepsCountEvent m_event;
 
     /**
+     * Метод получения координаты Минотавра y.
+     * @return Координата Минотавра y.
+     */
+    public int getMinotaurusCoordY () {
+
+        return m_minotaurusCoordY;
+    }
+    
+    /**
+     * Метод задания координаты Минотавра x.
+     * @param x Координата Минотавра x.
+     */
+    public void setMinotaurusCoordX (final int x) {
+
+        m_minotaurusCoordX = x;
+    }
+
+    /**
+     * Метод получения координаты Минотавра x.
+     * @return Координата Минотавра x.
+     */
+    public int getMinotaurusCoordX () {
+
+        return m_minotaurusCoordX;
+    }
+
+    /**
+     * Метод задания координаты игрока y.
+     * @param y Координата игрока y.
+     */
+    public void setPlayersCoordY (final int y) {
+
+        m_playersCoordY = y;
+    }
+
+    /**
+     * Метод получения координаты игрока y.
+     * @return Координата игрока y.
+     */
+    public int getPlayersCoordY () {
+
+        return m_playersCoordY;
+    }
+    
+    /**
+     * Метод получения коодинаты игрока x.
+     * @return Координата игрока x.
+     */
+    public int getPlayersCoordX () {
+
+        return m_playersCoordX;
+    }
+
+    /**
+     * Метод задани координаты игрока x.
+     * @param x Координата игрока x.
+     */
+    public void setPlayersCoordX (final int x) {
+
+        m_playersCoordX = x;
+    }
+
+    /**
      * Метод задания значения флагу, получил Тесей меч или нет.
      * @param hasTeseusSword Значение флага, получил Тесей меч или нет.
      */
