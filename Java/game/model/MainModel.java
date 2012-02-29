@@ -293,10 +293,10 @@ public class MainModel {
 
         m_scene = scene;
         m_cells = new GameCell[12][12];
-        m_playersCoordX = -1;
-        m_playersCoordY = -1;
-        m_minotaurusCoordX = -1;
-        m_minotaurusCoordY = -1;
+        m_playersCoordX = 9;
+        m_playersCoordY = 9;
+        m_minotaurusCoordX = 2;
+        m_minotaurusCoordY = 9;
         m_swordCoordX = -1;
         m_swordCoordY = -1;
         m_doorCoordX = -1;
@@ -345,7 +345,14 @@ public class MainModel {
      * @param y Кооордината по У.
      */
     public void playerMove(int way){
-        
+        if (way == MOOVE_UP)
+            m_playersCoordY -= 1;
+        if (way == MOOVE_DOWN)
+            m_playersCoordY += 1;
+        if (way == MOOVE_LEFT)
+            m_playersCoordX -= 1;
+        if (way == MOOVE_RIGHT)
+            m_playersCoordX += 1;
     }
     
     /**
@@ -353,6 +360,9 @@ public class MainModel {
      * в соответствие с последствиями хода Минотавра.
      */
     public void getEnemyMoveData(){
-        
+        if (m_minotaurusCoordX == 2)
+            m_minotaurusCoordX = 3;
+        if (m_minotaurusCoordX == 3)
+            m_minotaurusCoordX = 2;
     }
 }
