@@ -1,5 +1,7 @@
 package game.graphics;
 
+import java.awt.*;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Mikhail Navrotskiy
@@ -14,6 +16,10 @@ public class MyMenuBarItem {
     private String m_text1;
     /** Текст информации: изменяемая часть. */
     private String m_text2;
+    /** Координата элемента x. */
+    private int m_coordX;
+    /** Координата элемента y. */
+    private int m_coordY;
 
     /**
      * Метод получения неизменяемой части элемента игровой информации.
