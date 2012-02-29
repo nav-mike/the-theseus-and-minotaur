@@ -10,6 +10,7 @@ import game.model.events.TeseusGetSwordEvent;
 import game.model.events.TeseusGetSwordListener;
 import java.util.ArrayList;
 import java.util.Iterator;
+//import jpl.*;
 
 /**
  * Класс модели.
@@ -70,6 +71,20 @@ public class MainModel {
     /** Событие. */
     private ChangeStepsCountEvent m_event;
 
+    /* Направления перемещения героя. */
+    
+    /** Вверх. */
+    public static final int MOOVE_UP = 0;
+    
+    /** Вниз. */
+    public static final int MOOVE_DOWN = 1; 
+    
+    /** Влево. */
+    public static final int MOOVE_LEFT = 2;
+    
+    /** Вправо. */
+    public static final int MOOVE_RIGHT = 3;
+    
     /**
      * Метод получения координаты Минотавра y.
      * @return Координата Минотавра y.
@@ -302,5 +317,42 @@ public class MainModel {
 
         initComponents(scene);
     }
-
+    
+    /**
+     * Метод инициализации базы данных Пролога. 
+     * Задаем координаты игровым объектам из данных базы.
+     * @return Результат инициализации базы данных.
+     */
+    private boolean initPrologDatabase(){
+        
+        boolean result = false;
+        
+        String connect = "consult('maze.pro')"; 
+//    
+//        Query q1 = new Query(connect); 
+//        
+//        result = q1.hasSolution();
+        
+        System.out.println( connect + " " + (result ? "succeeded" : "failed") ); 
+    
+        return result;
+    }
+    
+    /**
+     * Метод, передающий Прологу направление шага Тесея и 
+     * выставляющий соответствующие последствиям хода флаги.
+     * @param x Координата по Х.
+     * @param y Кооордината по У.
+     */
+    public void playerMove(int way){
+        
+    }
+    
+    /**
+     * Метод, выставляющий флаги и координаты Минотавра
+     * в соответствие с последствиями хода Минотавра.
+     */
+    public void getEnemyMoveData(){
+        
+    }
 }
