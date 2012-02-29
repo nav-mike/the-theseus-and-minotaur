@@ -67,7 +67,8 @@ public class MainWindow extends JFrame {
     private void createLayouts () {
 
         this.setLayout(new GridLayout(1,2));
-        this.add(m_gameScene); this.add(m_mainMenu);
+        this.add(m_gameScene);
+//        this.add(m_mainMenu);
         this.m_gameMenu.add(m_newGame);
         this.m_gameMenu.add(m_closeGame);
         m_menuBar.add(this.m_gameMenu);
@@ -95,8 +96,8 @@ public class MainWindow extends JFrame {
 
         this.m_gameScene = new GameScene();
         m_gameScene.setBackground(Color.red);
-        this.m_mainMenu = new MenuClass();
-        m_mainMenu.setBackground(Color.yellow);
+//        this.m_mainMenu = new MenuClass();
+//        m_mainMenu.setBackground(Color.yellow);
         m_menuBar = new JMenuBar();
         m_gameMenu = new JMenu("Игра");
         m_newGame = new JMenuItem("Новая игра");

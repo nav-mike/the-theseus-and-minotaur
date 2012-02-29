@@ -54,6 +54,7 @@ public class MyButton extends JComponent implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         //To change body of implemented methods use File | Settings | File Templates.
+        System.out.println("12");
     }
 
     @Override
