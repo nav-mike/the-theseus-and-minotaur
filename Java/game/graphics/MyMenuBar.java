@@ -1,6 +1,8 @@
 package game.graphics;
 
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by IntelliJ IDEA.
@@ -22,6 +24,18 @@ public class MyMenuBar {
     public void add (MyMenuBarItem item) {
 
         m_items.add(item);
+    }
+
+    /**
+     * Метод рисования списка элементов игровой информации.
+     * @param graphics Контекст рисования.
+     */
+    public void paint (Graphics graphics) {
+
+        Iterator iterator = m_items.iterator();
+        
+        while (iterator.hasNext())
+            ((MyMenuBarItem)iterator.next()).paint(graphics);
     }
 
 }
