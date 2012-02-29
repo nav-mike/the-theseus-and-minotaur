@@ -108,4 +108,15 @@ public class MyMenuBarItem {
         m_coordY = y;
     }
 
+    /**
+     * Метод рисования элемента.
+     * @param graphics Контекст рисования.
+     */
+    public void paint (Graphics graphics) {
+
+        graphics.setColor(Color.black);
+        graphics.drawString(m_text1,m_coordX,m_coordY);
+        graphics.drawString(m_text2,m_coordX + m_text1.length() + 10,m_coordY);
+    }
+
 }
