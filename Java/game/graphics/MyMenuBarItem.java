@@ -100,10 +100,12 @@ public class MyMenuBarItem {
      * @param text1 Неизменяемая часть.
      * @param text2 Изменяемая часть.
      */
-    public MyMenuBarItem (String text1, String text2) {
+    public MyMenuBarItem (String text1, String text2, int x, int y) {
 
         m_text1 = text1;
         m_text2 = text2;
+        m_coordX = x;
+        m_coordY = y;
     }
 
 }
