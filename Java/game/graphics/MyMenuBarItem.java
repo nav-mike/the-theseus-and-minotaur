@@ -22,6 +22,42 @@ public class MyMenuBarItem {
     private int m_coordY;
 
     /**
+     * Метод задания координаты y.
+     * @param y Координата y.
+     */
+    public void setCoordY (int y) {
+
+        m_coordY = y;
+    }
+
+    /**
+     * Метод получения коордиинаты y.
+     * @return Координата y.
+     */
+    public int getCoordY () {
+
+        return m_coordY;
+    }
+
+    /**
+     * Метод задания координаты x.
+     * @param x Координата x.
+     */
+    public void setCoordX (int x) {
+
+        m_coordX = x;
+    }
+
+    /**
+     * Метод получения координаты x.
+     * @return Координата x.
+     */
+    public int getCoordX () {
+
+        return m_coordX;
+    }
+
+    /**
      * Метод получения неизменяемой части элемента игровой информации.
      * @return Неизменяемая часть текста информации.
      */
