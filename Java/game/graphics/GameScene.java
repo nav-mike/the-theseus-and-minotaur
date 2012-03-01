@@ -202,10 +202,14 @@ public class GameScene extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
 
-        if (e.getKeyCode() == KeyEvent.VK_LEFT)
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            this.movePlayerLeft();
             System.out.println("Go to left");
-        else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            this.movePlayerRight();
             System.out.println("Go to right");
+        }
         else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             this.movePlayerDown();
             System.out.println("Go to down");
@@ -247,6 +251,39 @@ public class GameScene extends JPanel implements KeyListener {
             _y = m_model.getPlayersCoordY();
         
         m_model.playerMove(MainModel.MOOVE_DOWN);
+        
+        int x = m_model.getPlayersCoordX(),
+            y = m_model.getPlayersCoordY();
+        
+        m_cells[_x - 1][_y - 1] = new GameCell(GameCell.FREE, false, _x, _y);
+        m_cells[x - 1][y - 1] = new GameCell(GameCell.TESEUS, false, x, y);
+        repaint();
+    }
+    
+    /**
+     * Метод перемещения Тесея влево.
+     */
+    private void movePlayerLeft () {
+        
+        int _x = m_model.getPlayersCoordX(),
+            _y = m_model.getPlayersCoordY();
+        
+        m_model.playerMove(MainModel.MOOVE_LEFT);
+        
+        int x = m_model.getPlayersCoordX(),
+            y = m_model.getPlayersCoordY();
+        
+        m_cells[_x - 1][_y - 1] = new GameCell(GameCell.FREE, false, _x, _y);
+        m_cells[x - 1][y - 1] = new GameCell(GameCell.TESEUS, false, x, y);
+        repaint();
+    }
+    
+    private void movePlayerRight () {
+        
+        int _x = m_model.getPlayersCoordX(),
+            _y = m_model.getPlayersCoordY();
+        
+        m_model.playerMove(MainModel.MOOVE_RIGHT);
         
         int x = m_model.getPlayersCoordX(),
             y = m_model.getPlayersCoordY();
