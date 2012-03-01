@@ -372,6 +372,11 @@ public class MainModel {
         result = q1.hasSolution();
         System.out.println( plStr + " " + (result ? "succeeded" : "failed") );
             
+        plStr = "setDoor"; 
+        q1 = new Query(plStr); 
+        result = q1.hasSolution();
+        System.out.println( plStr + " " + (result ? "succeeded" : "failed") );
+        
         return result;
     }
     
