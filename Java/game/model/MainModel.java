@@ -444,6 +444,13 @@ public class MainModel {
             setGameData();
         
         System.out.println();
+        
+        setStepsCount(getNewCoord("counter", "I",false));
+                
+        if (getStepsCount() == 0){
+            System.out.println("ENEMY MOVES!");
+            getEnemyMoveData();
+        }
     }
     
     /**
@@ -451,10 +458,16 @@ public class MainModel {
      * в соответствие с последствиями хода Минотавра.
      */
     public void getEnemyMoveData(){
-        if (m_minotaurusCoordX == 2)
-            m_minotaurusCoordX = 3;
-        if (m_minotaurusCoordX == 3)
-            m_minotaurusCoordX = 2;
+                
+        setPlayersCoordX(getNewCoord("enemy", "X",true));
+        
+        setPlayersCoordY(getNewCoord("enemy", "Y",true));
+        
+        if (!isMinotaurusDead())
+            setIsMinotaurusDead(getNewData("hasKey"));
+        
+        if (!isLoose())
+            setIsLoose(getNewData("isLoose")); 
     }
     
     /**
@@ -462,9 +475,9 @@ public class MainModel {
      */
     private void setGameData(){
         
-        setPlayersCoordX(getNewCoord("X"));
+        setPlayersCoordX(getNewCoord("player", "X",true));
         
-        setPlayersCoordY(getNewCoord("Y"));
+        setPlayersCoordY(getNewCoord("player", "Y",true));
         
         if (!hasTeseusSword())
             setHasTeseusSword(getNewData("hasSword"));
@@ -477,7 +490,6 @@ public class MainModel {
         
         if (!isLoose())
             setIsLoose(getNewData("isLoose")); 
-        
     }
     
     /**
@@ -485,9 +497,15 @@ public class MainModel {
      * @param coordName Имя координаты.
      * @return Новое значение координаты.
      */
-    private int getNewCoord(String coordName){
+    private int getNewCoord(String name, String coordName, boolean needSuffix){
         
-        String qrStr = "player" + coordName + "("+ coordName + ")";
+        String qrStr;
+        
+        if (needSuffix)
+            qrStr = name + coordName + "("+ coordName + ")";
+        else
+            qrStr = name + "("+ coordName + ")";
+        
         Query qr = new Query(qrStr);         
         Hashtable [] solTable = qr.allSolutions();
         jpl.Integer intData = (jpl.Integer)solTable[0].get(coordName);

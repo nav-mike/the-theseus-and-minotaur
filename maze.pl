@@ -1,5 +1,5 @@
 % Делаем БД динамической.
-:- dynamic cell/3, playerX/1, playerY/1, enemyX/1, enemyY/1, hasSword/1, hasKey/1, isWin/1, isLoose/1, isUpStep/3, isRightStep/3.
+:- dynamic cell/3, playerX/1, playerY/1, enemyX/1, enemyY/1, hasSword/1, hasKey/1, isWin/1, isLoose/1, isUpStep/3, isRightStep/3, counter/1.
 
 % Матрица клеток карты
 cell(1,1,wll). cell(2,1,flr). cell(3,1,wll). cell(4,1,wll). cell(5,1,wll). cell(6,1,wll). cell(7,1,wll). cell(8,1,wll). cell(9,1,wll). cell(10,1,wll). cell(11,1,wll). cell(12,1,wll).
@@ -38,6 +38,8 @@ hasKey(false).		% Ключа нет
 isWin(false).		% Игра еще не выиграна
 isLoose(false).		% Игра не проиграна
 
+startCounter(1).	% Начальное значение счетчика
+counter(2).			% Сам счетчик
 
 
 % Создать клетку с дверью
@@ -45,16 +47,27 @@ setDoor:-
 	doorX(DrX),
 	doorY(DrY),
 	retract(cell(DrX,DrY,flr)),	% Заменяем предикат
-	assert(cell(DrX,DrY,dor)).
+	assert(cell(DrX,DrY,dor)).	
+	
+% Изменение счетчика ходов игрока.
+decrementCounter:-
+	counter(I),
+	NewI is I - 1,
+	retract(counter(I)),
+	I \= 0,
+	assert(counter(NewI));
+	I = 0,
+	startCounter(J),
+	assert(counter(J)),
+	enemyMove.
 
-	
-	
 % Игрок сделал шаг
 playerMoove(Way):-
 	playerX(CurrentX),
 	playerY(CurrentY),
 	setNewCoordinates(Way,CurrentX,CurrentY),
-	checkSword.
+	checkSword,
+	decrementCounter.
 
 % Определить координаты игрока после шага
 setNewCoordinates(Way,X,Y):-
@@ -186,19 +199,46 @@ checkNoSword(X, Y, EnX, EnY):-
 	retract(isLoose(false)),	% Установим флаг победы
 	assert(isLoose(true)).	
 	
+% Ход Минотавра	
+enemyMove:-
+	enemyX(X),
+	enemyY(Y),
+	chooseTheWay(X,Y,Way),
+	setNewEnemyCoordinates(X,Y,Way),
+	true.
+	
+% Оглядеться и выбрать напрвление пути
+chooseTheWay(X,Y,Way):-
+	cell(X,Y+1,Type),
+	Type \= wll,
+	Way = up;
+	
+	cell(X+1,Y,Type),
+	Type \= wll,
+	Way = right;
+	
+	cell(X,Y-1,Type),
+	Type \= wll,
+	Way = down;
+	
+	cell(X-1,Y,Type),
+	Type \= wll,
+	Way = left.
+	
+% Задать новые координаты противнику
+setNewEnemyCoordinates:-
+	isEnemyUpStep(Way,X,Y);			% Если пошел вверх
+	isEnemyRightStep(Way,X,Y);		% Если пошел вправо
+	isEnemyLeftStep(Way,X,Y);		% Если пошел влево
+	isEnemyDownStep(Way,X,Y).		% Если пошел вниз
+	
+isEnemyUpStep.
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+isEnemyRightStep.
+
+isEnemyLeftStep.
+
+isEnemyDownStep.
 	
 	
 	
