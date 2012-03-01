@@ -461,10 +461,6 @@ public class MainModel {
      * Получить игровые данные от пролога. (пока только координаты игрока)
      */
     private void setGameData(){
-        Hashtable [] solTable;
-        jpl.Integer intData;
-        String qrStr;
-        Query qr;
         
         setPlayersCoordX(getNewCoord("X"));
         
@@ -482,8 +478,6 @@ public class MainModel {
         if (!isLoose())
             setIsLoose(getNewData("isLoose")); 
         
-        if (isLoose())
-            m_isLoose = m_isLoose;
     }
     
     /**
