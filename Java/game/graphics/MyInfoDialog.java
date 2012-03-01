@@ -1,5 +1,6 @@
 package game.graphics;
 
+import java.awt.Frame;
 import javax.swing.*;
 
 /**
@@ -16,6 +17,25 @@ public class MyInfoDialog extends JDialog {
     private String m_text;
     /** Заголовок диалога. */
     private String m_title;
+
+    /**
+     * Конструктор создания диалога.
+     * @param m_text Текст сообщения.
+     * @param m_title Заголовок сообщения.
+     */
+    public MyInfoDialog(String m_text, String m_title) {
+        
+        super();
+        this.m_text = m_text;
+        this.m_title = m_title;
+        
+        this.setTitle(m_title);
+        this.setText(m_text);
+        this.add(new JLabel(m_text));
+        this.setModal(true);
+        this.setSize(240, 90);
+        this.setVisible(true);
+    }
 
     /**
      * Метод получения текста диалога.

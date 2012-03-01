@@ -1,6 +1,8 @@
 package game.graphics;
 
 import game.model.MainModel;
+import game.model.events.TeseusGetSwordEvent;
+import game.model.events.TeseusGetSwordListener;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -21,7 +23,8 @@ import javax.swing.JPanel;
  * минотавра, и в каком он состоянии.
  * 2]. Геттеры, сеттеры параметров меча, Минотавра и т. д.
  */
-public class GameScene extends JPanel implements KeyListener {
+public class GameScene extends JPanel implements KeyListener,
+        TeseusGetSwordListener {
 
     /* Поля класса. */
     /** Список клеток поля. */
@@ -32,6 +35,8 @@ public class GameScene extends JPanel implements KeyListener {
     private boolean m_lifeMinotaurus;
     /** Модель игры. */
     private MainModel m_model;
+    /** Список информации по игре. */
+    private MyMenuBar m_menuBar;
 
     /**
      * Конструктор по умолчанию.
@@ -49,8 +54,10 @@ public class GameScene extends JPanel implements KeyListener {
         m_cells = new GameCell[12][12];
         fromMap();
         m_model = new MainModel(this);
+        m_menuBar = new MyMenuBar();
 
         this.addKeyListener(this);
+        m_model.addGetSwordListener(this);
     }
 
     /**
@@ -103,6 +110,7 @@ public class GameScene extends JPanel implements KeyListener {
         }
 
         drawGrid(g);
+        m_menuBar.paint(g);
 
     }
 
@@ -112,7 +120,7 @@ public class GameScene extends JPanel implements KeyListener {
      */
     private void drawGrid (Graphics g) {
 
-        g.setColor(Color.white);
+        g.setColor(Color.black);
         for (int i = 10; i <= 340; i += 30) {
 
             for (int j = 10; j <=340; j += 30) {
@@ -278,6 +286,9 @@ public class GameScene extends JPanel implements KeyListener {
         repaint();
     }
     
+    /**
+     * Метод перемещения игрока вправо.
+     */
     private void movePlayerRight () {
         
         int _x = m_model.getPlayersCoordX(),
@@ -299,5 +310,17 @@ public class GameScene extends JPanel implements KeyListener {
      */
     @Override
     public void keyReleased(KeyEvent e) {}
+
+    /**
+     * Реализация события получение Тесеем меча.
+     * @param e Событие.
+     */
+    @Override
+    public void gotSword(TeseusGetSwordEvent e) {
+
+        new MyInfoDialog("Тесей получает меч.", "Информация.");
+        m_menuBar.get(0).setText2("да");
+        repaint();
+    }
 
 }

@@ -159,6 +159,8 @@ public class MainModel {
      */
     public void setHasTeseusSword(boolean hasTeseusSword) {
         this.m_hasTeseusSword = hasTeseusSword;
+        if (m_hasTeseusSword)
+            fireGetSwordListener();
     }
 
     /**

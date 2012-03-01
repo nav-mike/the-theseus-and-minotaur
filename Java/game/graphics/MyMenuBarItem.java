@@ -20,6 +20,8 @@ public class MyMenuBarItem {
     private int m_coordX;
     /** Координата элемента y. */
     private int m_coordY;
+    /** Расстояние между частями слов. */
+    private int m_shift;
 
     /**
      * Метод задания координаты y.
@@ -100,12 +102,13 @@ public class MyMenuBarItem {
      * @param text1 Неизменяемая часть.
      * @param text2 Изменяемая часть.
      */
-    public MyMenuBarItem (String text1, String text2, int x, int y) {
+    public MyMenuBarItem (String text1, String text2, int x, int y, int shift) {
 
         m_text1 = text1;
         m_text2 = text2;
         m_coordX = x;
         m_coordY = y;
+        m_shift = shift;
     }
 
     /**
@@ -114,9 +117,9 @@ public class MyMenuBarItem {
      */
     public void paint (Graphics graphics) {
 
-        graphics.setColor(Color.black);
+        graphics.setColor(Color.white);
         graphics.drawString(m_text1,m_coordX,m_coordY);
-        graphics.drawString(m_text2,m_coordX + m_text1.length() + 10,m_coordY);
+        graphics.drawString(m_text2,m_coordX + m_shift,m_coordY);
     }
 
 }
