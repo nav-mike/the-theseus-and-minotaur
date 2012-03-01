@@ -206,8 +206,10 @@ public class GameScene extends JPanel implements KeyListener {
             System.out.println("Go to left");
         else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
             System.out.println("Go to right");
-        else if (e.getKeyCode() == KeyEvent.VK_DOWN)
+        else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            this.movePlayerDown();
             System.out.println("Go to down");
+        }
         else if (e.getKeyCode() == KeyEvent.VK_UP) {
             this.movePlayerUp();
             System.out.println("Go to up");
@@ -233,6 +235,24 @@ public class GameScene extends JPanel implements KeyListener {
         
         m_cells[_x-1][_y-1] = new GameCell(GameCell.FREE, false, _x, _y);
         m_cells[x-1][y-1] = new GameCell(GameCell.TESEUS, false, x, y);
+        repaint();
+    }
+    
+    /**
+     * Метод перемещения Тесея вниз.
+     */
+    private void movePlayerDown () {
+        
+        int _x = m_model.getPlayersCoordX(),
+            _y = m_model.getPlayersCoordY();
+        
+        m_model.playerMove(MainModel.MOOVE_DOWN);
+        
+        int x = m_model.getPlayersCoordX(),
+            y = m_model.getPlayersCoordY();
+        
+        m_cells[_x - 1][_y - 1] = new GameCell(GameCell.FREE, false, _x, _y);
+        m_cells[x - 1][y - 1] = new GameCell(GameCell.TESEUS, false, x, y);
         repaint();
     }
 
