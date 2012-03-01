@@ -400,10 +400,12 @@ public class MainModel {
         
         boolean moveResult = qr.hasSolution();
         
-        System.out.println( qrStr + " " + (moveResult ? "succeeded" : "failed") );
+        System.out.print( qrStr + " " + (moveResult ? "succeeded" : "failed") + "  |  " );
         
         if (moveResult)
-            getGameData();
+            setGameData();
+        
+        System.out.println();
     }
     
     /**
@@ -420,23 +422,27 @@ public class MainModel {
     /**
      * Получить игровые данные от пролога. (пока только координаты игрока)
      */
-    private void getGameData(){
+    private void setGameData(){
         Hashtable [] solTable;
         jpl.Integer intData;
         String qrStr;
         Query qr;
         
-        m_playersCoordX = getNewCoord("X");
+        setPlayersCoordX(getNewCoord("X"));
         
-        m_playersCoordY = getNewCoord("Y");
+        setPlayersCoordY(getNewCoord("Y"));
         
-        m_hasTeseusSword = getNewData("hasSword");
+        if (!hasTeseusSword())
+            setHasTeseusSword(getNewData("hasSword"));
         
-        m_isMinotaurusDead = getNewData("hasKey");
+        if (!isMinotaurusDead())
+            setIsMinotaurusDead(getNewData("hasKey"));
         
-        m_isWin = getNewData("isWin");
+        if (!isWin())
+            setIsWin(getNewData("isWin"));
         
-        m_isLoose = getNewData("isLoose"); 
+        if (!isLoose())
+            setIsLoose(getNewData("isLoose")); 
     }
     
     /**
@@ -460,11 +466,17 @@ public class MainModel {
      */
     private boolean getNewData(String dataName){
         
+        boolean result;
+        
         String qrStr = dataName + "(Flag)";
         Query qr = new Query(qrStr);         
         Hashtable [] solTable = qr.allSolutions();
         Atom intData = (jpl.Atom)solTable[0].get("Flag");
- 
-        return Boolean.parseBoolean(intData.name());
+        
+        result = Boolean.parseBoolean(intData.name());
+        
+        System.out.print(" " + qrStr + " " + (result ? "succeeded" : "failed")  + "  |  " );
+        
+        return result;
     }
 }
