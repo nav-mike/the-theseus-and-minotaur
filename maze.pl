@@ -70,7 +70,8 @@ isUpStep(Way,X,Y):-
 	checkWall(X,NewY),		% Проверим, что не стена
 	checkDoor(X,NewY),		% Проверим новую клетку на дверь
 	retract(playerY(Y)),	% Заменяем предикат
-	assert(playerY(NewY)).
+	assert(playerY(NewY)),
+	checkEnemy.
 	
 % Если пошел вправо
 isRightStep(Way,X,Y):-
@@ -79,7 +80,8 @@ isRightStep(Way,X,Y):-
 	checkWall(NewX,Y),		% Проверим, что не стена
 	checkDoor(NewX,Y),		% Проверим новую клетку на дверь
 	retract(playerX(X)),	% Заменяем предикат
-	assert(playerX(NewX)).
+	assert(playerX(NewX)),
+	checkEnemy.
 
 % Если пошел влево
 isLeftStep(Way,X,Y):-
@@ -88,7 +90,8 @@ isLeftStep(Way,X,Y):-
 	checkWall(NewX,Y),		% Проверим, что не стена
 	checkDoor(NewX,Y),		% Проверим новую клетку на дверь
 	retract(playerX(X)),	% Заменяем предикат
-	assert(playerX(NewX)).
+	assert(playerX(NewX)),
+	checkEnemy.
 	
 % Если пошел вниз
 isDownStep(Way,X,Y):-
@@ -97,7 +100,8 @@ isDownStep(Way,X,Y):-
 	checkWall(X,NewY),		% Проверим, что не стена
 	checkDoor(X,NewY),		% Проверим новую клетку на дверь
 	retract(playerY(Y)),	% Заменяем предикат
-	assert(playerY(NewY)).
+	assert(playerY(NewY)),
+	checkEnemy.
 
 % Проверим, что новая клетка не стена	
 checkWall(X,Y):-
@@ -128,8 +132,42 @@ checkDoor(X,Y):-
 	retract(isWin(false)),	% Установим флаг победы
 	assert(isWin(true)).	
 
+% Если встретили Минотавра
+checkEnemy:-
+	playerX(X),				% Координаты игрока
+	playerY(Y),
+	enemyX(EnX),			% Координаты Минотавра
+	enemyY(EnY),
+	checkEnemyCoords(X, Y, EnX, EnY).	% Проверяем координаты
+
+% Проверим координаты
+checkEnemyCoords(X, Y, EnX, EnY):-
+	unCorrectCoords(X, Y, EnX, EnY);
+	checkNoSword(X, Y, EnX, EnY);
+	checkHasSword(X, Y, EnX, EnY).
+
+% Если координаты не совпали
+unCorrectCoords(X, Y, EnX, EnY):-
+	X =\= EnX;
+	Y =\= EnY.	
 	
+% Если координаты совпали и меч есть
+checkHasSword(X, Y, EnX, EnY):-
+	X =:= EnX,
+	Y =:= EnY,
+	hasSword(true),
+	retract(hasKey(false)),	% Установим флаг победы
+	assert(hasKey(true)).	
+
+% Если координаты совпали но меча нет	
+checkNoSword(X, Y, EnX, EnY):-
+	X =:= EnX,
+	Y =:= EnY,
+	hasSword(false),
+	retract(isLoose(false)),	% Установим флаг победы
+	assert(isLoose(true)).	
 	
+
 	
 	
 	

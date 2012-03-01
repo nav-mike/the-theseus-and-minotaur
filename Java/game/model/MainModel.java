@@ -346,6 +346,8 @@ public class MainModel {
         m_stepsListeners = new ArrayList<ChangeStepsCountListener>();
         m_killMinotaurusListeners = new ArrayList<KillMinotaurusListener>();
         m_getSwordListeners = new ArrayList<TeseusGetSwordListener>();
+        m_isLoose = false;
+        m_isWin = false;
     }
 
     /**
@@ -450,6 +452,9 @@ public class MainModel {
         
         if (!isLoose())
             setIsLoose(getNewData("isLoose")); 
+        
+        if (isLoose())
+            m_isLoose = m_isLoose;
     }
     
     /**
