@@ -1,5 +1,6 @@
 package game.graphics;
 
+import game.model.MainModel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -29,6 +30,8 @@ public class GameScene extends JPanel implements KeyListener {
     private boolean m_needShowSword;
     /** Жив ли Минотавр. */
     private boolean m_lifeMinotaurus;
+    /** Модель игры. */
+    private MainModel m_model;
 
     /**
      * Конструктор по умолчанию.
@@ -45,6 +48,7 @@ public class GameScene extends JPanel implements KeyListener {
 
         m_cells = new GameCell[12][12];
         fromMap();
+        m_model = new MainModel(this);
 
         this.addKeyListener(this);
     }
@@ -204,12 +208,31 @@ public class GameScene extends JPanel implements KeyListener {
             System.out.println("Go to right");
         else if (e.getKeyCode() == KeyEvent.VK_DOWN)
             System.out.println("Go to down");
-        else if (e.getKeyCode() == KeyEvent.VK_UP)
+        else if (e.getKeyCode() == KeyEvent.VK_UP) {
+            this.movePlayerUp();
             System.out.println("Go to up");
+        }
         else if (e.getKeyCode() == KeyEvent.VK_SPACE)
             System.out.println("Go to next step");
         else
             System.out.println("Unknown keys");
+    }
+    
+    private void movePlayerUp () {
+        
+        int _x = m_model.getPlayersCoordX(),
+            _y = m_model.getPlayersCoordY();
+        
+        m_model.playerMove(MainModel.MOOVE_UP);
+        
+        int x = m_model.getPlayersCoordX(),
+            y = m_model.getPlayersCoordY();
+        
+//        m_cells[_x][_y].setCellsType(GameCell.FREE);
+        m_cells[_x][_y] = new GameCell(GameCell.FREE, false, _x+1, _y+1);
+//        m_cells[x][y].setCellsType(GameCell.TESEUS);
+        m_cells[x][y] = new GameCell(GameCell.TESEUS, false, x+1, y+1);
+        repaint();
     }
 
     /**
