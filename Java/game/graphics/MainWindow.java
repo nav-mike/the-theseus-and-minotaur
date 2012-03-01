@@ -95,7 +95,7 @@ public class MainWindow extends JFrame {
     private void initComponents () {
 
         this.m_gameScene = new GameScene();
-        m_gameScene.setBackground(Color.red);
+        m_gameScene.setBackground(Color.black);
 //        this.m_mainMenu = new MenuClass();
 //        m_mainMenu.setBackground(Color.yellow);
         m_menuBar = new JMenuBar();
