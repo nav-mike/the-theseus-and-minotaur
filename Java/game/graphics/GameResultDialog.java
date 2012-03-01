@@ -31,6 +31,8 @@ public class GameResultDialog extends JDialog {
 
         this.setModal(true);
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        this.setSize(400, 100);
+        this.setVisible(true);
     }
 
     /**

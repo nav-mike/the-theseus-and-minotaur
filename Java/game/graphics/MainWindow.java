@@ -88,6 +88,8 @@ public class MainWindow extends JFrame implements WinPlayerListener {
                 System.exit(0);
             }
         });
+        
+        this.m_gameScene.getModel().addWinPlayerListener(this);
     }
 
     /**

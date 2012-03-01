@@ -60,6 +60,7 @@ public class GameScene extends JPanel implements KeyListener,
 
         this.addKeyListener(this);
         m_model.addGetSwordListener(this);
+        m_model.addKillMinotaurusListener(this);
     }
 
     /**
@@ -335,6 +336,14 @@ public class GameScene extends JPanel implements KeyListener,
         new MyInfoDialog("Тесей убил Минотавра.", "Информация.");
         m_menuBar.get(1).setText2("да");
         repaint();
+    }
+
+    /**
+     * Метод получения ссылки на модель.
+     * @return Ссылка на модель.
+     */
+    public MainModel getModel() {
+        return m_model;
     }
 
 }

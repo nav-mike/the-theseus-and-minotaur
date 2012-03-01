@@ -2,12 +2,7 @@ package game.model;
 
 import game.graphics.GameCell;
 import game.graphics.GameScene;
-import game.model.events.ChangeStepsCountEvent;
-import game.model.events.ChangeStepsCountListener;
-import game.model.events.KillMinotaurusEvent;
-import game.model.events.KillMinotaurusListener;
-import game.model.events.TeseusGetSwordEvent;
-import game.model.events.TeseusGetSwordListener;
+import game.model.events.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -379,6 +374,7 @@ public class MainModel {
         m_stepsListeners = new ArrayList<ChangeStepsCountListener>();
         m_killMinotaurusListeners = new ArrayList<KillMinotaurusListener>();
         m_getSwordListeners = new ArrayList<TeseusGetSwordListener>();
+        m_winPlayerListeners = new ArrayList<WinPlayerListener>();
         m_isLoose = false;
         m_isWin = false;
     }
