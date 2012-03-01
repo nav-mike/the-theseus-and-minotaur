@@ -9,8 +9,9 @@ import game.model.events.KillMinotaurusListener;
 import game.model.events.TeseusGetSwordEvent;
 import game.model.events.TeseusGetSwordListener;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Iterator;
-//import jpl.*;
+import jpl.*;
 
 /**
  * Класс модели.
@@ -297,11 +298,11 @@ public class MainModel {
         m_playersCoordY = 9;
         m_minotaurusCoordX = 2;
         m_minotaurusCoordY = 9;
-        m_swordCoordX = -1;
-        m_swordCoordY = -1;
-        m_doorCoordX = -1;
-        m_doorCoordY = -1;
-        m_stepsCount = -1;
+        m_swordCoordX = 9;
+        m_swordCoordY = 2;
+        m_doorCoordX = 2;
+        m_doorCoordY = 1;
+        m_stepsCount = 2;
         m_isMinotaurusDead = false;
         m_hasTeseusSword = false;
         m_stepsListeners = new ArrayList<ChangeStepsCountListener>();
@@ -316,6 +317,7 @@ public class MainModel {
     public MainModel (GameScene scene) {
 
         initComponents(scene);
+        initPrologDatabase();
     }
     
     /**
@@ -327,14 +329,11 @@ public class MainModel {
         
         boolean result = false;
         
-        String connect = "consult('maze.pl')"; 
-//    
-//        Query q1 = new Query(connect); 
-//        
-//        result = q1.hasSolution();
-        
-        System.out.println( connect + " " + (result ? "succeeded" : "failed") ); 
-    
+        String plStr = "consult('maze.pl')"; 
+        Query q1 = new Query(plStr); 
+        result = q1.hasSolution();
+        System.out.println( plStr + " " + (result ? "succeeded" : "failed") );
+            
         return result;
     }
     
@@ -345,14 +344,27 @@ public class MainModel {
      * @param y Кооордината по У.
      */
     public void playerMove(int way){
-        if (way == MOOVE_UP)
-            m_playersCoordY -= 1;
-        if (way == MOOVE_DOWN)
-            m_playersCoordY += 1;
-        if (way == MOOVE_LEFT)
-            m_playersCoordX -= 1;
-        if (way == MOOVE_RIGHT)
-            m_playersCoordX += 1;
+        String qrStr = "playerMoove(none)";
+        Query qr;
+        
+        if (way == MOOVE_UP){
+            qrStr = "playerMoove(up)";
+        }
+        if (way == MOOVE_DOWN){
+            qrStr = "playerMoove(down)";
+        }
+        if (way == MOOVE_LEFT){
+            qrStr = "playerMoove(left)";
+        }
+        if (way == MOOVE_RIGHT){
+            qrStr = "playerMoove(right)"; 
+        }
+        
+        qr = new Query(qrStr);
+        
+        System.out.println( qrStr + " " + (qr.hasSolution() ? "succeeded" : "failed") );
+        
+        getGameData();
     }
     
     /**
@@ -364,5 +376,27 @@ public class MainModel {
             m_minotaurusCoordX = 3;
         if (m_minotaurusCoordX == 3)
             m_minotaurusCoordX = 2;
+    }
+    
+    /**
+     * Получить игровые данные от пролога. (пока только координаты игрока)
+     */
+    private void getGameData(){
+        Hashtable [] solTable;
+        jpl.Integer intData;
+        String qrStr;
+        Query qr;
+        
+        qrStr = "playerX(X)";
+        qr = new Query(qrStr);         
+        solTable = qr.allSolutions();
+        intData = (jpl.Integer)solTable[0].get("X");
+        m_playersCoordX = intData.intValue();
+        
+        qrStr = "playerY(Y)";
+        qr = new Query(qrStr);         
+        solTable = qr.allSolutions();
+        intData = (jpl.Integer)solTable[0].get("Y");
+        m_playersCoordY = intData.intValue();
     }
 }
