@@ -1,5 +1,7 @@
 package game.graphics;
 
+import game.model.events.WinPlayerEvent;
+import game.model.events.WinPlayerListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +19,7 @@ import javax.swing.*;
  * Наследуется от класса JFrame.
  * Имеет фиксированный размер.
  */
-public class MainWindow extends JFrame {
+public class MainWindow extends JFrame implements WinPlayerListener {
 
     /* Поля класса. */
     /** Игровое поле. */
@@ -68,7 +70,6 @@ public class MainWindow extends JFrame {
 
         this.setLayout(new GridLayout(1,2));
         this.add(m_gameScene);
-//        this.add(m_mainMenu);
         this.m_gameMenu.add(m_newGame);
         this.m_gameMenu.add(m_closeGame);
         m_menuBar.add(this.m_gameMenu);
@@ -96,11 +97,19 @@ public class MainWindow extends JFrame {
 
         this.m_gameScene = new GameScene();
         m_gameScene.setBackground(Color.black);
-//        this.m_mainMenu = new MenuClass();
-//        m_mainMenu.setBackground(Color.yellow);
         m_menuBar = new JMenuBar();
         m_gameMenu = new JMenu("Игра");
         m_newGame = new JMenuItem("Новая игра");
         m_closeGame = new JMenuItem("Закрыть игру");
+    }
+
+    /**
+     * Метод выода диалога о победе.
+     * @param e Событие.
+     */
+    @Override
+    public void playerWin(WinPlayerEvent e) {
+        
+       new GameResultDialog(this, GameResultDialog.VICTORY);
     }
 }

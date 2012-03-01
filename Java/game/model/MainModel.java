@@ -73,6 +73,8 @@ public class MainModel {
     private ArrayList<KillMinotaurusListener> m_killMinotaurusListeners;
     /** Список слушателей для события получения меча Тесеем. */
     private ArrayList<TeseusGetSwordListener> m_getSwordListeners;
+    /** Список слушателей для события победы игрока. */
+    private ArrayList<WinPlayerListener> m_winPlayerListeners;
     /** Событие. */
     private ChangeStepsCountEvent m_event;
 
@@ -177,7 +179,8 @@ public class MainModel {
      */
     public void setIsMinotaurusDead(boolean isMinotaurusDead) {
         this.m_isMinotaurusDead = isMinotaurusDead;
-        fireKillMinotaurusListener();
+        if (m_isMinotaurusDead)
+            fireKillMinotaurusListener();
     }
 
     /**
@@ -210,6 +213,8 @@ public class MainModel {
      */
     public void setIsWin(boolean m_isWin) {
         this.m_isWin = m_isWin;
+        if (this.m_isWin)
+            fireWinPlayerListener();
     }
     
     /**
@@ -246,6 +251,15 @@ public class MainModel {
 
         m_stepsListeners.add(l);
     }
+    
+    /**
+     * Метод добавления слушателя события победы игрока.
+     * @param l Слушатель события.
+     */
+    public void addWinPlayerListener (WinPlayerListener l) {
+        
+        m_winPlayerListeners.add(l);
+    }
 
     /**
      * Метод добавления слушателя события убийтсва Минотавра Тесеем.
@@ -272,6 +286,15 @@ public class MainModel {
     public void removeChangedStepsListener (ChangeStepsCountListener l) {
 
         m_stepsListeners.remove(l);
+    }
+    
+    /**
+     * Метод удаления слушаеля события победы игрока.
+     * @param l Слушатель события.
+     */
+    public void removeWinPlayerListener (WinPlayerListener l) {
+        
+        m_winPlayerListeners.remove(l);
     }
 
     /**
@@ -300,6 +323,16 @@ public class MainModel {
         Iterator i = m_stepsListeners.iterator();
         while (i.hasNext())
             ((ChangeStepsCountListener)i.next()).changedStepsCount(m_event);
+    }
+    
+    /**
+     * Метод оповещения слушателей о событии.
+     */
+    protected void fireWinPlayerListener () {
+        
+        Iterator i = m_winPlayerListeners.iterator();
+        while (i.hasNext())
+            ((WinPlayerListener)i.next()).playerWin(new WinPlayerEvent(m_isWin, this));
     }
 
     /**

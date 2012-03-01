@@ -1,6 +1,8 @@
 package game.graphics;
 
 import game.model.MainModel;
+import game.model.events.KillMinotaurusEvent;
+import game.model.events.KillMinotaurusListener;
 import game.model.events.TeseusGetSwordEvent;
 import game.model.events.TeseusGetSwordListener;
 import java.awt.*;
@@ -24,7 +26,7 @@ import javax.swing.JPanel;
  * 2]. Геттеры, сеттеры параметров меча, Минотавра и т. д.
  */
 public class GameScene extends JPanel implements KeyListener,
-        TeseusGetSwordListener {
+        TeseusGetSwordListener, KillMinotaurusListener {
 
     /* Поля класса. */
     /** Список клеток поля. */
@@ -320,6 +322,18 @@ public class GameScene extends JPanel implements KeyListener,
 
         new MyInfoDialog("Тесей получает меч.", "Информация.");
         m_menuBar.get(0).setText2("да");
+        repaint();
+    }
+
+    /**
+     * Реализация события получения Тесеем ключа.
+     * @param e Событие.
+     */
+    @Override
+    public void minotaurusDead(KillMinotaurusEvent e) {
+        
+        new MyInfoDialog("Тесей убил Минотавра.", "Информация.");
+        m_menuBar.get(1).setText2("да");
         repaint();
     }
 
