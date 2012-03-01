@@ -218,6 +218,9 @@ public class GameScene extends JPanel implements KeyListener {
             System.out.println("Unknown keys");
     }
     
+    /**
+     * Метод перемещения Тесея вверх.
+     */
     private void movePlayerUp () {
         
         int _x = m_model.getPlayersCoordX(),
@@ -228,10 +231,8 @@ public class GameScene extends JPanel implements KeyListener {
         int x = m_model.getPlayersCoordX(),
             y = m_model.getPlayersCoordY();
         
-//        m_cells[_x][_y].setCellsType(GameCell.FREE);
-        m_cells[_x][_y] = new GameCell(GameCell.FREE, false, _x+1, _y+1);
-//        m_cells[x][y].setCellsType(GameCell.TESEUS);
-        m_cells[x][y] = new GameCell(GameCell.TESEUS, false, x+1, y+1);
+        m_cells[_x-1][_y-1] = new GameCell(GameCell.FREE, false, _x, _y);
+        m_cells[x-1][y-1] = new GameCell(GameCell.TESEUS, false, x, y);
         repaint();
     }
 
