@@ -1,5 +1,5 @@
 % Делаем БД динамической.
-:- dynamic cell/10, playerX/1, playerY/1, enemyX/1, enemyY/1, hasSword/1, hasKey/1, isWin/1, isLoose/1,isUpStep/2, isRightStep/2.
+:- dynamic cell/10, playerX/1, playerY/1, enemyX/1, enemyY/1, hasSword/1, hasKey/1, isWin/1, isLoose/1, isUpStep/3, isRightStep/3.
 
 % Матрица клеток карты
 cell(1,1,wll). cell(2,1,flr). cell(3,1,wll). cell(4,1,wll). cell(5,1,wll). cell(6,1,wll). cell(7,1,wll). cell(8,1,wll). cell(9,1,wll). cell(10,1,wll).
@@ -45,36 +45,44 @@ playerMoove(Way):-
 
 % Определить координаты игрока после шага
 setNewCoordinates(Way,X,Y):-
-	isUpStep(Way,Y);		% Если пошел вверх
-	isRightStep(Way,X);		% Если пошел вправо
-	isLeftStep(Way,X);		% Если пошел влево
-	isDownStep(Way,Y).		% Если пошел вниз
+	isUpStep(Way,X,Y);		% Если пошел вверх
+	isRightStep(Way,X,Y);		% Если пошел вправо
+	isLeftStep(Way,X,Y);		% Если пошел влево
+	isDownStep(Way,X,Y).		% Если пошел вниз
 	
 % Если пошел вверх
-isUpStep(Way,Y):-
+isUpStep(Way,X,Y):-
 	Way = up,				% Если направление вверх
 	NewY is Y - 1,			% Изменяем координату У
+	cell(X,NewY,Field),		% Если есть такая клетка
+	Field \= wll,			 
 	retract(playerY(Y)),	% Заменяем предикат
 	assert(playerY(NewY)).
 	
 % Если пошел вправо
-isRightStep(Way,X):-
+isRightStep(Way,X,Y):-
 	Way = right,			% Если направление вправо
 	NewX is X + 1,			% Изменяем координату Х
+	cell(NewX,Y,Field),		% Если есть такая клетка
+	Field \= wll,
 	retract(playerX(X)),	% Заменяем предикат
 	assert(playerX(NewX)).
 
 % Если пошел влево
-isLeftStep(Way,X):-
+isLeftStep(Way,X,Y):-
 	Way = left,				% Если направление вправо
 	NewX is X - 1,			% Изменяем координату Х
+	cell(NewX,Y,Field),		% Если есть такая клетка
+	Field \= wll,
 	retract(playerX(X)),	% Заменяем предикат
 	assert(playerX(NewX)).
 	
 % Если пошел вниз
-isDownStep(Way,Y):-
+isDownStep(Way,X,Y):-
 	Way = down,				% Если направление вверх
 	NewY is Y + 1,			% Изменяем координату У
+	cell(X,NewY,Field),		% Если есть такая клетка
+	Field \= wll,
 	retract(playerY(Y)),	% Заменяем предикат
 	assert(playerY(NewY)).
 

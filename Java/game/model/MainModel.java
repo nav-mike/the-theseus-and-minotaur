@@ -63,6 +63,10 @@ public class MainModel {
     private boolean m_isMinotaurusDead;
     /** Флаг того, получил Тесей меч или нет. */
     private boolean m_hasTeseusSword;
+    /** Флаг победы - тесей достиг двери. */
+    private boolean m_isWin;
+    /** Флаг поражения - Тесей убит. */
+    private boolean m_isLoose;
     /** Список слушателей для события изменения количества очков хода Тесея.*/
     private ArrayList<ChangeStepsCountListener> m_stepsListeners;
     /** Список слушателей для события убийства Минотавра. */
@@ -180,6 +184,38 @@ public class MainModel {
      */
     public boolean isMinotaurusDead() {
         return m_isMinotaurusDead;
+    }
+
+    /**
+     * Метод получения флага победы.
+     * @return Значение флага победы.
+     */
+    public boolean isWin() {
+        return m_isWin;
+    }
+    
+    /**
+     * Метод получения флага поражения.
+     * @return Значение флага поражения.
+     */
+    public boolean isLoose() {
+        return m_isLoose;
+    }
+
+    /**
+     * Метод задания значения флага победы.
+     * @param m_isWin Значение флага победы.
+     */
+    public void setIsWin(boolean m_isWin) {
+        this.m_isWin = m_isWin;
+    }
+    
+    /**
+     * Метод задания значения флага поражения.
+     * @param m_isLoose Значение флага поражения.
+     */    
+    public void setIsLoose(boolean m_isLoose) {
+        this.m_isLoose = m_isLoose;
     }
 
     /**
@@ -362,9 +398,12 @@ public class MainModel {
         
         qr = new Query(qrStr);
         
-        System.out.println( qrStr + " " + (qr.hasSolution() ? "succeeded" : "failed") );
+        boolean moveResult = qr.hasSolution();
         
-        getGameData();
+        System.out.println( qrStr + " " + (moveResult ? "succeeded" : "failed") );
+        
+        if (moveResult)
+            getGameData();
     }
     
     /**
@@ -387,16 +426,45 @@ public class MainModel {
         String qrStr;
         Query qr;
         
-        qrStr = "playerX(X)";
-        qr = new Query(qrStr);         
-        solTable = qr.allSolutions();
-        intData = (jpl.Integer)solTable[0].get("X");
-        m_playersCoordX = intData.intValue();
+        m_playersCoordX = getNewCoord("X");
         
-        qrStr = "playerY(Y)";
-        qr = new Query(qrStr);         
-        solTable = qr.allSolutions();
-        intData = (jpl.Integer)solTable[0].get("Y");
-        m_playersCoordY = intData.intValue();
+        m_playersCoordY = getNewCoord("Y");
+        
+        m_hasTeseusSword = getNewData("hasSword");
+        
+        m_isMinotaurusDead = getNewData("hasKey");
+        
+        m_isWin = getNewData("isWin");
+        
+        m_isLoose = getNewData("isLoose"); 
+    }
+    
+    /**
+     * Получение указанной координаты из БД Пролога.
+     * @param coordName Имя координаты.
+     * @return Новое значение координаты.
+     */
+    private int getNewCoord(String coordName){
+        
+        String qrStr = "player" + coordName + "("+ coordName + ")";
+        Query qr = new Query(qrStr);         
+        Hashtable [] solTable = qr.allSolutions();
+        jpl.Integer intData = (jpl.Integer)solTable[0].get(coordName);
+        return intData.intValue();
+    }
+    
+    /**
+     * Получить новые данные из БД Пролога.
+     * @param dataName Имя данных.
+     * @return Значение флага
+     */
+    private boolean getNewData(String dataName){
+        
+        String qrStr = dataName + "(Flag)";
+        Query qr = new Query(qrStr);         
+        Hashtable [] solTable = qr.allSolutions();
+        Atom intData = (jpl.Atom)solTable[0].get("Flag");
+ 
+        return Boolean.parseBoolean(intData.name());
     }
 }
