@@ -218,6 +218,10 @@ public class GameCell {
                 drawThread(g);
                 g.drawImage(img, (m_coordX - 1) * 30 + 10, (m_coordY - 1) * 30 + 10, 30, 30, null);
             }
+        } else {
+            
+            g.setColor(Color.gray);
+            g.fillRect((m_coordX - 1) * 30 + 10, (m_coordY - 1) * 30 + 10, 30, 30);
         }
     }
     
