@@ -23,7 +23,8 @@ import javax.swing.JPanel;
  * 2]. Геттеры, сеттеры параметров меча, Минотавра и т. д.
  */
 public class GameScene extends JPanel implements KeyListener,
-        TeseusGetSwordListener, KillMinotaurusListener, ChangeMinotaurusCoordinatesListener {
+        TeseusGetSwordListener, KillMinotaurusListener,
+        ChangeMinotaurusCoordinatesListener, ChangeStepsCountListener {
 
     /* Поля класса. */
     /** Список клеток поля. */
@@ -59,6 +60,7 @@ public class GameScene extends JPanel implements KeyListener,
         m_model.addGetSwordListener(this);
         m_model.addKillMinotaurusListener(this);
         m_model.addChangeMinotaurusCoordinatesListener(this);
+        m_model.addChangedStepsListener(this);
     }
 
     /**
@@ -337,7 +339,7 @@ public class GameScene extends JPanel implements KeyListener,
     @Override
     public void gotSword(TeseusGetSwordEvent e) {
 
-        new MyInfoDialog("Тесей получает меч.", "Информация.");
+//        new MyInfoDialog("Тесей получает меч.", "Информация.");
         m_menuBar.get(0).setText2("да");
         repaint();
     }
@@ -349,7 +351,7 @@ public class GameScene extends JPanel implements KeyListener,
     @Override
     public void minotaurusDead(KillMinotaurusEvent e) {
         
-        new MyInfoDialog("Тесей убил Минотавра.", "Информация.");
+//        new MyInfoDialog("Тесей убил Минотавра.", "Информация.");
         m_menuBar.get(1).setText2("да");
         repaint();
     }
@@ -402,6 +404,17 @@ public class GameScene extends JPanel implements KeyListener,
         m_cells[e.getNewCoordX()-1][e.getNewCoordY()-1] = 
                 new GameCell(GameCell.MINOTAURUS, false, e.getNewCoordX(), e.getNewCoordY(), null);
         
+        repaint();
+    }
+
+    /**
+     * Метод отображения количества шагов Тесея.
+     * @param e Событие.
+     */
+    @Override
+    public void changedStepsCount(ChangeStepsCountEvent e) {
+        
+        m_menuBar.get(2).setText2(Integer.toString(e.getStepsCount()));
         repaint();
     }
 
