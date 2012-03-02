@@ -70,6 +70,8 @@ public class MainModel {
     private ArrayList<TeseusGetSwordListener> m_getSwordListeners;
     /** Список слушателей для события победы игрока. */
     private ArrayList<WinPlayerListener> m_winPlayerListeners;
+    /** Список слушателей для события поражения игрока. */
+    private ArrayList<LosePlayerListener> m_losePlayerListeners;
     /** Событие. */
     private ChangeStepsCountEvent m_event;
 
@@ -218,6 +220,8 @@ public class MainModel {
      */    
     public void setIsLoose(boolean m_isLoose) {
         this.m_isLoose = m_isLoose;
+        if (this.m_isLoose)
+            fireLosePlayerListener();
     }
 
     /**
@@ -255,6 +259,15 @@ public class MainModel {
         
         m_winPlayerListeners.add(l);
     }
+    
+    /**
+     * Метод добавления слушателя события поражения игрока.
+     * @param l Слушатель события.
+     */
+    public void addLosePlayerListener (LosePlayerListener l) {
+        
+        m_losePlayerListeners.add(l);
+    }
 
     /**
      * Метод добавления слушателя события убийтсва Минотавра Тесеем.
@@ -291,6 +304,15 @@ public class MainModel {
         
         m_winPlayerListeners.remove(l);
     }
+    
+    /**
+     * Метод удаления слушателя поражения игрока.
+     * @param l Слушатель события.
+     */
+    public void removeLosePlayerListener (LosePlayerListener l) {
+        
+        m_losePlayerListeners.remove(l);
+    }
 
     /**
      * Метод удаления слушателя события убийства Минотавра Тесеем.
@@ -318,6 +340,16 @@ public class MainModel {
         Iterator i = m_stepsListeners.iterator();
         while (i.hasNext())
             ((ChangeStepsCountListener)i.next()).changedStepsCount(m_event);
+    }
+    
+    /**
+     * Метод оповещения слушателей о событии.
+     */
+    protected void fireLosePlayerListener () {
+        
+        Iterator i = m_losePlayerListeners.iterator();
+        while (i.hasNext())
+            ((LosePlayerListener)i.next()).palyerLose(new LosePlayerEvent(m_isLoose, this));
     }
     
     /**
@@ -490,6 +522,7 @@ public class MainModel {
         
         if (!isLoose())
             setIsLoose(getNewData("isLoose")); 
+        
     }
     
     /**
@@ -506,6 +539,7 @@ public class MainModel {
         else
             qrStr = name + "("+ coordName + ")";
         
+        String qrStr = "player" + coordName + "("+ coordName + ")";
         Query qr = new Query(qrStr);         
         Hashtable [] solTable = qr.allSolutions();
         jpl.Integer intData = (jpl.Integer)solTable[0].get(coordName);

@@ -1,5 +1,7 @@
 package game.graphics;
 
+import game.model.events.LosePlayerEvent;
+import game.model.events.LosePlayerListener;
 import game.model.events.WinPlayerEvent;
 import game.model.events.WinPlayerListener;
 import java.awt.*;
@@ -19,7 +21,8 @@ import javax.swing.*;
  * Наследуется от класса JFrame.
  * Имеет фиксированный размер.
  */
-public class MainWindow extends JFrame implements WinPlayerListener {
+public class MainWindow extends JFrame implements WinPlayerListener,
+        LosePlayerListener {
 
     /* Поля класса. */
     /** Игровое поле. */
@@ -113,5 +116,15 @@ public class MainWindow extends JFrame implements WinPlayerListener {
     public void playerWin(WinPlayerEvent e) {
         
        new GameResultDialog(this, GameResultDialog.VICTORY);
+    }
+
+    /**
+     * Метод вывода диалога о поражении.
+     * @param e Событие.
+     */
+    @Override
+    public void palyerLose(LosePlayerEvent e) {
+        
+        new GameResultDialog(this, GameResultDialog.LOSE);
     }
 }
