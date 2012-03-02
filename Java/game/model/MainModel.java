@@ -76,6 +76,8 @@ public class MainModel {
     private ArrayList<WinPlayerListener> m_winPlayerListeners;
     /** Список слушателей для события поражения игрока. */
     private ArrayList<LosePlayerListener> m_losePlayerListeners;
+    /** Список слушателей для события изменения координат у Минотавра. */
+    private ArrayList<ChangeMinotaurusCoordinatesListener> m_chMinCoordListeners;
     /** Событие. */
     private ChangeStepsCountEvent m_event;
 
@@ -109,6 +111,19 @@ public class MainModel {
     public void setMinotaurusCoordX (final int x) {
 
         m_minotaurusCoordX = x;
+        if (m_minotaurusCoordXOld != 0)
+            fireChangeMinotaurusCoordinatesListener();
+    }
+    
+    /**
+     * Метод задания координаты Минотавра y.
+     * @param y Координата Минотавра y.
+     */
+    public void setMinoraurusCoordY (final int y) {
+        
+        m_minotaurusCoordY = y;
+        if (m_minotaurusCoordYOld != 0)
+            fireChangeMinotaurusCoordinatesListener();
     }
 
     /**
@@ -272,6 +287,15 @@ public class MainModel {
         
         m_losePlayerListeners.add(l);
     }
+    
+    /**
+     * Метод добавления слушателя события смены координат Минотавра.
+     * @param l Слушатель события.
+     */
+    public void addChangeMinotaurusCoordinatesListener (ChangeMinotaurusCoordinatesListener l) {
+        
+        m_chMinCoordListeners.add(l);
+    }
 
     /**
      * Метод добавления слушателя события убийтсва Минотавра Тесеем.
@@ -316,6 +340,15 @@ public class MainModel {
     public void removeLosePlayerListener (LosePlayerListener l) {
         
         m_losePlayerListeners.remove(l);
+    }
+    
+    /**
+     * Метод удаления слушателя события смены координат Минотавра.
+     * @param l Слушатель события.
+     */
+    public void removeChangeMinotaurusCoordinateListener (ChangeMinotaurusCoordinatesListener l) {
+        
+        m_chMinCoordListeners.remove(l);
     }
 
     /**
@@ -365,6 +398,19 @@ public class MainModel {
         while (i.hasNext())
             ((LosePlayerListener)i.next()).palyerLose(new LosePlayerEvent(m_isLoose, this));
     }
+    
+    /**
+     * Метод оповещения слушателей о событии.
+     */
+    protected void fireChangeMinotaurusCoordinatesListener () {
+        
+        Iterator i = m_chMinCoordListeners.iterator();
+        while (i.hasNext())
+            ((ChangeMinotaurusCoordinatesListener)i.next()).changeCoordinates(
+                    new ChangeMinotaurusCoordinatesEvent(m_minotaurusCoordXOld, 
+                    m_minotaurusCoordYOld, m_minotaurusCoordX, m_minotaurusCoordY, 
+                    this));
+    }
 
     /**
      * Метод оповещения слушателей о событии.
@@ -412,6 +458,7 @@ public class MainModel {
         m_getSwordListeners = new ArrayList<TeseusGetSwordListener>();
         m_winPlayerListeners = new ArrayList<WinPlayerListener>();
         m_losePlayerListeners = new ArrayList<LosePlayerListener>();
+        m_chMinCoordListeners = new ArrayList<ChangeMinotaurusCoordinatesListener>();
         m_isLoose = false;
         m_isWin = false;
         m_minotaurusCoordXOld = 0;
