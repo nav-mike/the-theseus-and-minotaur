@@ -44,6 +44,10 @@ public class MainModel {
     private int m_minotaurusCoordX;
     /** Координата Минотавра y. */
     private int m_minotaurusCoordY;
+    /** Координата Минотавра x. */
+    private int m_minotaurusCoordXOld;
+    /** Координата Минотавра y. */
+    private int m_minotaurusCoordYOld;
     /** Координата меча x. */
     private int m_swordCoordX;
     /** Координата меча y. */
@@ -121,7 +125,7 @@ public class MainModel {
      * @param y Координата игрока y.
      */
     public void setPlayersCoordY (final int y) {
-
+        m_minotaurusCoordYOld = m_playersCoordY;
         m_playersCoordY = y;
     }
 
@@ -130,7 +134,7 @@ public class MainModel {
      * @return Координата игрока y.
      */
     public int getPlayersCoordY () {
-
+        
         return m_playersCoordY;
     }
     
@@ -148,7 +152,7 @@ public class MainModel {
      * @param x Координата игрока x.
      */
     public void setPlayersCoordX (final int x) {
-
+        m_minotaurusCoordXOld = m_playersCoordX;
         m_playersCoordX = x;
     }
 
@@ -410,6 +414,8 @@ public class MainModel {
         m_losePlayerListeners = new ArrayList<LosePlayerListener>();
         m_isLoose = false;
         m_isWin = false;
+        m_minotaurusCoordXOld = 0;
+        m_minotaurusCoordYOld = 0;
     }
 
     /**
