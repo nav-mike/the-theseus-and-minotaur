@@ -102,6 +102,8 @@ public class GameScene extends JPanel implements KeyListener,
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        
+        hideCells();
 
         for (int i = 0; i < 12; i++) {
 
@@ -360,6 +362,34 @@ public class GameScene extends JPanel implements KeyListener,
      */
     public MainModel getModel() {
         return m_model;
+    }
+    
+    /**
+     * Метод установа тумана войны.
+     */
+    private void hideCells () {
+        
+        int x = this.m_model.getPlayersCoordX() - 1,
+            y = this.m_model.getPlayersCoordY() - 1;
+        
+        for (int i = 0; i < 12; i++) {
+            
+            for (int j = 0; j < 12; j++) {
+                
+                if (i == x && j == y)
+                    m_cells[i][j].setIsHide(false);
+                else if ((i == x - 1 || i == x + 1) && j == y)
+                    m_cells[i][j].setIsHide(false);
+                else if (i == x && (j == y - 1 || j == y + 1))
+                    m_cells[i][j].setIsHide(false);
+                else if ((i == x - 1 && j == y - 1) || (i == x + 1 && j == y + 1))
+                    m_cells[i][j].setIsHide(false);
+                else if ((i == x - 1 && j == y + 1) || (i == x + 1 && j == y - 1))
+                    m_cells[i][j].setIsHide(false);
+                else
+                    m_cells[i][j].setIsHide(true);
+            }
+        }
     }
 
 }
