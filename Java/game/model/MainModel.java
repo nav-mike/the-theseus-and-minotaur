@@ -544,8 +544,8 @@ public class MainModel {
         
         if (moveResult)
             setGameData();
-        
-        System.out.print("steps: " + getStepsCount());       
+
+        System.out.println();
         System.out.println();
     }
     
@@ -554,10 +554,10 @@ public class MainModel {
      * в соответствие с последствиями хода Минотавра.
      */
     public void getEnemyMoveData(){
-        if (m_minotaurusCoordX == 2)
-            m_minotaurusCoordX = 3;
-        if (m_minotaurusCoordX == 3)
-            m_minotaurusCoordX = 2;
+        System.out.println();
+        System.out.println("Enemy turn!  ");
+        
+        setMinotaurusCoord(getNewCoord("enemy","X"), getNewCoord("enemy","Y"));
     }
     
     /**
@@ -565,9 +565,9 @@ public class MainModel {
      */
     private void setGameData(){
         
-        setPlayersCoordX(getNewCoord("X"));
+        setPlayersCoordX(getNewCoord("player","X"));
         
-        setPlayersCoordY(getNewCoord("Y"));
+        setPlayersCoordY(getNewCoord("player","Y"));
         
         if (!hasTeseusSword())
             setHasTeseusSword(getNewData("hasSword"));
@@ -582,6 +582,9 @@ public class MainModel {
             setIsLoose(getNewData("isLoose")); 
 
         setStepsCount(getPlStepsCount());
+        
+        if (getStepsCount() == 0)
+            getEnemyMoveData();
     }
     
     /**
@@ -589,9 +592,9 @@ public class MainModel {
      * @param coordName Имя координаты.
      * @return Новое значение координаты.
      */
-    private int getNewCoord(String coordName){
+    private int getNewCoord(String name, String coordName){
         
-        String qrStr = "player" + coordName + "("+ coordName + ")";
+        String qrStr = name + coordName + "("+ coordName + ")";
         Query qr = new Query(qrStr);         
         Hashtable [] solTable = qr.allSolutions();
         jpl.Integer intData = (jpl.Integer)solTable[0].get(coordName);
