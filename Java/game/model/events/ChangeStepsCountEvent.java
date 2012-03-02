@@ -3,7 +3,7 @@ package game.model.events;
 import java.util.EventObject;
 
 /**
- * Событие изменения очков ходу у Тесея.
+ * Событие изменения очков хода у Тесея.
  * Возникает когда изменяется количество очков хода.
  */
 public class ChangeStepsCountEvent extends EventObject {
