@@ -135,9 +135,12 @@ public class MainModel {
      */
     public void setMinotaurusCoord (final int x, final int y) {
         
+        m_minotaurusCoordYOld = m_minotaurusCoordY;
+        m_minotaurusCoordXOld = m_minotaurusCoordX;
+
         m_minotaurusCoordX = x;
         m_minotaurusCoordY = y;
-        
+
         if (m_minotaurusCoordXOld != 0 && m_minotaurusCoordYOld != 0)
             fireChangeMinotaurusCoordinatesListener();
     }
@@ -156,7 +159,6 @@ public class MainModel {
      * @param y Координата игрока y.
      */
     public void setPlayersCoordY (final int y) {
-        m_minotaurusCoordYOld = m_playersCoordY;
         m_playersCoordY = y;
     }
 
@@ -183,7 +185,6 @@ public class MainModel {
      * @param x Координата игрока x.
      */
     public void setPlayersCoordX (final int x) {
-        m_minotaurusCoordXOld = m_playersCoordX;
         m_playersCoordX = x;
     }
 
@@ -558,6 +559,12 @@ public class MainModel {
         System.out.println("Enemy turn!  ");
         
         setMinotaurusCoord(getNewCoord("enemy","X"), getNewCoord("enemy","Y"));
+        
+        if (!isMinotaurusDead())
+            setIsMinotaurusDead(getNewData("hasKey"));
+        
+        if (!isLoose())
+            setIsLoose(getNewData("isLoose")); 
     }
     
     /**
@@ -583,7 +590,7 @@ public class MainModel {
 
         setStepsCount(getPlStepsCount());
         
-        if (getStepsCount() == 0)
+        if (getStepsCount() == 0 && !isMinotaurusDead())
             getEnemyMoveData();
     }
     

@@ -178,7 +178,12 @@ checkHasSword(X, Y, EnX, EnY):-
 	Y =:= EnY,
 	hasSword(true),
 	retract(hasKey(false)),	% Установим флаг победы
-	assert(hasKey(true)).	
+	assert(hasKey(true)),
+	retract(enemyX(EnX)),	% Установим флаг победы
+	assert(enemyX(-1)),
+	retract(enemyY(EnY)),	% Установим флаг победы
+	assert(enemyY(-1)).
+	
 
 % Если координаты совпали но меча нет	
 checkNoSword(X, Y, EnX, EnY):-
@@ -208,7 +213,8 @@ checkCounter1:-
 	I == 0,					% Если оно равно 0
 	NewI is 1,				% Выставляем новое значение на 1
 	retract(counter(I)),	% Изменяем счетчик
-	assert(counter(NewI)).
+	assert(counter(NewI)),
+	enemyMoove.
 	
 % Уменьшаем счетчик на 1
 checkCounter2:-
@@ -219,6 +225,24 @@ checkCounter2:-
 	assert(counter(NewI)).
 	
 	
+% ========== | ========== | ========== | ========== | ========== | ========== | ========== | ========== |
+% ========== | ========== | ========== | ========== | ========== | ========== | ========== | ========== |
+% ========== | ========== | ========== | ========== | ========== | ========== |	========== | ========== |
+
+enemyMoove:-
+	enemyY(Y),
+	enemyX(X),
+	NewY is Y - 1,
+	checkWall(X,NewY),
+	retract(enemyY(Y)),		% Изменяем счетчик
+	assert(enemyY(NewY)).	
+
+
+
+
+
+
+
 	
 	
 	
