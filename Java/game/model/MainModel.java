@@ -545,6 +545,7 @@ public class MainModel {
         if (moveResult)
             setGameData();
         
+        System.out.print("steps: " + getStepsCount());       
         System.out.println();
     }
     
@@ -579,7 +580,8 @@ public class MainModel {
         
         if (!isLoose())
             setIsLoose(getNewData("isLoose")); 
-        
+
+        setStepsCount(getPlStepsCount());
     }
     
     /**
@@ -599,7 +601,7 @@ public class MainModel {
     /**
      * Получить новые данные из БД Пролога.
      * @param dataName Имя данных.
-     * @return Значение флага
+     * @return Значение флага.
      */
     private boolean getNewData(String dataName){
         
@@ -615,5 +617,17 @@ public class MainModel {
         System.out.print(" " + qrStr + " " + (result ? "succeeded" : "failed")  + "  |  " );
         
         return result;
+    }
+    
+    /**
+     * Получение кол-ва шагов из БД пролога.
+     * @return Количество доступных шагов.
+     */
+    private int getPlStepsCount(){
+        String qrStr = "counter(I)";
+        Query qr = new Query(qrStr);         
+        Hashtable [] solTable = qr.allSolutions();
+        jpl.Integer intData = (jpl.Integer)solTable[0].get("I");
+        return intData.intValue();
     }
 }
