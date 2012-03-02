@@ -1,7 +1,7 @@
 % Делаем БД динамической.
 :- dynamic cell/3, playerX/1, playerY/1, enemyX/1, enemyY/1, hasSword/1,
 		   hasKey/1, isWin/1, isLoose/1, isUpStep/3, isRightStep/3, 
-		   startCounter/1, counter/1.
+		   startCounter/1, counter/1, enemyWay/1.
 
 % Матрица клеток карты
 cell(1,1,wll). cell(2,1,flr). cell(3,1,wll). cell(4,1,wll). cell(5,1,wll). cell(6,1,wll). cell(7,1,wll). cell(8,1,wll). cell(9,1,wll). cell(10,1,wll). cell(11,1,wll). cell(12,1,wll).
@@ -229,18 +229,43 @@ checkCounter2:-
 % ========== | ========== | ========== | ========== | ========== | ========== | ========== | ========== |
 % ========== | ========== | ========== | ========== | ========== | ========== |	========== | ========== |
 
+enemyWay(up).	% Направление движения Минотавра.
+
 enemyMoove:-
+	enemyMooveUp;
+	enemyMooveRight.
+
+enemyMooveUp:-
+	enemyWay(up),
 	enemyY(Y),
 	enemyX(X),
 	NewY is Y - 1,
-	checkWall(X,NewY),
+	enemyCheckWallUp(X,NewY),
 	retract(enemyY(Y)),		% Изменяем счетчик
-	assert(enemyY(NewY)).	
+	assert(enemyY(NewY)).
+	
+enemyMooveRight:-
+	enemyWay(right),
+	enemyY(Y),
+	enemyX(X),
+	NewX is X + 1,
+	enemyCheckWallRight(NewX,Y),
+	retract(enemyX(X)),		% Изменяем счетчик
+	assert(enemyX(NewX)).	
+	
+% Проверим, что новая клетка не стена	
+enemyCheckWallUp(X,Y):-
+	cell(X,Y,Field),		% Если есть такая клетка, берем ее тип
+	Field \= wll;			% Проверим, что не стена
+	retract(enemyWay(up)),		% Изменяем счетчик
+	assert(enemyWay(right)),
+	fail.
 
-
-
-
-
+% Проверим, что новая клетка не стена	
+enemyCheckWallRight(X,Y):-
+	cell(X,Y,Field),		% Если есть такая клетка, берем ее тип
+	Field \= wll.			% Проверим, что не стена
+	
 
 
 	
