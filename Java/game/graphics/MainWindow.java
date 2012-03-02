@@ -93,6 +93,7 @@ public class MainWindow extends JFrame implements WinPlayerListener,
         });
         
         this.m_gameScene.getModel().addWinPlayerListener(this);
+        this.m_gameScene.getModel().addLosePlayerListener(this);
     }
 
     /**

@@ -215,7 +215,7 @@ public class GameScene extends JPanel implements KeyListener,
     @Override
     public void keyPressed(KeyEvent e) {
         
-        if (m_model.isWin())
+        if (m_model.isWin() || m_model.isLoose())
             return;
 
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
