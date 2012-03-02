@@ -1,10 +1,7 @@
 package game.graphics;
 
 import game.model.MainModel;
-import game.model.events.KillMinotaurusEvent;
-import game.model.events.KillMinotaurusListener;
-import game.model.events.TeseusGetSwordEvent;
-import game.model.events.TeseusGetSwordListener;
+import game.model.events.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -26,7 +23,7 @@ import javax.swing.JPanel;
  * 2]. Геттеры, сеттеры параметров меча, Минотавра и т. д.
  */
 public class GameScene extends JPanel implements KeyListener,
-        TeseusGetSwordListener, KillMinotaurusListener {
+        TeseusGetSwordListener, KillMinotaurusListener, ChangeMinotaurusCoordinatesListener {
 
     /* Поля класса. */
     /** Список клеток поля. */
@@ -61,6 +58,7 @@ public class GameScene extends JPanel implements KeyListener,
         this.addKeyListener(this);
         m_model.addGetSwordListener(this);
         m_model.addKillMinotaurusListener(this);
+        m_model.addChangeMinotaurusCoordinatesListener(this);
     }
 
     /**
@@ -390,6 +388,21 @@ public class GameScene extends JPanel implements KeyListener,
                     m_cells[i][j].setIsHide(true);
             }
         }
+    }
+
+    /**
+     * Метод реагирования на событие смены координат Минотавра.
+     * @param e Событие.
+     */
+    @Override
+    public void changeCoordinates(ChangeMinotaurusCoordinatesEvent e) {
+        
+        m_cells[e.getOldCoordX()-1][e.getOldCoordY()-1] = 
+                new GameCell(GameCell.FREE, false, e.getOldCoordX(), e.getOldCoordY(), null);
+        m_cells[e.getNewCoordX()-1][e.getNewCoordY()-1] = 
+                new GameCell(GameCell.MINOTAURUS, false, e.getNewCoordX(), e.getNewCoordY(), null);
+        
+        repaint();
     }
 
 }
