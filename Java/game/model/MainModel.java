@@ -70,6 +70,8 @@ public class MainModel {
     private ArrayList<TeseusGetSwordListener> m_getSwordListeners;
     /** Список слушателей для события победы игрока. */
     private ArrayList<WinPlayerListener> m_winPlayerListeners;
+    /** Список слушателей для события поражения игрока. */
+    private ArrayList<LosePlayerListener> m_losePlayerListeners;
     /** Событие. */
     private ChangeStepsCountEvent m_event;
 
@@ -218,6 +220,8 @@ public class MainModel {
      */    
     public void setIsLoose(boolean m_isLoose) {
         this.m_isLoose = m_isLoose;
+        if (this.m_isLoose)
+            fireLosePlayerListener();
     }
 
     /**
@@ -255,6 +259,15 @@ public class MainModel {
         
         m_winPlayerListeners.add(l);
     }
+    
+    /**
+     * Метод добавления слушателя события поражения игрока.
+     * @param l Слушатель события.
+     */
+    public void addLosePlayerListener (LosePlayerListener l) {
+        
+        m_losePlayerListeners.add(l);
+    }
 
     /**
      * Метод добавления слушателя события убийтсва Минотавра Тесеем.
@@ -290,6 +303,15 @@ public class MainModel {
     public void removeWinPlayerListener (WinPlayerListener l) {
         
         m_winPlayerListeners.remove(l);
+    }
+    
+    /**
+     * Метод удаления слушателя события поражения игрока.
+     * @param l Слушатель события.
+     */
+    public void removeLosePlayerListener (LosePlayerListener l) {
+        
+        m_losePlayerListeners.remove(l);
     }
 
     /**
@@ -328,6 +350,16 @@ public class MainModel {
         Iterator i = m_winPlayerListeners.iterator();
         while (i.hasNext())
             ((WinPlayerListener)i.next()).playerWin(new WinPlayerEvent(m_isWin, this));
+    }
+    
+    /**
+     * Метод оповещения слушателей о событии.
+     */
+    protected void fireLosePlayerListener () {
+        
+        Iterator i = m_losePlayerListeners.iterator();
+        while (i.hasNext())
+            ((LosePlayerListener)i.next()).palyerLose(new LosePlayerEvent(m_isLoose, this));
     }
 
     /**
@@ -375,6 +407,7 @@ public class MainModel {
         m_killMinotaurusListeners = new ArrayList<KillMinotaurusListener>();
         m_getSwordListeners = new ArrayList<TeseusGetSwordListener>();
         m_winPlayerListeners = new ArrayList<WinPlayerListener>();
+        m_losePlayerListeners = new ArrayList<LosePlayerListener>();
         m_isLoose = false;
         m_isWin = false;
     }
