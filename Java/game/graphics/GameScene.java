@@ -103,7 +103,7 @@ public class GameScene extends JPanel implements KeyListener,
     public void paint(Graphics g) {
         super.paint(g);
         
-        hideCells();
+        //hideCells();
 
         for (int i = 0; i < 12; i++) {
 
@@ -412,9 +412,11 @@ public class GameScene extends JPanel implements KeyListener,
     public void changeCoordinates(ChangeMinotaurusCoordinatesEvent e) {
         
         m_cells[e.getOldCoordX()-1][e.getOldCoordY()-1] = 
-                new GameCell(GameCell.FREE, false, e.getOldCoordX(), e.getOldCoordY(), null);
+                new GameCell(GameCell.FREE, false, e.getOldCoordX(), e.getOldCoordY(),
+                m_cells[e.getOldCoordX()-1][e.getOldCoordY()-1].getStyle());
         m_cells[e.getNewCoordX()-1][e.getNewCoordY()-1] = 
-                new GameCell(GameCell.MINOTAURUS, false, e.getNewCoordX(), e.getNewCoordY(), null);
+                new GameCell(GameCell.MINOTAURUS, false, e.getNewCoordX(), e.getNewCoordY(),
+                m_cells[e.getNewCoordX()-1][e.getNewCoordY()-1].getStyle());
         
         repaint();
     }
