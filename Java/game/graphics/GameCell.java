@@ -1,7 +1,10 @@
 package game.graphics;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 import javax.swing.ImageIcon;
 
@@ -36,6 +39,8 @@ public class GameCell {
     private int m_coordX;
     /** Координата клетки y. */
     private int m_coordY;
+    /** Список указаний того, как нужно рисовать нить на клетке. */
+    private ArrayList<Integer> m_style;
 
     /* Тип клетки. */
     /** Пустая клетка, по ней можно проходить. */
@@ -98,6 +103,7 @@ public class GameCell {
         this.m_isHide = isHide;
         this.m_coordX = coordX;
         this.m_coordY = coordY;
+        this.m_style = new ArrayList<Integer>();
 
         getImageIndex();
     }
@@ -198,7 +204,51 @@ public class GameCell {
             Image img = new ImageIcon(MainWindow.class.getResource(m_paths[m_currentImagesIndex])).getImage();
 
             g.drawImage(img, (m_coordX - 1) * 30 + 10, (m_coordY - 1) * 30 + 10, 30, 30, null);
+            
+            drawThread(g);
         }
+    }
+    
+    /**
+     * Метод рисования нити Тесея.
+     * @param graphics Контекст рисования.
+     */
+    protected void drawThread (Graphics graphics) {
+        
+        graphics.setColor(Color.white);
+        Iterator i = m_style.iterator();
+        
+        while (i.hasNext()) {
+            
+            Integer value = (Integer) i.next();
+            
+            if (value.intValue() == ThreadsConstants.TO_LEFT)
+                graphics.drawLine((m_coordX - 1) * 30 + 10, 
+                        (m_coordY - 1) * 30 + 25, (m_coordX - 1) * 30 + 25, 
+                        (m_coordY - 1) * 30 + 25);
+            else if (value.intValue() == ThreadsConstants.TO_RIGHT)
+                graphics.drawLine((m_coordX - 1) * 30 + 40, 
+                        (m_coordY - 1) * 30 + 25, (m_coordX - 1) * 30 + 25, 
+                        (m_coordY - 1) * 30 + 25);
+            else if (value.intValue() == ThreadsConstants.TO_UP)
+                graphics.drawLine((m_coordX - 1) * 30 + 25, 
+                        (m_coordY - 1) * 30 + 10, (m_coordX - 1) * 30 + 25, 
+                        (m_coordY - 1) * 30 + 25);
+            else if (value.intValue() == ThreadsConstants.TO_DOWN)
+                graphics.drawLine((m_coordX - 1) * 30 + 25, 
+                        (m_coordY - 1) * 30 + 40, (m_coordX - 1) * 30 + 25, 
+                        (m_coordY - 1) * 30 + 25);
+        }
+    }
+    
+    /**
+     * Метод добавления стиля рисования нити Тесея.
+     * @param style Стиль нити Тесея.
+     */
+    public void addThreadsStyle (final int style) {
+        
+        if (!this.m_style.contains(style))
+            this.m_style.add(style);
     }
 
 }
