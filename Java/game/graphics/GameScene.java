@@ -254,8 +254,11 @@ public class GameScene extends JPanel implements KeyListener,
                 m_cells[_x - 1][_y - 1].getStyle());
         m_cells[x-1][y-1] = new GameCell(GameCell.TESEUS, false, x, y,
                 m_cells[x - 1][y - 1].getStyle());
-        m_cells[_x - 1][_y - 1].addThreadsStyle(ThreadsConstants.TO_UP);
-        m_cells[x - 1][y - 1].addThreadsStyle(ThreadsConstants.FROM_DOWN);
+        if (x != _x || y != _y) {
+        
+            m_cells[_x - 1][_y - 1].addThreadsStyle(ThreadsConstants.TO_UP);
+            m_cells[x - 1][y - 1].addThreadsStyle(ThreadsConstants.FROM_DOWN);
+        }
         repaint();
     }
     
@@ -276,8 +279,10 @@ public class GameScene extends JPanel implements KeyListener,
                 m_cells[_x - 1][_y - 1].getStyle());
         m_cells[x - 1][y - 1] = new GameCell(GameCell.TESEUS, false, x, y,
                 m_cells[x - 1][y - 1].getStyle());
-        m_cells[_x - 1][_y - 1].addThreadsStyle(ThreadsConstants.TO_DOWN);
-        m_cells[x - 1][y - 1].addThreadsStyle(ThreadsConstants.FROM_UP);
+        if (x != _x || y != _y) {
+            m_cells[_x - 1][_y - 1].addThreadsStyle(ThreadsConstants.TO_DOWN);
+            m_cells[x - 1][y - 1].addThreadsStyle(ThreadsConstants.FROM_UP);
+        }
         repaint();
     }
     
@@ -298,8 +303,10 @@ public class GameScene extends JPanel implements KeyListener,
                 m_cells[_x - 1][_y - 1].getStyle());
         m_cells[x - 1][y - 1] = new GameCell(GameCell.TESEUS, false, x, y,
                 m_cells[x - 1][y - 1].getStyle());
-        m_cells[_x - 1][_y - 1].addThreadsStyle(ThreadsConstants.TO_LEFT);
-        m_cells[x - 1][y - 1].addThreadsStyle(ThreadsConstants.FROM_RIGHT);
+        if (x != _x || y != _y) {
+            m_cells[_x - 1][_y - 1].addThreadsStyle(ThreadsConstants.TO_LEFT);
+            m_cells[x - 1][y - 1].addThreadsStyle(ThreadsConstants.FROM_RIGHT);
+        }
         repaint();
     }
     
@@ -320,8 +327,10 @@ public class GameScene extends JPanel implements KeyListener,
                 m_cells[_x - 1][_y - 1].getStyle());
         m_cells[x - 1][y - 1] = new GameCell(GameCell.TESEUS, false, x, y,
                 m_cells[x - 1][y - 1].getStyle());
-        m_cells[_x - 1][_y - 1].addThreadsStyle(ThreadsConstants.TO_RIGHT);
-        m_cells[x - 1][y - 1].addThreadsStyle(ThreadsConstants.FROM_LEFT);
+        if (x != _x || y != _y) {
+            m_cells[_x - 1][_y - 1].addThreadsStyle(ThreadsConstants.TO_RIGHT);
+            m_cells[x - 1][y - 1].addThreadsStyle(ThreadsConstants.FROM_LEFT);
+        }
         repaint();
     }
 
