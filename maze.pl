@@ -137,33 +137,14 @@ changeSwordState(X, Y, SwX, SwY):-
 	retract(hasSword(false)),	% Заменяем предикат
 	assert(hasSword(true)).
 
-	
-% Проверим, есть ли у Тесея ключ от двери
-checkDoor(X, Y):-
-	unDoorCorrectCoords(X, Y, 2, 1);
-	checkDoorNoKey(X, Y, 2, 1);
-	checkDoorHasKey(X, Y, 2, 1).
-
-% Если координаты с дверью не совпали
-unDoorCorrectCoords(X, Y, DrX, DrY):-
-	X =\= DrX;
-	Y =\= DrY.	
-	
-% Если координаты совпали и ключ есть
-checkDoorHasKey(X, Y, DrX, DrY):-
-	X =:= DrX,
-	Y =:= DrY,
-	hasKey(true),
+% Проверим, есть ли у Тесея ключ
+checkDoor(X,Y):-
+	cell(X,Y,Field),		% Если есть такая клетка, берем ее тип
+	Field \= dor;			% Если это дверь - нельзя пройти
+	hasKey(true),			% Или, если есть ключ
 	retract(isWin(false)),	% Установим флаг победы
 	assert(isWin(true)).	
 
-% Если координаты совпали, но ключа нет	
-checkDoorNoKey(X, Y, DrX, DrY):-
-	X =:= DrX,
-	Y =:= DrY,
-	hasKey(false),
-	fail.
-	
 % Если встретили Минотавра
 checkEnemy:-
 	playerX(X),				% Координаты игрока
