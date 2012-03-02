@@ -97,13 +97,18 @@ public class GameCell {
      * @param isHide Является ли клетка скрытой.
      * @param coordX Координата клетки x.
      * @param coordY Координата клетки y.
+     * @param style  Стиль рисования нити.
      */
-    public GameCell(int cellsType, boolean isHide, int coordX, int coordY) {
+    public GameCell(int cellsType, boolean isHide, int coordX, int coordY,
+            ArrayList<Integer> style) {
         this.m_cellsType = cellsType;
         this.m_isHide = isHide;
         this.m_coordX = coordX;
         this.m_coordY = coordY;
-        this.m_style = new ArrayList<Integer>();
+        if (style == null)
+            this.m_style = new ArrayList<Integer>();
+        else
+            this.m_style = style;
 
         getImageIndex();
     }
@@ -201,11 +206,18 @@ public class GameCell {
 
         if (!isHide()) {
 
-            Image img = new ImageIcon(MainWindow.class.getResource(m_paths[m_currentImagesIndex])).getImage();
-
-            g.drawImage(img, (m_coordX - 1) * 30 + 10, (m_coordY - 1) * 30 + 10, 30, 30, null);
+            if (m_cellsType != MINOTAURUS &&
+                m_cellsType != TESEUS) {
             
-            drawThread(g);
+                Image img = new ImageIcon(MainWindow.class.getResource(m_paths[m_currentImagesIndex])).getImage();
+                g.drawImage(img, (m_coordX - 1) * 30 + 10, (m_coordY - 1) * 30 + 10, 30, 30, null);
+                drawThread(g);
+            } else {
+                
+                Image img = new ImageIcon(MainWindow.class.getResource(m_paths[m_currentImagesIndex])).getImage();
+                drawThread(g);
+                g.drawImage(img, (m_coordX - 1) * 30 + 10, (m_coordY - 1) * 30 + 10, 30, 30, null);
+            }
         }
     }
     
@@ -249,6 +261,14 @@ public class GameCell {
         
         if (!this.m_style.contains(style))
             this.m_style.add(style);
+    }
+
+    /**
+     * Метод получения списка типа рисования нити.
+     * @return Список типов рисования списка.
+     */
+    public ArrayList<Integer> getStyle() {
+        return m_style;
     }
 
 }
