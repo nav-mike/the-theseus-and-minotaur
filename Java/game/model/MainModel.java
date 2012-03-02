@@ -108,6 +108,7 @@ public class MainModel {
      * Метод задания координаты Минотавра x.
      * @param x Координата Минотавра x.
      */
+    @Deprecated
     public void setMinotaurusCoordX (final int x) {
 
         m_minotaurusCoordX = x;
@@ -119,10 +120,25 @@ public class MainModel {
      * Метод задания координаты Минотавра y.
      * @param y Координата Минотавра y.
      */
+    @Deprecated
     public void setMinoraurusCoordY (final int y) {
         
         m_minotaurusCoordY = y;
         if (m_minotaurusCoordYOld != 0)
+            fireChangeMinotaurusCoordinatesListener();
+    }
+    
+    /**
+     * Метод задания координат Минотавра.
+     * @param x Координата Минотавра x.
+     * @param y Координата Минотавра y.
+     */
+    public void setMinotaurusCoord (final int x, final int y) {
+        
+        m_minotaurusCoordX = x;
+        m_minotaurusCoordY = y;
+        
+        if (m_minotaurusCoordXOld != 0 && m_minotaurusCoordYOld != 0)
             fireChangeMinotaurusCoordinatesListener();
     }
 
