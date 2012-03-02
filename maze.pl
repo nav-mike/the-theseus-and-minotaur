@@ -55,8 +55,8 @@ playerMoove(Way):-
 	playerX(CurrentX),
 	playerY(CurrentY),
 	setNewCoordinates(Way,CurrentX,CurrentY),
-	checkSword,
-	decrementCounter.
+	checkSword,						% Проверим, подобрал ли Тесей меч.
+	decrementCounter.				% Изменим счетчик (переместить, если нужно, чтобы герой топтался на месте, а Минотавр шел)
 
 % Определить координаты игрока после шага
 setNewCoordinates(Way,X,Y):-
@@ -214,7 +214,7 @@ checkCounter1:-
 	NewI is 1,				% Выставляем новое значение на 1
 	retract(counter(I)),	% Изменяем счетчик
 	assert(counter(NewI)),
-	enemyMoove.
+	enemyMoove.				% Ход противника
 	
 % Уменьшаем счетчик на 1
 checkCounter2:-
@@ -231,43 +231,95 @@ checkCounter2:-
 
 enemyWay(up).	% Направление движения Минотавра.
 
+% Ход противника
 enemyMoove:-
-	enemyMooveUp;
-	enemyMooveRight.
+	enemyMooveUp;		% Или Минотавр двигается вверх
+	enemyMooveRight;	% Или Минотавр двигается вправо
+	enemyMooveLeft;		% Или Минотавр двигается влево
+	enemyMooveDown.		% Или Минотавр двигается вниз
 
+% Минотавр движется вверх
 enemyMooveUp:-
-	enemyWay(up),
-	enemyY(Y),
+	enemyWay(up),		% Если направление вверх
+	enemyY(Y),			% Берем координаты
 	enemyX(X),
-	NewY is Y - 1,
-	enemyCheckWallUp(X,NewY),
-	retract(enemyY(Y)),		% Изменяем счетчик
+	NewY is Y - 1,		% Изменяем одну координату
+	enemyCheckWall(X,NewY),	% Проверяем, если наткнулись на стену
+	retract(enemyY(Y)),		% Изменяем координаты
 	assert(enemyY(NewY)).
 	
-enemyMooveRight:-
-	enemyWay(right),
-	enemyY(Y),
-	enemyX(X),
-	NewX is X + 1,
-	enemyCheckWallRight(NewX,Y),
-	retract(enemyX(X)),		% Изменяем счетчик
-	assert(enemyX(NewX)).	
-	
 % Проверим, что новая клетка не стена	
-enemyCheckWallUp(X,Y):-
+enemyCheckWall(X,Y):-
 	cell(X,Y,Field),		% Если есть такая клетка, берем ее тип
 	Field \= wll;			% Проверим, что не стена
-	retract(enemyWay(up)),		% Изменяем счетчик
-	assert(enemyWay(right)),
-	fail.
-
-% Проверим, что новая клетка не стена	
-enemyCheckWallRight(X,Y):-
-	cell(X,Y,Field),		% Если есть такая клетка, берем ее тип
-	Field \= wll.			% Проверим, что не стена
+	getRandomWay(Way),		% Получаем случайное направление
+	enemyWay(Current),		% Получаем текущее направление
+	retract(enemyWay(Current)),		% Изменяем направление
+	assert(enemyWay(Way)),
+	fail.						% Разворачиваем Минотавра в другую сторону
 	
+% Получить случайное направление
+getRandomWay(Way):-
+	getUpWay(I,Way);		% Или вверх
+	getRightWay(I,Way); 	% Или вправо
+	getLeftWay(I,Way); 		% Или влево
+	getDownWay(I,Way).		% Или вниз
 
+% Направление вверх
+getUpWay(I,Way):-
+	I is random(4),		% Берем случайное число
+	I =:= 0,			% Получаем направление в соответствии с номером
+	Way = up.
+	
+% Направление вправо
+getRightWay(I,Way):-
+	I is random(4),		% Берем случайное число
+	I =:= 1,			% Получаем направление в соответствии с номером
+	Way = right.
+	
+% Направление влево
+getLeftWay(I,Way):-
+	I is random(4),		% Берем случайное число
+	I =:= 2,			% Получаем направление в соответствии с номером
+	Way = left.
+	
+% Направление вниз
+getDownWay(I,Way):-
+	I is random(4),		% Берем случайное число
+	I =:= 3,			% Получаем направление в соответствии с номером
+	Way = down.	
+	
+% Минотавр движется вправо
+enemyMooveRight:-
+	enemyWay(right),	% Если направление - вправо
+	enemyY(Y),
+	enemyX(X),
+	NewX is X + 1,		% Изменяем координату
+	enemyCheckWall(NewX,Y),		% Проверяем на наличие впереди стены
+	retract(enemyX(X)),			% Изменяем координату
+	assert(enemyX(NewX)).	
 
+% Минотавр движется влево
+enemyMooveLeft:-
+	enemyWay(left),		% Если направление - влево
+	enemyY(Y),
+	enemyX(X),
+	NewX is X - 1,		% Изменяем координату
+	enemyCheckWall(NewX,Y),		% Проверяем на наличие впереди стены
+	retract(enemyX(X)),			% Изменяем координату
+	assert(enemyX(NewX)).	
+	
+% Минотавр движется вниз
+enemyMooveDown:-
+	enemyWay(down),		% Если направление - вниз
+	enemyY(Y),
+	enemyX(X),
+	NewY is Y + 1,		% Изменяем координату
+	enemyCheckWall(X,NewY),		% Проверяем на наличие впереди стены
+	retract(enemyY(Y)),			% Изменяем координату
+	assert(enemyY(NewY)).
+
+	
 	
 	
 	
