@@ -37,12 +37,18 @@ public class GameScene extends JPanel implements KeyListener,
     private MainModel m_model;
     /** Список информации по игре. */
     private MyMenuBar m_menuBar;
+    /** Флаг, определяющий, встал ли Минотавр на меч. */
+    private boolean m_stepMtoSword;
+    /** Флаг, определяющий, встал ли Минотавр на меч. */
+    private boolean m_stepMtoPlayer;
+
 
     /**
      * Конструктор по умолчанию.
      * Создает игровою сцену.
+     * @param flag Требуется ли подключение к прологу.
      */
-    public GameScene() {
+    public GameScene(boolean flag) {
 
         super();
 
@@ -53,7 +59,7 @@ public class GameScene extends JPanel implements KeyListener,
 
         m_cells = new GameCell[12][12];
         fromMap();
-        m_model = new MainModel(this);
+        m_model = new MainModel(this,flag);
         m_menuBar = new MyMenuBar();
 
         this.addKeyListener(this);
@@ -61,6 +67,8 @@ public class GameScene extends JPanel implements KeyListener,
         m_model.addKillMinotaurusListener(this);
         m_model.addChangeMinotaurusCoordinatesListener(this);
         m_model.addChangedStepsListener(this);
+        
+        m_stepMtoSword = false;
     }
 
     /**
@@ -103,7 +111,7 @@ public class GameScene extends JPanel implements KeyListener,
     public void paint(Graphics g) {
         super.paint(g);
         
-        //hideCells();
+        hideCells();
 
         for (int i = 0; i < 12; i++) {
 
@@ -158,7 +166,7 @@ public class GameScene extends JPanel implements KeyListener,
 
         m_cells[1][2] = new GameCell(GameCell.WALL, false, 2, 3, null);
         m_cells[8][8] = new GameCell(GameCell.TESEUS, false, 9, 9, null);
-        m_cells[1][8] = new GameCell(GameCell.MINOTAURUS, false, 2, 9, null);
+        m_cells[4][1] = new GameCell(GameCell.MINOTAURUS, false, 5, 2, null);
         m_cells[8][1] = new GameCell(GameCell.SWORD, false, 9, 2, null);
         m_cells[3][1] = new GameCell(GameCell.WALL, false, 4, 2, null);
         m_cells[3][2] = new GameCell(GameCell.WALL, false, 4, 3, null);
@@ -234,8 +242,14 @@ public class GameScene extends JPanel implements KeyListener,
             this.movePlayerUp();
             System.out.println("Go to up");
         }
-        else if (e.getKeyCode() == KeyEvent.VK_SPACE)
+        else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            
             System.out.println("Go to next step");
+            if (!m_model.isMinotaurusDead())
+                m_model.skip();
+            
+            
+        }
         else
             System.out.println("Unknown keys");
     }
@@ -365,6 +379,9 @@ public class GameScene extends JPanel implements KeyListener,
         
 //        new MyInfoDialog("Тесей убил Минотавра.", "Информация.");
         m_menuBar.get(1).setText2("да");
+        m_cells[m_model.getMinotaurusCoordX()-1][m_model.getMinotaurusCoordY()-1] = 
+                    new GameCell(GameCell.MINOTAURUS, false, m_model.getMinotaurusCoordX(), m_model.getMinotaurusCoordY(),
+                    m_cells[m_model.getMinotaurusCoordX()-1][m_model.getMinotaurusCoordY()-1].getStyle());
         repaint();
     }
 
@@ -410,10 +427,24 @@ public class GameScene extends JPanel implements KeyListener,
      */
     @Override
     public void changeCoordinates(ChangeMinotaurusCoordinatesEvent e) {
+        if (m_model.isMinotaurusDead())
+            return;
         
-        m_cells[e.getOldCoordX()-1][e.getOldCoordY()-1] = 
-                new GameCell(GameCell.FREE, false, e.getOldCoordX(), e.getOldCoordY(),
-                m_cells[e.getOldCoordX()-1][e.getOldCoordY()-1].getStyle());
+        if (!m_stepMtoSword)
+            m_cells[e.getOldCoordX()-1][e.getOldCoordY()-1] = 
+                    new GameCell(GameCell.FREE, false, e.getOldCoordX(), e.getOldCoordY(),
+                    m_cells[e.getOldCoordX()-1][e.getOldCoordY()-1].getStyle());
+        
+        else {
+            
+            m_cells[e.getOldCoordX()-1][e.getOldCoordY()-1] = 
+                    new GameCell(GameCell.SWORD, false, e.getOldCoordX(), e.getOldCoordY(),
+                    m_cells[e.getOldCoordX()-1][e.getOldCoordY()-1].getStyle());
+            m_stepMtoSword = false;
+        }
+        if (m_cells[e.getNewCoordX()-1][e.getNewCoordY()-1].getCellsType() == GameCell.SWORD)
+            m_stepMtoSword = true;
+                        
         m_cells[e.getNewCoordX()-1][e.getNewCoordY()-1] = 
                 new GameCell(GameCell.MINOTAURUS, false, e.getNewCoordX(), e.getNewCoordY(),
                 m_cells[e.getNewCoordX()-1][e.getNewCoordY()-1].getStyle());

@@ -485,11 +485,13 @@ public class MainModel {
     /**
      * Конструктор с параметром.
      * @param scene Ссылка на поле игрового поля.
+     * @param flag  Флаг, требуется ли подключение к прологу.
      */
-    public MainModel (GameScene scene) {
+    public MainModel (GameScene scene, boolean flag) {
 
         initComponents(scene);
-        initPrologDatabase();
+        if (flag == true)
+            initPrologDatabase();
     }
     
     /**
@@ -592,6 +594,30 @@ public class MainModel {
         
         if (getStepsCount() == 0 && !isMinotaurusDead())
             getEnemyMoveData();
+    }
+    
+    /**
+     * Метод пропуска хода игроком.
+     */
+    public void skip () {
+        String qrStr = "setCounterZero";
+        Query qr = new Query(qrStr);         
+        boolean flag = qr.hasSolution();
+        System.out.print("Turn skipped: ");
+        System.out.println(flag);
+        getEnemyMoveData();
+    }
+    
+    /**
+     * Создание новой игры.
+     */
+    public void newGame () {
+        
+        String qrStr = "toStartMode";
+        Query qr = new Query(qrStr);
+        boolean flag = qr.hasSolution();
+        System.out.print("New game is: ");
+        System.out.println(flag);
     }
     
     /**

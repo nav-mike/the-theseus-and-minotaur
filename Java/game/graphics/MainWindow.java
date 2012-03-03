@@ -33,10 +33,19 @@ public class MainWindow extends JFrame implements WinPlayerListener,
     private JMenuBar m_menuBar;
     /** Элемент меню. */
     private JMenu m_gameMenu;
+    /** Элемент меню справки. */
+    private JMenu m_helpMenu;
     /** Меню новая игра. */
     private JMenuItem m_newGame;
     /** Меню закрытие игры. */
     private JMenuItem m_closeGame;
+    /** Меню "О программе". */
+    private JMenuItem m_about;
+    /** Меню помощи. */
+    private JMenuItem m_help;
+    private static final String m_helpText = "Управление:\n"
+            + "1. Для перемещения воспользуйтесь клавишами со стрелками.\n"
+            + "2. Для пропуска хода нажмите клавишу пробела.";
 
     /**
      * Конструктор по умолчанию.
@@ -73,9 +82,12 @@ public class MainWindow extends JFrame implements WinPlayerListener,
 
         this.setLayout(new GridLayout(1,2));
         this.add(m_gameScene);
-        this.m_gameMenu.add(m_newGame);
+//        this.m_gameMenu.add(m_newGame);
         this.m_gameMenu.add(m_closeGame);
+        this.m_helpMenu.add(m_about);
+        this.m_helpMenu.add(m_help);
         m_menuBar.add(this.m_gameMenu);
+        m_menuBar.add(m_helpMenu);
         this.setJMenuBar(m_menuBar);
     }
 
@@ -92,6 +104,35 @@ public class MainWindow extends JFrame implements WinPlayerListener,
             }
         });
         
+//        this.m_newGame.addActionListener(new ActionListener() {
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                
+//                m_gameScene.getModel().newGame();
+//                m_gameScene = new GameScene(false);
+//            }
+//        });
+        
+        this.m_about.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                JOptionPane.showMessageDialog(rootPane, "Работу выполнили студенты ИВТ - 460:\n"
+                        + "Навроцкий М. А.\nСоколов А. А.", "О программе", 
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        
+        this.m_help.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(rootPane, m_helpText, "Помощь", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        
         this.m_gameScene.getModel().addWinPlayerListener(this);
         this.m_gameScene.getModel().addLosePlayerListener(this);
     }
@@ -101,12 +142,15 @@ public class MainWindow extends JFrame implements WinPlayerListener,
      */
     private void initComponents () {
 
-        this.m_gameScene = new GameScene();
+        this.m_gameScene = new GameScene(true);
         m_gameScene.setBackground(Color.black);
         m_menuBar = new JMenuBar();
         m_gameMenu = new JMenu("Игра");
-        m_newGame = new JMenuItem("Новая игра");
+        m_helpMenu = new JMenu("?");
+//        m_newGame = new JMenuItem("Новая игра");
         m_closeGame = new JMenuItem("Закрыть игру");
+        m_about = new JMenuItem("О программе");
+        m_help = new JMenuItem("Помошь");
     }
 
     /**
