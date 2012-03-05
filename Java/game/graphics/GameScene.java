@@ -274,8 +274,10 @@ public class GameScene extends JPanel implements KeyListener,
         int x = m_model.getPlayersCoordX(),
             y = m_model.getPlayersCoordY();
         
-        m_cells[_x-1][_y-1] = new GameCell(GameCell.FREE, false, _x, _y,
+        if (_x != m_model.getMinotaurusCoordX() || _y != m_model.getMinotaurusCoordY())
+            m_cells[_x-1][_y-1] = new GameCell(GameCell.FREE, false, _x, _y,
                 m_cells[_x - 1][_y - 1].getStyle());
+        
         m_cells[x-1][y-1] = new GameCell(GameCell.TESEUS, false, x, y,
                 m_cells[x - 1][y - 1].getStyle());
         if (x != _x || y != _y) {
@@ -299,8 +301,10 @@ public class GameScene extends JPanel implements KeyListener,
         int x = m_model.getPlayersCoordX(),
             y = m_model.getPlayersCoordY();
         
-        m_cells[_x - 1][_y - 1] = new GameCell(GameCell.FREE, false, _x, _y,
+        if (_x != m_model.getMinotaurusCoordX() || _y != m_model.getMinotaurusCoordY())
+            m_cells[_x - 1][_y - 1] = new GameCell(GameCell.FREE, false, _x, _y,
                 m_cells[_x - 1][_y - 1].getStyle());
+        
         m_cells[x - 1][y - 1] = new GameCell(GameCell.TESEUS, false, x, y,
                 m_cells[x - 1][y - 1].getStyle());
         if (x != _x || y != _y) {
@@ -323,8 +327,10 @@ public class GameScene extends JPanel implements KeyListener,
         int x = m_model.getPlayersCoordX(),
             y = m_model.getPlayersCoordY();
         
-        m_cells[_x - 1][_y - 1] = new GameCell(GameCell.FREE, false, _x, _y,
+        if (_x != m_model.getMinotaurusCoordX() || _y != m_model.getMinotaurusCoordY())
+            m_cells[_x - 1][_y - 1] = new GameCell(GameCell.FREE, false, _x, _y,
                 m_cells[_x - 1][_y - 1].getStyle());
+        
         m_cells[x - 1][y - 1] = new GameCell(GameCell.TESEUS, false, x, y,
                 m_cells[x - 1][y - 1].getStyle());
         if (x != _x || y != _y) {
@@ -347,8 +353,10 @@ public class GameScene extends JPanel implements KeyListener,
         int x = m_model.getPlayersCoordX(),
             y = m_model.getPlayersCoordY();
         
-        m_cells[_x - 1][_y - 1] = new GameCell(GameCell.FREE, false, _x, _y,
-                m_cells[_x - 1][_y - 1].getStyle());
+        if (_x != m_model.getMinotaurusCoordX() || _y != m_model.getMinotaurusCoordY())
+             m_cells[_x - 1][_y - 1] = new GameCell(GameCell.FREE, false, _x, _y,
+                    m_cells[_x - 1][_y - 1].getStyle());
+        
         m_cells[x - 1][y - 1] = new GameCell(GameCell.TESEUS, false, x, y,
                 m_cells[x - 1][y - 1].getStyle());
         if (x != _x || y != _y) {

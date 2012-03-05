@@ -467,7 +467,7 @@ public class MainModel {
         m_swordCoordY = 2;
         m_doorCoordX = 2;
         m_doorCoordY = 1;
-        m_stepsCount = 2;
+        m_stepsCount = 1;
         m_isMinotaurusDead = false;
         m_hasTeseusSword = false;
         m_stepsListeners = new ArrayList<ChangeStepsCountListener>();
