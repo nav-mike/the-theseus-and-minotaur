@@ -461,8 +461,8 @@ public class MainModel {
         m_cells = new GameCell[12][12];
         m_playersCoordX = 9;
         m_playersCoordY = 9;
-        m_minotaurusCoordX = 2;
-        m_minotaurusCoordY = 9;
+        m_minotaurusCoordX = 5;
+        m_minotaurusCoordY = 2;
         m_swordCoordX = 9;
         m_swordCoordY = 2;
         m_doorCoordX = 2;
@@ -479,7 +479,7 @@ public class MainModel {
         m_isLoose = false;
         m_isWin = false;
         m_minotaurusCoordXOld = 0;
-        m_minotaurusCoordYOld = 0;
+        m_minotaurusCoordYOld = 0; 
     }
 
     /**
@@ -490,8 +490,12 @@ public class MainModel {
     public MainModel (GameScene scene, boolean flag) {
 
         initComponents(scene);
-        if (flag == true)
+        if (flag == true){
             initPrologDatabase();
+            fillPrologDataBase(m_playersCoordX,m_playersCoordY,m_minotaurusCoordX,
+                               m_minotaurusCoordY,m_swordCoordX,m_swordCoordY,
+                               m_doorCoordX,m_doorCoordY,m_stepsCount);
+        }
     }
     
     /**
@@ -507,13 +511,94 @@ public class MainModel {
         Query q1 = new Query(plStr); 
         result = q1.hasSolution();
         System.out.println( plStr + " " + (result ? "succeeded" : "failed") );
-            
+                    
+        return result;
+    }
+    
+    /**
+     * 
+     * @param playerX Координата игрока по Х
+     * @param playerY Координата игрока по У
+     * @param enemyX  Координата Минотавра по Х
+     * @param enemyY  Координата Минотавра по У
+     * @param swordX  Координата меча по Х
+     * @param swordY  Координата меча по У
+     * @param doorX   Координата двери по Х
+     * @param doorY   Координата двери по У
+     * @param counter Число ходов
+     */
+    public static void fillPrologDataBase(
+                        int playerX,
+                        int playerY,
+                        int enemyX,
+                        int enemyY,
+                        int swordX,
+                        int swordY,
+                        int doorX,
+                        int doorY,
+                        int counter) {
+        String plStr;
+        Query q1;
+       
+        plStr = "assert(playerX(" + String.valueOf(playerX) + "))"; 
+        q1 = new Query(plStr); 
+        System.out.println( plStr + " " + (q1.hasSolution() ? "succeeded" : "failed") );
+        
+        plStr = "assert(playerY(" + String.valueOf(playerY) + "))"; 
+        q1 = new Query(plStr); 
+        System.out.println( plStr + " " + (q1.hasSolution() ? "succeeded" : "failed") );
+       
+        plStr = "assert(enemyX(" + String.valueOf(enemyX) + "))"; 
+        q1 = new Query(plStr); 
+        System.out.println( plStr + " " + (q1.hasSolution() ? "succeeded" : "failed") );
+        
+        plStr = "assert(enemyY(" + String.valueOf(enemyY) + "))"; 
+        q1 = new Query(plStr); 
+        System.out.println( plStr + " " + (q1.hasSolution() ? "succeeded" : "failed") );
+        
+        plStr = "assert(swordX(" + String.valueOf(swordX) + "))"; 
+        q1 = new Query(plStr); 
+        System.out.println( plStr + " " + (q1.hasSolution() ? "succeeded" : "failed") );
+        
+        plStr = "assert(swordY(" + String.valueOf(swordY) + "))";  
+        q1 = new Query(plStr); 
+        System.out.println( plStr + " " + (q1.hasSolution() ? "succeeded" : "failed") );
+        
+        plStr = "assert(doorX(" + String.valueOf(doorX) + "))";  
+        q1 = new Query(plStr); 
+        System.out.println( plStr + " " + (q1.hasSolution() ? "succeeded" : "failed") );
+        
+        plStr = "assert(doorY(" + String.valueOf(doorY) + "))";
+        q1 = new Query(plStr); 
+        System.out.println( plStr + " " + (q1.hasSolution() ? "succeeded" : "failed") );
+        
+        plStr = "assert(counter(" + String.valueOf(counter) + "))"; 
+        q1 = new Query(plStr); 
+        System.out.println( plStr + " " + (q1.hasSolution() ? "succeeded" : "failed") );
+        
+        plStr = "assert(startCounter(" + String.valueOf(counter - 1) + "))"; 
+        q1 = new Query(plStr); 
+        System.out.println( plStr + " " + (q1.hasSolution() ? "succeeded" : "failed") );
+        
+        plStr = "assert(hasSword(false))"; 
+        q1 = new Query(plStr); 
+        System.out.println( plStr + " " + (q1.hasSolution() ? "succeeded" : "failed") );
+        
+        plStr = "assert(hasKey(false))"; 
+        q1 = new Query(plStr); 
+        System.out.println( plStr + " " + (q1.hasSolution() ? "succeeded" : "failed") );
+        
+        plStr = "assert(isWin(false))"; 
+        q1 = new Query(plStr); 
+        System.out.println( plStr + " " + (q1.hasSolution() ? "succeeded" : "failed") );
+        
+        plStr = "assert(isLoose(false))"; 
+        q1 = new Query(plStr); 
+        System.out.println( plStr + " " + (q1.hasSolution() ? "succeeded" : "failed") );
+        
         plStr = "setDoor"; 
         q1 = new Query(plStr); 
-        result = q1.hasSolution();
-        System.out.println( plStr + " " + (result ? "succeeded" : "failed") );
-        
-        return result;
+        System.out.println( plStr + " " + (q1.hasSolution() ? "succeeded" : "failed") ); 
     }
     
     /**

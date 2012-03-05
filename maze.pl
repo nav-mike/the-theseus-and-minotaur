@@ -13,32 +13,11 @@ cell(1,6,wll). cell(2,6,flr). cell(3,6,wll). cell(4,6,flr). cell(5,6,flr). cell(
 cell(1,7,wll). cell(2,7,flr). cell(3,7,flr). cell(4,7,flr). cell(5,7,wll). cell(6,7,flr). cell(7,7,flr). cell(8,7,wll). cell(9,7,flr). cell(10,7,wll). cell(11,7,flr). cell(12,7,wll).
 cell(1,8,wll). cell(2,8,flr). cell(3,8,wll). cell(4,8,flr). cell(5,8,flr). cell(6,8,wll). cell(7,8,flr). cell(8,8,wll). cell(9,8,flr). cell(10,8,wll). cell(11,8,wll). cell(12,8,wll). 
 cell(1,9,wll). cell(2,9,flr). cell(3,9,flr). cell(4,9,flr). cell(5,9,flr). cell(6,9,wll). cell(7,9,flr). cell(8,9,flr). cell(9,9,flr). cell(10,9,flr). cell(11,9,flr). cell(12,9,wll).
-cell(1,10,wll). cell(2,10,wll). cell(3,10,wll). cell(4,10,flr). cell(5,10,wll). cell(6,10,wll). cell(7,10,wll). cell(8,10,wll). cell(9,10,flr). cell(10,10,flr). cell(11,10,flr). cell(12,10,wll).
-cell(1,11,wll). cell(2,11,flr). cell(3,11,flr). cell(4,11,flr). cell(5,11,flr). cell(6,11,wll). cell(7,11,flr). cell(8,11,flr). cell(9,11,flr). cell(10,11,wll). cell(11,11,flr). cell(12,11,wll).
+cell(1,10,wll). cell(2,10,flr). cell(3,10,wll). cell(4,10,flr). cell(5,10,wll). cell(6,10,wll). cell(7,10,wll). cell(8,10,wll). cell(9,10,flr). cell(10,10,flr). cell(11,10,flr). cell(12,10,wll).
+cell(1,11,wll). cell(2,11,flr). cell(3,11,flr). cell(4,11,flr). cell(5,11,flr). cell(6,11,flr). cell(7,11,flr). cell(8,11,flr). cell(9,11,flr). cell(10,11,wll). cell(11,11,flr). cell(12,11,wll).
 cell(1,12,wll). cell(2,12,wll). cell(3,12,wll). cell(4,12,wll). cell(5,12,wll). cell(6,12,wll). cell(7,12,wll). cell(8,12,wll). cell(9,12,wll). cell(10,12,wll). cell(11,12,wll). cell(12,12,wll).
 
-%% Зададим игровые состояния
 
-% Координаты игрока
-playerX(9).
-playerY(9).
-
-% Координаты Минотавра
-enemyX(5).
-enemyY(2).
-
-% Координаты меча
-swordX(9).
-swordY(2).
-
-% Координаты двери
-doorX(2).
-doorY(1).
-
-hasSword(false).	% Меча нет
-hasKey(false).		% Ключа нет
-isWin(false).		% Игра еще не выиграна
-isLoose(false).		% Игра не проиграна
 
 
 % Возвращение бд в стандратное состояние
@@ -211,9 +190,6 @@ checkNoSword(X, Y, EnX, EnY):-
 % ========== | ========== | ========== | ========== | ========== | ========== | ========== | ========== |
 % ========== | ========== | ========== | ========== | ========== | ========== |	========== | ========== |
 
-
-counter(2).		% Счетчик
-startCounter(1).
 
 setCounterZero:-
 	counter(I),

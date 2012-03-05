@@ -111,7 +111,7 @@ public class GameScene extends JPanel implements KeyListener,
     public void paint(Graphics g) {
         super.paint(g);
         
-        hideCells();
+        //hideCells();
 
         for (int i = 0; i < 12; i++) {
 
@@ -190,13 +190,11 @@ public class GameScene extends JPanel implements KeyListener,
         m_cells[9][7] = new GameCell(GameCell.WALL, false, 10, 8, null);
         m_cells[10][7] = new GameCell(GameCell.WALL, false, 11, 8, null);
         m_cells[5][8] = new GameCell(GameCell.WALL, false, 6, 9, null);
-        m_cells[1][9] = new GameCell(GameCell.WALL, false, 2, 10, null);
         m_cells[2][9] = new GameCell(GameCell.WALL, false, 3, 10, null);
         m_cells[4][9] = new GameCell(GameCell.WALL, false, 5, 10, null);
         m_cells[5][9] = new GameCell(GameCell.WALL, false, 6, 10, null);
         m_cells[6][9] = new GameCell(GameCell.WALL, false, 7, 10, null);
         m_cells[7][9] = new GameCell(GameCell.WALL, false, 8, 10, null);
-        m_cells[5][10] = new GameCell(GameCell.WALL, false, 6, 11, null);
         m_cells[9][10] = new GameCell(GameCell.WALL, false, 10, 11, null);
 
         for (int i = 0; i < 12; i++) {
@@ -246,12 +244,15 @@ public class GameScene extends JPanel implements KeyListener,
             
             System.out.println("Go to next step");
             if (!m_model.isMinotaurusDead())
-                m_model.skip();
-            
-            
+                m_model.skip();            
         }
         else
             System.out.println("Unknown keys");
+        
+        if (m_model.isLoose())
+            m_cells[m_model.getMinotaurusCoordX()-1][m_model.getMinotaurusCoordY()-1] = 
+                    new GameCell(GameCell.MINOTAURUS, false, m_model.getMinotaurusCoordX(), m_model.getMinotaurusCoordY(),
+                    m_cells[m_model.getMinotaurusCoordX()-1][m_model.getMinotaurusCoordY()-1].getStyle());
     }
     
     /**
@@ -380,11 +381,11 @@ public class GameScene extends JPanel implements KeyListener,
 //        new MyInfoDialog("Тесей убил Минотавра.", "Информация.");
         m_menuBar.get(1).setText2("да");
         m_cells[m_model.getMinotaurusCoordX()-1][m_model.getMinotaurusCoordY()-1] = 
-                    new GameCell(GameCell.MINOTAURUS, false, m_model.getMinotaurusCoordX(), m_model.getMinotaurusCoordY(),
-                    m_cells[m_model.getMinotaurusCoordX()-1][m_model.getMinotaurusCoordY()-1].getStyle());
+                new GameCell(GameCell.TESEUS, false, m_model.getMinotaurusCoordX(), m_model.getMinotaurusCoordY(),
+                m_cells[m_model.getMinotaurusCoordX()-1][m_model.getMinotaurusCoordY()-1].getStyle());
         repaint();
     }
-
+    
     /**
      * Метод получения ссылки на модель.
      * @return Ссылка на модель.
