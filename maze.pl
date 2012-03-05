@@ -213,6 +213,7 @@ checkNoSword(X, Y, EnX, EnY):-
 
 
 counter(2).		% Счетчик
+startCounter(1).
 
 setCounterZero:-
 	counter(I),
@@ -229,7 +230,8 @@ decrementCounter:-
 checkCounter1:-
 	counter(I),				% Получаем текущее значение счетчика
 	I == 0,					% Если оно равно 0
-	NewI is 1,				% Выставляем новое значение на 1
+	startCounter(J),
+	NewI = J,				% Выставляем новое значение на 1
 	retract(counter(I)),	% Изменяем счетчик
 	assert(counter(NewI)),
 	enemyMoove.				% Ход противника
@@ -254,7 +256,9 @@ enemyMoove:-
 	enemyMooveUp;		% Или Минотавр двигается вверх
 	enemyMooveRight;	% Или Минотавр двигается вправо
 	enemyMooveLeft;		% Или Минотавр двигается влево
-	enemyMooveDown.		% Или Минотавр двигается вниз
+	enemyMooveDown;		% Или Минотавр двигается вниз
+	hasKey(false),
+	enemyMoove.
 
 % Минотавр движется вверх
 enemyMooveUp:-
@@ -283,7 +287,8 @@ getRandomWay(Way):-
 	getUpWay(I,Way);		% Или вверх
 	getRightWay(I,Way); 	% Или вправо
 	getLeftWay(I,Way); 		% Или влево
-	getDownWay(I,Way).		% Или вниз
+	getDownWay(I,Way),		% Или вниз
+	Way = down.
 
 % Направление вверх
 getUpWay(I,Way):-
