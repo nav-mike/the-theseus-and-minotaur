@@ -243,6 +243,7 @@ enemyMooveUp:-
 	enemyX(X),
 	NewY is Y - 1,		% Изменяем одну координату
 	enemyCheckWall(X,NewY),	% Проверяем, если наткнулись на стену,
+	enemyCheckSeePlayer(X,NewY),
 	enemyCheckPlayer(X,NewY),
 	retract(enemyY(Y)),		% Изменяем координаты
 	assert(enemyY(NewY)).
@@ -297,6 +298,7 @@ enemyMooveRight:-
 	enemyX(X),
 	NewX is X + 1,		% Изменяем координату
 	enemyCheckWall(NewX,Y),		% Проверяем на наличие впереди стены
+	enemyCheckSeePlayer(NewX,Y),
 	enemyCheckPlayer(NewX,Y),
 	retract(enemyX(X)),			% Изменяем координату
 	assert(enemyX(NewX)).	
@@ -308,6 +310,7 @@ enemyMooveLeft:-
 	enemyX(X),
 	NewX is X - 1,		% Изменяем координату
 	enemyCheckWall(NewX,Y),		% Проверяем на наличие впереди стены
+	enemyCheckSeePlayer(NewX,Y),
 	enemyCheckPlayer(NewX,Y),
 	retract(enemyX(X)),			% Изменяем координату
 	assert(enemyX(NewX)).	
@@ -319,6 +322,7 @@ enemyMooveDown:-
 	enemyX(X),
 	NewY is Y + 1,		% Изменяем координату
 	enemyCheckWall(X,NewY),		% Проверяем на наличие впереди стены
+	enemyCheckSeePlayer(X,NewY),
 	enemyCheckPlayer(X,NewY),
 	retract(enemyY(Y)),			% Изменяем координату
 	assert(enemyY(NewY)).
@@ -349,10 +353,61 @@ meetWithoutSword(X,Y):-
 	retract(isLoose(false)),	% Установим флаг
 	assert(isLoose(true)).
 	
+% Проверить видим ли мы игрока
+enemyCheckSeePlayer(X,Y):-
+	checkPlayerCoords(X,Y);			% Проверить на совпадение с координатами игрока
+	getPlayerWay(X,Y,Way),			% Получаем направление до игрока
+	enemyWay(Current),				% Получаем текущее направление
+	retract(enemyWay(Current)),		% Изменяем направление
+	assert(enemyWay(Way)).	
 	
-	
-	
+% Проверить на совпадение с координатами игрока
+checkPlayerCoords(X,Y):-
+	playerX(PlX),	% Берем координаты игрока
+	playerY(PlY),	% Если не совпали - выходим
+	PlX \= X,
+	PlY \= Y,
+	true.
 
+% Получить направление до игрока
+getPlayerWay(X,Y,Way):-
+	checkPlyerLeft(X,Y,Way);
+	checkPlyerRight(X,Y,Way);
+	checkPlyerUp(X,Y,Way);
+	checkPlyerDown(X,Y,Way),
+	Way = down.
+	
+% Если надо двигаться влево к игроку
+checkPlyerLeft(X,Y,Way):-
+	playerX(PlX),
+	playerY(PlY),
+	PlY == Y,
+	PlX @=< X,
+	Way = left.
+	
+% Если надо двигаться вправо к игроку	
+checkPlyerRight(X,Y,Way):-
+	playerX(PlX),
+	playerY(PlY),
+	PlY == Y,
+	PlX @>= X,
+	Way = right.
+	
+% Если надо двигаться вверх к игроку
+checkPlyerUp(X,Y,Way):-
+	playerX(PlX),
+	playerY(PlY),
+	PlX == X,
+	PlY @=< Y,
+	Way = up.
+	
+% Если надо двигаться вниз к игроку
+checkPlyerDown(X,Y,Way):-
+	playerX(PlX),
+	playerY(PlY),
+	PlX == X,
+	PlY @>= Y,
+	Way = down.
 	
 	
 	

@@ -111,7 +111,7 @@ public class GameScene extends JPanel implements KeyListener,
     public void paint(Graphics g) {
         super.paint(g);
         
-        hideCells();
+        //hideCells();
 
         for (int i = 0; i < 12; i++) {
 
