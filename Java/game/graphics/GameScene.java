@@ -111,7 +111,7 @@ public class GameScene extends JPanel implements KeyListener,
     public void paint(Graphics g) {
         super.paint(g);
         
-        //hideCells();
+       // hideCells();
 
         for (int i = 0; i < 12; i++) {
 
@@ -274,7 +274,7 @@ public class GameScene extends JPanel implements KeyListener,
         int x = m_model.getPlayersCoordX(),
             y = m_model.getPlayersCoordY();
         
-        if (_x != m_model.getMinotaurusCoordX() || _y != m_model.getMinotaurusCoordY())
+        if (m_model.isMinotaurusDead() || _x != m_model.getMinotaurusCoordX() || _y != m_model.getMinotaurusCoordY())
             m_cells[_x-1][_y-1] = new GameCell(GameCell.FREE, false, _x, _y,
                 m_cells[_x - 1][_y - 1].getStyle());
         
@@ -301,7 +301,7 @@ public class GameScene extends JPanel implements KeyListener,
         int x = m_model.getPlayersCoordX(),
             y = m_model.getPlayersCoordY();
         
-        if (_x != m_model.getMinotaurusCoordX() || _y != m_model.getMinotaurusCoordY())
+        if (m_model.isMinotaurusDead() || _x != m_model.getMinotaurusCoordX() || _y != m_model.getMinotaurusCoordY())
             m_cells[_x - 1][_y - 1] = new GameCell(GameCell.FREE, false, _x, _y,
                 m_cells[_x - 1][_y - 1].getStyle());
         
@@ -327,7 +327,7 @@ public class GameScene extends JPanel implements KeyListener,
         int x = m_model.getPlayersCoordX(),
             y = m_model.getPlayersCoordY();
         
-        if (_x != m_model.getMinotaurusCoordX() || _y != m_model.getMinotaurusCoordY())
+        if (m_model.isMinotaurusDead() || _x != m_model.getMinotaurusCoordX() || _y != m_model.getMinotaurusCoordY())
             m_cells[_x - 1][_y - 1] = new GameCell(GameCell.FREE, false, _x, _y,
                 m_cells[_x - 1][_y - 1].getStyle());
         
@@ -353,7 +353,7 @@ public class GameScene extends JPanel implements KeyListener,
         int x = m_model.getPlayersCoordX(),
             y = m_model.getPlayersCoordY();
         
-        if (_x != m_model.getMinotaurusCoordX() || _y != m_model.getMinotaurusCoordY())
+        if (m_model.isMinotaurusDead() || _x != m_model.getMinotaurusCoordX() || _y != m_model.getMinotaurusCoordY())
              m_cells[_x - 1][_y - 1] = new GameCell(GameCell.FREE, false, _x, _y,
                     m_cells[_x - 1][_y - 1].getStyle());
         

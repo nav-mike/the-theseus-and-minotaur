@@ -200,7 +200,8 @@ setCounterZero:-
 % Изменение счетчика ходов игрока.
 decrementCounter:-
 	checkCounter1;		% Либо уменьшаем счетчик на 1
-	checkCounter2.		% Либо выставляем счетчик в 0
+	checkCounter2;		% Либо выставляем счетчик в 0
+	true.
 	
 % Выставляем счетчик в 0
 checkCounter1:-
