@@ -111,7 +111,7 @@ public class GameScene extends JPanel implements KeyListener,
     public void paint(Graphics g) {
         super.paint(g);
         
-        //hideCells();
+        hideCells();
 
         for (int i = 0; i < 12; i++) {
 
@@ -165,10 +165,11 @@ public class GameScene extends JPanel implements KeyListener,
         }
 
         m_cells[1][2] = new GameCell(GameCell.WALL, false, 2, 3, null);
+        m_cells[1][7] = new GameCell(GameCell.WALL, false, 2, 8, null);
         m_cells[8][8] = new GameCell(GameCell.TESEUS, false, 9, 9, null);
-        m_cells[4][1] = new GameCell(GameCell.MINOTAURUS, false, 5, 2, null);
+        m_cells[5][1] = new GameCell(GameCell.MINOTAURUS, false, 6, 2, null);
         m_cells[8][1] = new GameCell(GameCell.SWORD, false, 9, 2, null);
-        m_cells[3][1] = new GameCell(GameCell.WALL, false, 4, 2, null);
+        m_cells[4][1] = new GameCell(GameCell.WALL, false, 5, 2, null);
         m_cells[3][2] = new GameCell(GameCell.WALL, false, 4, 3, null);
         m_cells[4][2] = new GameCell(GameCell.WALL, false, 5, 3, null);
         m_cells[6][2] = new GameCell(GameCell.WALL, false, 7, 3, null);
@@ -176,7 +177,7 @@ public class GameScene extends JPanel implements KeyListener,
         m_cells[9][2] = new GameCell(GameCell.WALL, false, 10, 3, null);
         m_cells[2][4] = new GameCell(GameCell.WALL, false, 3, 5, null);
         m_cells[4][4] = new GameCell(GameCell.WALL, false, 5, 5, null);
-        m_cells[5][4] = new GameCell(GameCell.WALL, false, 6, 5, null);
+        m_cells[6][4] = new GameCell(GameCell.WALL, false, 7, 5, null);
         m_cells[7][4] = new GameCell(GameCell.WALL, false, 8, 5, null);
         m_cells[8][4] = new GameCell(GameCell.WALL, false, 9, 5, null);
         m_cells[10][4] = new GameCell(GameCell.WALL, false, 11, 5, null);
@@ -244,7 +245,12 @@ public class GameScene extends JPanel implements KeyListener,
             
             System.out.println("Go to next step");
             if (!m_model.isMinotaurusDead())
-                m_model.skip();            
+                m_model.skip();
+            
+            if (m_model.isMinotaurusDead())
+                m_cells[m_model.getMinotaurusCoordX()-1][m_model.getMinotaurusCoordY()-1] = 
+                    new GameCell(GameCell.TESEUS, false, m_model.getMinotaurusCoordX(), m_model.getMinotaurusCoordY(),
+                    m_cells[m_model.getMinotaurusCoordX()-1][m_model.getMinotaurusCoordY()-1].getStyle());
         }
         else
             System.out.println("Unknown keys");
@@ -380,9 +386,6 @@ public class GameScene extends JPanel implements KeyListener,
         
 //        new MyInfoDialog("Тесей убил Минотавра.", "Информация.");
         m_menuBar.get(1).setText2("да");
-        m_cells[m_model.getMinotaurusCoordX()-1][m_model.getMinotaurusCoordY()-1] = 
-                new GameCell(GameCell.TESEUS, false, m_model.getMinotaurusCoordX(), m_model.getMinotaurusCoordY(),
-                m_cells[m_model.getMinotaurusCoordX()-1][m_model.getMinotaurusCoordY()-1].getStyle());
         repaint();
     }
     

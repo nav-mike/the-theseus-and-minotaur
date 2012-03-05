@@ -461,7 +461,7 @@ public class MainModel {
         m_cells = new GameCell[12][12];
         m_playersCoordX = 9;
         m_playersCoordY = 9;
-        m_minotaurusCoordX = 5;
+        m_minotaurusCoordX = 6;
         m_minotaurusCoordY = 2;
         m_swordCoordX = 9;
         m_swordCoordY = 2;

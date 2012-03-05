@@ -5,13 +5,13 @@
 
 % Матрица клеток карты
 cell(1,1,wll). cell(2,1,flr). cell(3,1,wll). cell(4,1,wll). cell(5,1,wll). cell(6,1,wll). cell(7,1,wll). cell(8,1,wll). cell(9,1,wll). cell(10,1,wll). cell(11,1,wll). cell(12,1,wll).
-cell(1,2,wll). cell(2,2,flr). cell(3,2,flr). cell(4,2,wll). cell(5,2,flr). cell(6,2,flr). cell(7,2,flr). cell(8,2,flr). cell(9,2,flr). cell(10,2,flr). cell(11,2,flr). cell(12,2,wll).
+cell(1,2,wll). cell(2,2,flr). cell(3,2,flr). cell(4,2,flr). cell(5,2,wll). cell(6,2,flr). cell(7,2,flr). cell(8,2,flr). cell(9,2,flr). cell(10,2,flr). cell(11,2,flr). cell(12,2,wll).
 cell(1,3,wll). cell(2,3,wll). cell(3,3,flr). cell(4,3,wll). cell(5,3,wll). cell(6,3,flr). cell(7,3,wll). cell(8,3,flr). cell(9,3,wll). cell(10,3,wll). cell(11,3,flr). cell(12,3,wll).
 cell(1,4,wll). cell(2,4,flr). cell(3,4,flr). cell(4,4,flr). cell(5,4,flr). cell(6,4,flr). cell(7,4,flr). cell(8,4,flr). cell(9,4,flr). cell(10,4,flr). cell(11,4,flr). cell(12,4,wll).
-cell(1,5,wll). cell(2,5,flr). cell(3,5,wll). cell(4,5,flr). cell(5,5,wll). cell(6,5,wll). cell(7,5,flr). cell(8,5,wll). cell(9,5,wll). cell(10,5,flr). cell(11,5,wll). cell(12,5,wll).
+cell(1,5,wll). cell(2,5,flr). cell(3,5,wll). cell(4,5,flr). cell(5,5,wll). cell(6,5,flr). cell(7,5,wll). cell(8,5,wll). cell(9,5,wll). cell(10,5,flr). cell(11,5,wll). cell(12,5,wll).
 cell(1,6,wll). cell(2,6,flr). cell(3,6,wll). cell(4,6,flr). cell(5,6,flr). cell(6,6,flr). cell(7,6,flr). cell(8,6,flr). cell(9,6,flr). cell(10,6,flr). cell(11,6,flr). cell(12,6,wll).
 cell(1,7,wll). cell(2,7,flr). cell(3,7,flr). cell(4,7,flr). cell(5,7,wll). cell(6,7,flr). cell(7,7,flr). cell(8,7,wll). cell(9,7,flr). cell(10,7,wll). cell(11,7,flr). cell(12,7,wll).
-cell(1,8,wll). cell(2,8,flr). cell(3,8,wll). cell(4,8,flr). cell(5,8,flr). cell(6,8,wll). cell(7,8,flr). cell(8,8,wll). cell(9,8,flr). cell(10,8,wll). cell(11,8,wll). cell(12,8,wll). 
+cell(1,8,wll). cell(2,8,wll). cell(3,8,wll). cell(4,8,flr). cell(5,8,flr). cell(6,8,wll). cell(7,8,flr). cell(8,8,wll). cell(9,8,flr). cell(10,8,wll). cell(11,8,wll). cell(12,8,wll). 
 cell(1,9,wll). cell(2,9,flr). cell(3,9,flr). cell(4,9,flr). cell(5,9,flr). cell(6,9,wll). cell(7,9,flr). cell(8,9,flr). cell(9,9,flr). cell(10,9,flr). cell(11,9,flr). cell(12,9,wll).
 cell(1,10,wll). cell(2,10,flr). cell(3,10,wll). cell(4,10,flr). cell(5,10,wll). cell(6,10,wll). cell(7,10,wll). cell(8,10,wll). cell(9,10,flr). cell(10,10,flr). cell(11,10,flr). cell(12,10,wll).
 cell(1,11,wll). cell(2,11,flr). cell(3,11,flr). cell(4,11,flr). cell(5,11,flr). cell(6,11,flr). cell(7,11,flr). cell(8,11,flr). cell(9,11,flr). cell(10,11,wll). cell(11,11,flr). cell(12,11,wll).
